@@ -94,7 +94,7 @@ export async function GET() {
         const result = {
           source: 'google_api_new',
           rating: googleRating,
-          user_ratings_total: googleTotal + 28, // Google + Doctoralia total
+          user_ratings_total: googleTotal + doctoraliaReviews.length, // Google + Doctoralia total
           google_url: data.googleMapsUri || 'https://www.google.com/search?q=Marina+Falc%C3%A3o+Psic%C3%B3loga',
           reviews: [...googleReviews, ...doctoraliaReviews]
         };
