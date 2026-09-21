@@ -33,6 +33,18 @@ export async function GET() {
         image_url: 'https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?q=80&w=1470&auto=format&fit=crop',
         published: 1,
         featured: 1
+      },
+      {
+        title: 'Você sabe como o Instagram afeta sua autoestima?',
+        slug: 'instagram-afeta-autoestima',
+        summary: 'As redes sociais podem ser uma vitrine de comparações irreais. Assista a este vídeo onde falo sobre os impactos silenciosos da internet na saúde mental.',
+        content: '<p>A rolagem infinita (doomscrolling) e a exposição contínua a filtros de embelezamento têm mudado a maneira como enxergamos a nós mesmos. Você já parou para pensar quantas vezes por dia você se compara com um recorte perfeitamente editado da vida de outra pessoa?</p><p>Assista ao vídeo e compartilhe sua opinião nos comentários.</p>',
+        category: 'Redes Sociais',
+        image_url: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1470&auto=format&fit=crop',
+        video_url: 'https://www.instagram.com/psimarinafalcao/reel/DAAte_Sxs0k/', // Fake reel id, but works as format
+        video_type: 'instagram',
+        published: 1,
+        featured: 1
       }
     ];
 
@@ -41,8 +53,8 @@ export async function GET() {
       const existing = await query('SELECT id FROM posts WHERE slug = ?', [post.slug]);
       if (existing.length === 0) {
         await query(
-          'INSERT INTO posts (title, slug, summary, content, category, image_url, published, featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-          [post.title, post.slug, post.summary, post.content, post.category, post.image_url, post.published, post.featured]
+          'INSERT INTO posts (title, slug, summary, content, category, image_url, video_url, video_type, published, featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+          [post.title, post.slug, post.summary, post.content, post.category, post.image_url, post.video_url || null, post.video_type || 'youtube', post.published, post.featured]
         );
       }
     }
