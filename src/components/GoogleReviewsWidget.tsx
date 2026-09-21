@@ -65,6 +65,7 @@ function useDraggableScroll(dataLoaded: boolean) {
     const onMouseDown = (e: MouseEvent) => {
       isDown = true;
       slider.style.scrollBehavior = 'auto'; // Disable smooth scroll while dragging
+      slider.style.scrollSnapType = 'none'; // Disable snap while dragging
       slider.classList.add('cursor-grabbing');
       startX = e.pageX - slider.offsetLeft;
       scrollLeft = slider.scrollLeft;
@@ -73,11 +74,13 @@ function useDraggableScroll(dataLoaded: boolean) {
       isDown = false;
       slider.classList.remove('cursor-grabbing');
       slider.style.scrollBehavior = 'smooth';
+      slider.style.scrollSnapType = 'x mandatory';
     };
     const onMouseUp = () => {
       isDown = false;
       slider.classList.remove('cursor-grabbing');
       slider.style.scrollBehavior = 'smooth';
+      slider.style.scrollSnapType = 'x mandatory';
     };
     const onMouseMove = (e: MouseEvent) => {
       if (!isDown) return;
@@ -99,7 +102,8 @@ function useDraggableScroll(dataLoaded: boolean) {
         if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
           slider.scrollTo({ left: 0 });
         } else {
-          slider.scrollBy({ left: 320 });
+          // Calculate the width of one card + gap. Roughly 280px.
+          slider.scrollBy({ left: 280 });
         }
       }
     }, 4000);
@@ -180,7 +184,7 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
         `}} />
         <div 
           ref={scrollRefCompact}
-          className="flex overflow-x-auto hide-scrollbar gap-4 pb-2 cursor-grab items-stretch"
+          className="flex overflow-x-auto hide-scrollbar gap-4 pb-2 cursor-grab items-stretch snap-x snap-mandatory px-[12.5vw] sm:px-[calc(50%-130px)]"
           style={{ scrollBehavior: 'smooth' }}
         >
           {data.reviews.map((rev, idx) => {
@@ -189,7 +193,7 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
             return (
           <figure 
             key={idx} 
-            className={`flex flex-col justify-between space-y-6 select-none h-auto transition-all duration-300
+            className={`flex flex-col justify-between space-y-6 select-none h-auto transition-all duration-300 snap-center
               w-[75vw] sm:w-[260px] shrink-0 bg-white p-5 rounded-2xl border border-warm-200 shadow-sm hover:shadow-md
             `}
           >
@@ -288,7 +292,7 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
         ref={scrollRefFull}
         className={`
         ${data.reviews.length > 3 
-          ? 'flex overflow-x-auto hide-scrollbar pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 gap-4 md:gap-6 cursor-grab items-stretch' 
+          ? 'flex overflow-x-auto hide-scrollbar pb-8 gap-4 md:gap-6 cursor-grab items-stretch snap-x snap-mandatory px-[12.5vw] sm:px-[calc(50%-140px)]' 
           : 'grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12'}
       `}
         style={{ scrollBehavior: 'smooth' }}
@@ -299,7 +303,7 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
           return (
           <figure 
             key={idx} 
-            className={`flex flex-col justify-between space-y-6 select-none h-auto transition-all duration-300
+            className={`flex flex-col justify-between space-y-6 select-none h-auto transition-all duration-300 snap-center
               ${data.reviews.length > 3 ? 'w-[75vw] sm:w-[280px] shrink-0 bg-white p-6 rounded-2xl border border-warm-200 shadow-sm hover:shadow-md transition-shadow' : ''}
             `}
           >
