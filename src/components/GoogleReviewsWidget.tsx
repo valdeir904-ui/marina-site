@@ -119,8 +119,18 @@ function useDraggableScroll(dataLoaded: boolean) {
 export default function GoogleReviewsWidget({ compact = false }: { compact?: boolean }) {
   const [data, setData] = useState<GoogleReviewsData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [expandedIndices, setExpandedIndices] = useState<Set<number>>(new Set());
   const scrollRefCompact = useDraggableScroll(!!data);
   const scrollRefFull = useDraggableScroll(!!data);
+
+  const toggleExpand = (idx: number) => {
+    setExpandedIndices(prev => {
+      const next = new Set(prev);
+      if (next.has(idx)) next.delete(idx);
+      else next.add(idx);
+      return next;
+    });
+  };
 
   useEffect(() => {
     async function fetchReviews() {
@@ -172,17 +182,30 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
           className="flex overflow-x-auto hide-scrollbar gap-4 pb-2 cursor-grab"
           style={{ scrollBehavior: 'smooth' }}
         >
-          {data.reviews.map((rev, idx) => (
-            <div key={idx} className="flex flex-col items-center text-center space-y-3 shrink-0 w-[70vw] sm:w-[240px] select-none">
+          {data.reviews.map((rev, idx) => {
+            const isExpanded = expandedIndices.has(idx);
+            const isLong = rev.text.length > 130;
+            return (
+            <div key={idx} className="flex flex-col items-center text-center space-y-3 shrink-0 w-[65vw] sm:w-[220px] select-none">
               <div className="flex items-center gap-1 text-amber-400 pointer-events-none">
                 {[...Array(rev.rating || 5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-current" />
                 ))}
               </div>
-              <blockquote className="text-sm text-slate-700 italic line-clamp-4 leading-relaxed font-medium px-2 pointer-events-none">
-                &ldquo;{rev.text}&rdquo;
-              </blockquote>
-              <div className="flex items-center gap-2 justify-center pt-1 pointer-events-none relative w-full px-6">
+              <div className="flex flex-col items-center relative z-10 w-full">
+                <blockquote className={`text-sm text-slate-700 italic leading-relaxed font-medium px-2 pointer-events-none transition-all duration-300 ${isExpanded ? '' : 'line-clamp-4'}`}>
+                  &ldquo;{rev.text}&rdquo;
+                </blockquote>
+                {isLong && (
+                  <button 
+                    onClick={() => toggleExpand(idx)}
+                    className="text-brand-600 text-[11px] font-bold mt-1 hover:text-brand-800 transition-colors pointer-events-auto"
+                  >
+                    {isExpanded ? 'Ler menos' : 'Ler mais...'}
+                  </button>
+                )}
+              </div>
+              <div className="flex items-center gap-2 justify-center pt-1 pointer-events-none relative w-full px-4">
                 {rev.profile_photo_url ? (
                   <img src={rev.profile_photo_url} alt={rev.author_name} className="w-6 h-6 rounded-full object-cover shrink-0" />
                 ) : (
@@ -198,7 +221,7 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
                 </div>
               </div>
             </div>
-          ))}
+          )})}
         </div>
       </div>
     );
@@ -230,7 +253,7 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
           href={data.google_url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-brand-700 transition-colors underline decoration-warm-400 underline-offset-4 hover:decoration-brand-400 shrink-0"
+          className="inline-flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-brand-700 transition-colors underline decoration-warm-400 underline-offset-4 hover:decoration-brand-400 shrink-0 relative z-10"
         >
           <span>Ver perfil no Google</span>
           <ExternalLink className="w-3.5 h-3.5" />
@@ -254,22 +277,35 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
       `}
         style={{ scrollBehavior: 'smooth' }}
       >
-        {data.reviews.map((rev, idx) => (
+        {data.reviews.map((rev, idx) => {
+          const isExpanded = expandedIndices.has(idx);
+          const isLong = rev.text.length > 150;
+          return (
           <figure 
             key={idx} 
-            className={`flex flex-col justify-between space-y-6 select-none h-auto
-              ${data.reviews.length > 3 ? 'w-[85vw] sm:w-[340px] shrink-0 bg-white p-6 rounded-2xl border border-warm-200 shadow-sm hover:shadow-md transition-shadow' : ''}
+            className={`flex flex-col justify-between space-y-6 select-none h-auto transition-all duration-300
+              ${data.reviews.length > 3 ? 'w-[75vw] sm:w-[280px] shrink-0 bg-white p-6 rounded-2xl border border-warm-200 shadow-sm hover:shadow-md transition-shadow' : ''}
             `}
           >
-            <div className="space-y-4 pointer-events-none">
-              <div className="flex items-center gap-1 text-amber-400">
+            <div className="space-y-4">
+              <div className="flex items-center gap-1 text-amber-400 pointer-events-none">
                 {[...Array(rev.rating)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-current" />
                 ))}
               </div>
-              <blockquote className="text-slate-700 text-sm sm:text-base leading-relaxed">
-                &ldquo;{rev.text}&rdquo;
-              </blockquote>
+              <div className="flex flex-col items-start relative z-10">
+                <blockquote className={`text-slate-700 text-sm sm:text-base leading-relaxed transition-all duration-300 pointer-events-none ${isExpanded ? '' : 'line-clamp-4'}`}>
+                  &ldquo;{rev.text}&rdquo;
+                </blockquote>
+                {isLong && (
+                  <button 
+                    onClick={() => toggleExpand(idx)}
+                    className="text-brand-600 text-xs font-bold mt-2 hover:text-brand-800 transition-colors pointer-events-auto"
+                  >
+                    {isExpanded ? 'Ler menos' : 'Ler mais...'}
+                  </button>
+                )}
+              </div>
             </div>
 
             <figcaption className="flex items-center gap-3 pointer-events-none">
@@ -286,16 +322,16 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
                   {rev.author_name.charAt(0)}
                 </div>
               )}
-              <div>
-                <span className="font-semibold text-slate-900 text-sm block">{rev.author_name}</span>
-                <span className="text-xs text-slate-500">{rev.relative_time_description}</span>
+              <div className="overflow-hidden">
+                <span className="font-semibold text-slate-900 text-sm block truncate">{rev.author_name}</span>
+                <span className="text-xs text-slate-500 block truncate">{rev.relative_time_description}</span>
               </div>
-              <div className="ml-auto flex-shrink-0 opacity-80">
+              <div className="ml-auto flex-shrink-0 opacity-80 pl-2">
                 {rev.source === 'doctoralia' ? <DoctoraliaLogo className="w-6 h-6" /> : <GoogleLogo className="w-6 h-6" />}
               </div>
             </figcaption>
           </figure>
-        ))}
+        )})}
       </div>
     </div>
   );
