@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Star, ExternalLink } from 'lucide-react';
 
 interface Review {
@@ -43,9 +43,66 @@ function GoogleLogo({ className }: { className?: string }) {
   );
 }
 
+function DoctoraliaLogo({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="12" fill="#00b380"/>
+      <text x="12" y="16" fontSize="14" fontWeight="bold" fill="white" textAnchor="middle" fontFamily="sans-serif">D</text>
+    </svg>
+  );
+}
+
+function useDraggableScroll() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const slider = ref.current;
+    if (!slider) return;
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    const onMouseDown = (e: MouseEvent) => {
+      isDown = true;
+      slider.classList.add('cursor-grabbing');
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const onMouseLeave = () => {
+      isDown = false;
+      slider.classList.remove('cursor-grabbing');
+    };
+    const onMouseUp = () => {
+      isDown = false;
+      slider.classList.remove('cursor-grabbing');
+    };
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 2;
+      slider.scrollLeft = scrollLeft - walk;
+    };
+
+    slider.addEventListener('mousedown', onMouseDown);
+    slider.addEventListener('mouseleave', onMouseLeave);
+    slider.addEventListener('mouseup', onMouseUp);
+    slider.addEventListener('mousemove', onMouseMove);
+
+    return () => {
+      slider.removeEventListener('mousedown', onMouseDown);
+      slider.removeEventListener('mouseleave', onMouseLeave);
+      slider.removeEventListener('mouseup', onMouseUp);
+      slider.removeEventListener('mousemove', onMouseMove);
+    };
+  }, []);
+  return ref;
+}
+
 export default function GoogleReviewsWidget({ compact = false }: { compact?: boolean }) {
   const [data, setData] = useState<GoogleReviewsData | null>(null);
   const [loading, setLoading] = useState(true);
+  const scrollRefCompact = useDraggableScroll();
+  const scrollRefFull = useDraggableScroll();
 
   useEffect(() => {
     async function fetchReviews() {
@@ -81,35 +138,41 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
 
   if (compact) {
     return (
-      <div className="w-full">
+      <div className="w-full relative">
         <style dangerouslySetInnerHTML={{ __html: `
           .hide-scrollbar::-webkit-scrollbar { display: none; }
           .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+          .cursor-grab { cursor: grab; }
+          .cursor-grabbing { cursor: grabbing; }
         `}} />
-        <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 pb-2">
+        <div 
+          ref={scrollRefCompact}
+          className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 pb-2 cursor-grab"
+        >
           {data.reviews.map((rev, idx) => (
-            <div key={idx} className="flex flex-col items-center text-center space-y-3 shrink-0 w-[80vw] sm:w-[280px] snap-center">
-              <div className="flex items-center gap-1 text-amber-400">
+            <div key={idx} className="flex flex-col items-center text-center space-y-3 shrink-0 w-[80vw] sm:w-[280px] snap-center select-none">
+              <div className="flex items-center gap-1 text-amber-400 pointer-events-none">
                 {[...Array(rev.rating || 5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-current" />
                 ))}
               </div>
-              <blockquote className="text-sm text-slate-700 italic line-clamp-4 leading-relaxed font-medium px-2">
+              <blockquote className="text-sm text-slate-700 italic line-clamp-4 leading-relaxed font-medium px-2 pointer-events-none">
                 &ldquo;{rev.text}&rdquo;
               </blockquote>
-              <div className="flex items-center gap-2 justify-center pt-1">
+              <div className="flex items-center gap-2 justify-center pt-1 pointer-events-none relative w-full px-6">
                 {rev.profile_photo_url ? (
-                  <img src={rev.profile_photo_url} alt={rev.author_name} className="w-6 h-6 rounded-full object-cover" />
+                  <img src={rev.profile_photo_url} alt={rev.author_name} className="w-6 h-6 rounded-full object-cover shrink-0" />
                 ) : (
-                  rev.source === 'doctoralia' ? (
-                    <div className="w-5 h-5 rounded-full bg-[#00e3a4]/20 text-[#00b380] font-bold flex items-center justify-center text-[10px] shrink-0">
-                      {rev.author_name.charAt(0)}
-                    </div>
-                  ) : (
-                    <GoogleLogo className="w-5 h-5 shrink-0" />
-                  )
+                  <div className={`w-6 h-6 rounded-full font-bold flex items-center justify-center text-[10px] shrink-0 ${
+                    rev.source === 'doctoralia' ? 'bg-[#00e3a4]/20 text-[#00b380]' : 'bg-brand-100 text-brand-700'
+                  }`}>
+                    {rev.author_name.charAt(0)}
+                  </div>
                 )}
                 <span className="text-xs font-semibold text-slate-900 line-clamp-1">{rev.author_name}</span>
+                <div className="ml-auto flex-shrink-0">
+                  {rev.source === 'doctoralia' ? <DoctoraliaLogo className="w-4 h-4" /> : <GoogleLogo className="w-4 h-4" />}
+                </div>
               </div>
             </div>
           ))}
@@ -124,6 +187,7 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
       <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pb-8 border-b border-warm-200">
         <div className="flex items-center gap-4 text-center sm:text-left">
           <GoogleLogo className="w-8 h-8 shrink-0" />
+          <DoctoraliaLogo className="w-8 h-8 shrink-0 -ml-2" />
           <div>
             <div className="flex items-center justify-center sm:justify-start gap-2">
               <span className="font-serif text-2xl text-slate-900">{data.rating.toFixed(1)}</span>
@@ -154,21 +218,25 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
       <style dangerouslySetInnerHTML={{ __html: `
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .cursor-grab { cursor: grab; }
+        .cursor-grabbing { cursor: grabbing; }
       `}} />
       
-      <div className={`
+      <div 
+        ref={scrollRefFull}
+        className={`
         ${data.reviews.length > 3 
-          ? 'flex overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 gap-6 md:gap-8' 
+          ? 'flex overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 gap-6 md:gap-8 cursor-grab' 
           : 'grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12'}
       `}>
         {data.reviews.map((rev, idx) => (
           <figure 
             key={idx} 
-            className={`flex flex-col justify-between space-y-6 
+            className={`flex flex-col justify-between space-y-6 select-none
               ${data.reviews.length > 3 ? 'min-w-[85vw] sm:min-w-[380px] snap-center shrink-0 bg-white p-6 rounded-2xl border border-warm-200 shadow-sm' : ''}
             `}
           >
-            <div className="space-y-4">
+            <div className="space-y-4 pointer-events-none">
               <div className="flex items-center gap-1 text-amber-400">
                 {[...Array(rev.rating)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-current" />
@@ -179,7 +247,7 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
               </blockquote>
             </div>
 
-            <figcaption className="flex items-center gap-3">
+            <figcaption className="flex items-center gap-3 pointer-events-none">
               {rev.profile_photo_url ? (
                 <img
                   src={rev.profile_photo_url}
@@ -196,6 +264,9 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
               <div>
                 <span className="font-semibold text-slate-900 text-sm block">{rev.author_name}</span>
                 <span className="text-xs text-slate-500">{rev.relative_time_description}</span>
+              </div>
+              <div className="ml-auto flex-shrink-0 opacity-80">
+                {rev.source === 'doctoralia' ? <DoctoraliaLogo className="w-6 h-6" /> : <GoogleLogo className="w-6 h-6" />}
               </div>
             </figcaption>
           </figure>
