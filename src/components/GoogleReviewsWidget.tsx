@@ -249,7 +249,7 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
         ref={scrollRefFull}
         className={`
         ${data.reviews.length > 3 
-          ? 'flex overflow-x-auto hide-scrollbar pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 gap-4 md:gap-6 cursor-grab' 
+          ? 'flex overflow-x-auto hide-scrollbar pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 gap-4 md:gap-6 cursor-grab items-stretch' 
           : 'grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12'}
       `}
         style={{ scrollBehavior: 'smooth' }}
@@ -257,8 +257,8 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
         {data.reviews.map((rev, idx) => (
           <figure 
             key={idx} 
-            className={`flex flex-col justify-between space-y-6 select-none
-              ${data.reviews.length > 3 ? 'min-w-[80vw] sm:min-w-[300px] shrink-0 bg-white p-6 rounded-2xl border border-warm-200 shadow-sm hover:shadow-md transition-shadow' : ''}
+            className={`flex flex-col justify-between space-y-6 select-none h-auto
+              ${data.reviews.length > 3 ? 'w-[85vw] sm:w-[340px] shrink-0 bg-white p-6 rounded-2xl border border-warm-200 shadow-sm hover:shadow-md transition-shadow' : ''}
             `}
           >
             <div className="space-y-4 pointer-events-none">
