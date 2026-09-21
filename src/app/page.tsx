@@ -29,10 +29,10 @@ export default async function ConstructionPage() {
         </div>
 
         <h1 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 mb-2">
-          Dra. Marina Falcão
+          {settings.site_title || 'Dra. Marina Falcão'}
         </h1>
         <p className="text-sm font-bold text-brand-700 uppercase tracking-wider mb-8">
-          Psicóloga Clínica • CRP 06/162899
+          {settings.tagline || (settings.crp ? `Psicóloga Clínica • ${settings.crp}` : 'Psicóloga Clínica')}
         </p>
 
         <div className="bg-warm-50 border border-warm-200 rounded-2xl p-6 mb-8">

@@ -61,13 +61,13 @@ export default async function BioLinksPage() {
 
             <div>
               <h1 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
-                Dra. Marina Falcão
+                {settings.site_title || 'Dra. Marina Falcão'}
               </h1>
               <p className="text-xs font-bold text-brand-700 uppercase tracking-wider mt-0.5">
-                Psicóloga Clínica • CRP 06/162899
+                {settings.crp ? `Psicóloga Clínica • ${settings.crp}` : 'Psicóloga Clínica'}
               </p>
               <p className="text-sm text-slate-600 font-medium mt-2 max-w-xs mx-auto">
-                "Tudo começa na sua saúde mental."
+                "{settings.tagline || 'Tudo começa na sua saúde mental.'}"
               </p>
             </div>
 
