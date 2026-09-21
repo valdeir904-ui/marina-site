@@ -72,7 +72,11 @@ export default function GoogleReviewsWidget() {
   }
 
   if (!data || !data.reviews || data.reviews.length === 0) {
-    return null;
+    return (
+      <div className="p-4 bg-red-50 text-red-800 text-xs font-mono break-all rounded">
+        DEBUG INFO: {JSON.stringify(data)}
+      </div>
+    );
   }
 
   return (
