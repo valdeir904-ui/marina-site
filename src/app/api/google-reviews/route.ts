@@ -1,18 +1,11 @@
 import { NextResponse } from 'next/server';
 
-let cachedData: any = null;
-let lastFetchTime = 0;
-const CACHE_DURATION_MS = 60 * 60 * 1000; // 1 hora de cache
+export const revalidate = 604800; // Cache por 7 dias na Vercel (604800 segundos)
 
 export async function GET() {
   try {
     const apiKey = process.env.GOOGLE_PLACES_API_KEY;
     const placeId = process.env.GOOGLE_PLACE_ID;
-
-    const now = Date.now();
-    if (cachedData && now - lastFetchTime < CACHE_DURATION_MS) {
-      return NextResponse.json(cachedData);
-    }
 
     if (apiKey && placeId) {
       const googleUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,reviews,user_ratings_total,url&key=${apiKey}&language=pt-BR`;
@@ -35,8 +28,6 @@ export async function GET() {
           })),
         };
 
-        cachedData = result;
-        lastFetchTime = now;
         return NextResponse.json(result);
       }
     }
