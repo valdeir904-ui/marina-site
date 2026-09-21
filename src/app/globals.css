@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@theme {
+  /* Tipografia — mapeia as fontes do next/font para as utilities */
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-madefor), ui-sans-serif, system-ui, sans-serif;
+  --font-sub: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+
+  /* Paleta — Dourado/Bronze (brand), Marrom (secondary), Oliva (sage) e Neutros (warm) */
+  --color-brand-50: #f8f5f0;
+  --color-brand-100: #efeae0;
+  --color-brand-200: #dcd0bc;
+  --color-brand-300: #c5b091;
+  --color-brand-400: #b2956c;
+  --color-brand-500: #a78048; /* Dourado/Bronze - Principal */
+  --color-brand-600: #8c6838;
+  --color-brand-700: #74532f;
+  --color-brand-800: #62462b;
+  --color-brand-900: #764B36; /* Marrom avermelhado - Apoio 1 */
+
+  --color-sage-50: #f6f6f4;
+  --color-sage-100: #eae8e5;
+  --color-sage-200: #cdcac1;
+  --color-sage-300: #a8a395;
+  --color-sage-400: #898371;
+  --color-sage-500: #7b7459; /* Oliva/Terroso - Apoio 2 */
+  --color-sage-600: #5f5a43;
+  --color-sage-700: #4c4837;
+  --color-sage-800: #3f3c2f;
+
+  --color-warm-50: #fdfbf7;
+  --color-warm-100: #f7f4ee;
+  --color-warm-200: #efebe4;
+  --color-warm-300: #e2dad0;
+  --color-warm-400: #cbbfb1;
+  --color-warm-500: #b1a190;
+
+  /* Sombras discretas com tom quente */
+  --shadow-warm-sm: 0 1px 2px rgba(90, 52, 44, 0.06);
+  --shadow-warm-md: 0 4px 16px -4px rgba(90, 52, 44, 0.08);
+  --shadow-warm-lg: 0 12px 32px -8px rgba(90, 52, 44, 0.12);
+
+  --animate-fade-in: fade-in 0.25s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  --animate-shimmer: shimmer 2.5s infinite linear;
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-150%) skewX(-20deg);
+    }
+    100% {
+      transform: translateX(200%) skewX(-20deg);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    overflow-x: hidden;
+    background-color: #fdfbf7;
+    color: #453e3b;
+  }
+}
+
+/* Kicker editorial: pequeno rótulo acima dos títulos de seção */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-sub);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand-700);
+}
+
+.kicker::before {
+  content: '';
+  width: 1.75rem;
+  height: 1px;
+  background-color: var(--color-brand-400);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #fdfbf7;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbbfb1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b1a190;
+}
