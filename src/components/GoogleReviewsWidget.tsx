@@ -50,10 +50,13 @@ export default function GoogleReviewsWidget() {
     async function fetchReviews() {
       try {
         const res = await fetch('/api/google-reviews');
-        if (res.ok) {
-          const json = await res.json();
-          setData(json);
+        if (!res.ok) {
+          const errJson = await res.json().catch(() => null);
+          setData(errJson || { error: 'Status ' + res.status });
+          return;
         }
+        const json = await res.json();
+        setData(json);
       } catch (err) {
         console.error('Erro ao buscar avaliações:', err);
       } finally {
@@ -72,7 +75,11 @@ export default function GoogleReviewsWidget() {
   }
 
   if (!data || !data.reviews || data.reviews.length === 0) {
-    return null;
+    return (
+      <div className="p-4 bg-red-50 text-red-800 text-xs font-mono break-all rounded">
+        DEBUG INFO: {JSON.stringify(data)}
+      </div>
+    );
   }
 
   return (
