@@ -79,24 +79,33 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
   }
 
   if (compact) {
-    const rev = data.reviews[0];
     return (
-      <div className="flex flex-col items-center text-center space-y-4">
-        <div className="flex items-center gap-1 text-amber-400">
-          {[...Array(rev.rating || 5)].map((_, i) => (
-            <Star key={i} className="w-5 h-5 fill-current" />
+      <div className="w-full">
+        <style dangerouslySetInnerHTML={{ __html: `
+          .hide-scrollbar::-webkit-scrollbar { display: none; }
+          .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        `}} />
+        <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 pb-2">
+          {data.reviews.map((rev, idx) => (
+            <div key={idx} className="flex flex-col items-center text-center space-y-3 shrink-0 w-[80vw] sm:w-[280px] snap-center">
+              <div className="flex items-center gap-1 text-amber-400">
+                {[...Array(rev.rating || 5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-current" />
+                ))}
+              </div>
+              <blockquote className="text-sm text-slate-700 italic line-clamp-4 leading-relaxed font-medium px-2">
+                &ldquo;{rev.text}&rdquo;
+              </blockquote>
+              <div className="flex items-center gap-2 justify-center pt-1">
+                {rev.profile_photo_url ? (
+                  <img src={rev.profile_photo_url} alt={rev.author_name} className="w-6 h-6 rounded-full object-cover" />
+                ) : (
+                  <GoogleLogo className="w-5 h-5 shrink-0" />
+                )}
+                <span className="text-xs font-semibold text-slate-900 line-clamp-1">{rev.author_name}</span>
+              </div>
+            </div>
           ))}
-        </div>
-        <blockquote className="text-sm text-slate-700 italic line-clamp-4 leading-relaxed font-medium">
-          &ldquo;{rev.text}&rdquo;
-        </blockquote>
-        <div className="flex items-center gap-2 justify-center pt-2">
-          {rev.profile_photo_url ? (
-            <img src={rev.profile_photo_url} alt={rev.author_name} className="w-6 h-6 rounded-full object-cover" />
-          ) : (
-            <GoogleLogo className="w-5 h-5 shrink-0" />
-          )}
-          <span className="text-xs font-semibold text-slate-900">{rev.author_name}</span>
         </div>
       </div>
     );
