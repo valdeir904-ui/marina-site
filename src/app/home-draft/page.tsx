@@ -388,11 +388,7 @@ export default async function HomePage() {
               </h2>
             </div>
 
-            <div className="bg-warm-50 border border-warm-200 rounded-3xl p-12 text-center max-w-4xl mx-auto">
-              <p className="text-slate-500 font-medium italic">
-                Em breve, depoimentos de pacientes.
-              </p>
-            </div>
+            <GoogleReviewsWidget />
           </div>
         </section>
 
