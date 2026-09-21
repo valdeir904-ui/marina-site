@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export const revalidate = 604800; // Cache por 7 dias na Vercel (604800 segundos)
+export const revalidate = 0; // Temp: Desativando o cache para debugar
 
 export async function GET() {
   try {
