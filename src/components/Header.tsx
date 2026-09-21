@@ -39,22 +39,22 @@ export default function Header({ settings = {} }: HeaderProps) {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   return (
-    <header className={`sticky top-0 z-40 transition-all duration-300 ${isScrolled ? 'bg-warm-50/95 shadow-sm' : 'bg-warm-50/90'} backdrop-blur-md border-b border-warm-200/80`}>
+    <header className={`sticky top-0 z-40 transition-all duration-500 ${isScrolled ? 'bg-brand-700/95 shadow-md border-b-transparent' : 'bg-warm-50/90 border-b border-warm-200/80'} backdrop-blur-md`}>
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand / Logo */}
-        <Link href="/" className="block">
-          <span className="font-serif text-xl sm:text-2xl text-brand-700 tracking-tight block">
+        <Link href="/" className="block group">
+          <span className={`font-serif text-xl sm:text-2xl tracking-tight block transition-colors duration-500 ${isScrolled ? 'text-white' : 'text-brand-700'}`}>
             Marina Falcão
           </span>
-          <span className="text-[11px] text-slate-500 tracking-[0.14em] uppercase block">
+          <span className={`text-[11px] tracking-[0.14em] uppercase block transition-colors duration-500 ${isScrolled ? 'text-brand-100' : 'text-slate-500'}`}>
             Psicóloga · CRP 06/162899
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-700">
+        <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-brand-700 transition-colors">
+            <Link key={link.href} href={link.href} className={`transition-colors duration-300 ${isScrolled ? 'text-brand-100 hover:text-white' : 'text-slate-700 hover:text-brand-700'}`}>
               {link.label}
             </Link>
           ))}
@@ -62,12 +62,12 @@ export default function Header({ settings = {} }: HeaderProps) {
 
         {/* Action Button & Social */}
         <div className="hidden md:flex items-center gap-6">
-          <div className="flex items-center gap-4 border-r border-warm-200 pr-6">
+          <div className={`flex items-center gap-4 border-r pr-6 transition-colors duration-500 ${isScrolled ? 'border-brand-600' : 'border-warm-200'}`}>
             <a
               href={settings.instagram_url || "https://instagram.com/marinafalcaopsi"}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-700 hover:text-brand-700 transition-colors p-1"
+              className={`p-1 transition-colors duration-300 ${isScrolled ? 'text-brand-100 hover:text-white' : 'text-slate-700 hover:text-brand-700'}`}
               aria-label="Instagram"
             >
               <InstagramIcon />
@@ -77,7 +77,11 @@ export default function Header({ settings = {} }: HeaderProps) {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-brand-700 hover:bg-brand-800 text-white px-5 py-2.5 rounded-full font-medium text-sm transition-colors"
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm transition-all duration-500 transform hover:-translate-y-0.5 ${
+              isScrolled 
+                ? 'bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-md hover:shadow-lg' 
+                : 'bg-brand-700 hover:bg-brand-800 text-white shadow-sm'
+            }`}
           >
             <MessageCircle className="w-4 h-4" />
             <span>Agendar sessão</span>
@@ -87,7 +91,7 @@ export default function Header({ settings = {} }: HeaderProps) {
         {/* Mobile menu button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-slate-700 hover:text-brand-700 focus:outline-none"
+          className={`md:hidden p-2 focus:outline-none transition-colors duration-300 ${isScrolled ? 'text-white' : 'text-slate-700 hover:text-brand-700'}`}
           aria-label="Abrir menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
