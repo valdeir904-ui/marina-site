@@ -14,6 +14,7 @@ import { query } from '@/lib/db';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingWhatsapp from '@/components/FloatingWhatsapp';
+import GoogleReviewsWidget from '@/components/GoogleReviewsWidget';
 import { getSiteSettings } from '@/lib/settings';
 
 export const metadata = {
@@ -148,6 +149,14 @@ export default async function BioLinksPage() {
               </div>
               <span className="text-xs text-slate-400">Ver</span>
             </a>
+
+            {/* Google Reviews */}
+            <div className="pt-6">
+              <h2 className="font-serif text-xl font-bold text-slate-800 mb-4 text-center">O que dizem os pacientes</h2>
+              <div className="bg-white rounded-3xl p-6 shadow-warm-md border border-warm-200">
+                <GoogleReviewsWidget />
+              </div>
+            </div>
 
             {/* Instagram */}
             <a
