@@ -95,25 +95,52 @@ function useDraggableScroll(dataLoaded: boolean) {
     slider.addEventListener('mouseup', onMouseUp);
     slider.addEventListener('mousemove', onMouseMove);
 
-    // Auto-scroll logic
-    const interval = setInterval(() => {
-      if (!slider.matches(':hover') && !isDown) {
-        slider.style.scrollBehavior = 'smooth';
-        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
-          slider.scrollTo({ left: 0 });
-        } else {
-          // Calculate the width of one card + gap. Roughly 280px.
-          slider.scrollBy({ left: 280 });
+    let animationFrameId: number;
+    const speed = 0.5; // pixels per frame
+
+    slider.addEventListener('mouseenter', () => {
+      slider.dataset.hovered = 'true';
+    });
+    slider.addEventListener('mouseleave', () => {
+      slider.dataset.hovered = 'false';
+    });
+    slider.addEventListener('touchstart', () => {
+      slider.dataset.hovered = 'true';
+    });
+    slider.addEventListener('touchend', () => {
+      setTimeout(() => {
+        slider.dataset.hovered = 'false';
+      }, 1500); // pause a bit after touch
+    });
+
+    let accumulatedScroll = 0;
+
+    const loop = () => {
+      if (!isDown && slider.dataset.hovered !== 'true') {
+        slider.style.scrollBehavior = 'auto'; // Must be auto for 1px increments
+        
+        accumulatedScroll += speed;
+        if (accumulatedScroll >= 1) {
+          slider.scrollLeft += Math.floor(accumulatedScroll);
+          accumulatedScroll -= Math.floor(accumulatedScroll);
+        }
+        
+        // If we scrolled past half the content (since it's duplicated), reset to start seamlessly
+        if (slider.scrollLeft >= slider.scrollWidth / 2) {
+          slider.scrollLeft = 0;
         }
       }
-    }, 4000);
+      animationFrameId = requestAnimationFrame(loop);
+    };
+    
+    animationFrameId = requestAnimationFrame(loop);
 
     return () => {
       slider.removeEventListener('mousedown', onMouseDown);
       slider.removeEventListener('mouseleave', onMouseLeave);
       slider.removeEventListener('mouseup', onMouseUp);
       slider.removeEventListener('mousemove', onMouseMove);
-      clearInterval(interval);
+      cancelAnimationFrame(animationFrameId);
     };
   }, [dataLoaded]);
   
@@ -184,8 +211,8 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
         `}} />
         <div 
           ref={scrollRefCompact}
-          className="flex overflow-x-auto hide-scrollbar gap-4 pb-2 cursor-grab items-stretch snap-x snap-mandatory px-[12.5vw] sm:px-[calc(50%-130px)]"
-          style={{ scrollBehavior: 'smooth' }}
+          className="flex overflow-x-auto hide-scrollbar gap-4 pb-2 cursor-grab items-stretch px-[12.5vw] sm:px-[calc(50%-130px)]"
+          style={{ scrollBehavior: 'auto' }}
         >
           {data.reviews.map((rev, idx) => {
             const isExpanded = expandedIndices.has(idx);
@@ -193,7 +220,7 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
             return (
           <figure 
             key={idx} 
-            className={`flex flex-col justify-between space-y-6 select-none h-auto transition-all duration-300 snap-center
+            className={`flex flex-col justify-between space-y-6 select-none h-auto transition-all duration-300
               w-[75vw] sm:w-[260px] shrink-0 bg-white p-5 rounded-2xl border border-warm-200 shadow-sm hover:shadow-md
             `}
           >
@@ -292,10 +319,10 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
         ref={scrollRefFull}
         className={`
         ${data.reviews.length > 3 
-          ? 'flex overflow-x-auto hide-scrollbar pb-8 gap-4 md:gap-6 cursor-grab items-stretch snap-x snap-mandatory px-[12.5vw] sm:px-[calc(50%-140px)]' 
+          ? 'flex overflow-x-auto hide-scrollbar pb-8 gap-4 md:gap-6 cursor-grab items-stretch px-[12.5vw] sm:px-[calc(50%-140px)]' 
           : 'grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12'}
       `}
-        style={{ scrollBehavior: 'smooth' }}
+        style={{ scrollBehavior: 'auto' }}
       >
         {data.reviews.map((rev, idx) => {
           const isExpanded = expandedIndices.has(idx);
@@ -303,7 +330,7 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
           return (
           <figure 
             key={idx} 
-            className={`flex flex-col justify-between space-y-6 select-none h-auto transition-all duration-300 snap-center
+            className={`flex flex-col justify-between space-y-6 select-none h-auto transition-all duration-300
               ${data.reviews.length > 3 ? 'w-[75vw] sm:w-[280px] shrink-0 bg-white p-6 rounded-2xl border border-warm-200 shadow-sm hover:shadow-md transition-shadow' : ''}
             `}
           >
