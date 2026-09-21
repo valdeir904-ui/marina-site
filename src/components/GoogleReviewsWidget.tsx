@@ -115,9 +115,23 @@ export default function GoogleReviewsWidget() {
       </div>
 
       {/* Depoimentos */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12">
+      <style dangerouslySetInnerHTML={{ __html: `
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      `}} />
+      
+      <div className={`
+        ${data.reviews.length > 3 
+          ? 'flex overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 gap-6 md:gap-8' 
+          : 'grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12'}
+      `}>
         {data.reviews.map((rev, idx) => (
-          <figure key={idx} className="flex flex-col justify-between space-y-6">
+          <figure 
+            key={idx} 
+            className={`flex flex-col justify-between space-y-6 
+              ${data.reviews.length > 3 ? 'min-w-[85vw] sm:min-w-[380px] snap-center shrink-0 bg-white p-6 rounded-2xl border border-warm-200 shadow-sm' : ''}
+            `}
+          >
             <div className="space-y-4">
               <div className="flex items-center gap-1 text-amber-400">
                 {[...Array(rev.rating)].map((_, i) => (
