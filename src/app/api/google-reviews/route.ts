@@ -32,38 +32,7 @@ export async function GET() {
       }
     }
 
-    // Fallback default dataset when GOOGLE_PLACES_API_KEY is not configured yet
-    const fallbackData = {
-      source: 'fallback',
-      rating: 5.0,
-      user_ratings_total: 28,
-      google_url: 'https://www.google.com/search?q=Marina+Falc%C3%A3o+Psic%C3%B3loga+Ribeir%C3%A3o+Preto',
-      reviews: [
-        {
-          author_name: 'Camila Rodrigues',
-          profile_photo_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120',
-          rating: 5,
-          relative_time_description: 'há 2 semanas',
-          text: 'A Dra. Marina é uma profissional incrível. O acolhimento durante o processo de terapia me ajudou a entender e controlar minhas crises de ansiedade. Atendimento impecável!',
-        },
-        {
-          author_name: 'Lucas Mendes',
-          profile_photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120',
-          rating: 5,
-          relative_time_description: 'há 1 mês',
-          text: 'Fiz acompanhamento para Burnout e sobrecarga no trabalho. A abordagem da Análise do Comportamento foi essencial para eu conseguir impor limites e recuperar a saúde mental.',
-        },
-        {
-          author_name: 'Juliana & Marcelo',
-          profile_photo_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120',
-          rating: 5,
-          relative_time_description: 'há 3 meses',
-          text: 'Iniciamos a terapia de casal com a Marina e a melhoria na nossa comunicação foi nítida logo nas primeiras sessões. Recomendo de olhos fechados!',
-        },
-      ],
-    };
-
-    return NextResponse.json(fallbackData);
+    return NextResponse.json({ error: 'Configuração da API ausente ou falha na requisição.' }, { status: 400 });
   } catch (error: any) {
     console.error('Erro ao buscar avaliações do Google:', error);
     return NextResponse.json({ error: 'Erro ao carregar avaliações.' }, { status: 500 });
