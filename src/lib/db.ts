@@ -1,6 +1,5 @@
-import mysql from 'mysql2/promise';
-import sqlite3 from 'sqlite3';
-import { open, Database as SQLiteDatabase } from 'sqlite';
+import type mysql from 'mysql2/promise';
+import type { Database as SQLiteDatabase } from 'sqlite';
 import bcrypt from 'bcryptjs';
 import path from 'path';
 import { createPool, VercelPool } from '@vercel/postgres';
@@ -20,6 +19,8 @@ let pgPool: VercelPool | null = null;
 
 async function getSqliteDb() {
   if (!sqliteDb) {
+    const sqlite3 = (await import('sqlite3')).default;
+    const { open } = await import('sqlite');
     const dbPath = path.join(process.cwd(), 'database.sqlite');
     sqliteDb = await open({
       filename: dbPath,
@@ -29,8 +30,9 @@ async function getSqliteDb() {
   return sqliteDb;
 }
 
-function getMysqlPool() {
+async function getMysqlPool() {
   if (!mysqlPool) {
+    const mysql = (await import('mysql2/promise')).default;
     mysqlPool = mysql.createPool({
       host, port, user, password, database,
       waitForConnections: true, connectionLimit: 10, queueLimit: 0,
@@ -80,7 +82,7 @@ export async function query(sql: string, params: any[] = []): Promise<any> {
       return { affectedRows: result.rowCount };
     }
   } else if (driver === 'mysql') {
-    const pool = getMysqlPool();
+    const pool = await getMysqlPool();
     const [rows] = await pool.execute(sql, params);
     return rows;
   } else {
@@ -208,7 +210,7 @@ export async function initDb() {
       }
     } else {
       // MySQL logic
-      const pool = getMysqlPool();
+      const pool = await getMysqlPool();
       await pool.query(`
         CREATE TABLE IF NOT EXISTS users (
           id INT AUTO_INCREMENT PRIMARY KEY,
