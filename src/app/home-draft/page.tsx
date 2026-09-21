@@ -6,6 +6,7 @@ import { getSiteSettings } from '@/lib/settings';
 import FaqAccordion from '@/components/FaqAccordion';
 import StepTimeline from '@/components/StepTimeline';
 import GoogleReviewsWidget from '@/components/GoogleReviewsWidget';
+import Reveal from '@/components/Reveal';
 import Link from 'next/link';
 import {
   MessageCircle,
@@ -87,61 +88,71 @@ export default async function HomePage() {
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center lg:items-start">
               <div className="lg:col-span-7 space-y-7 text-center lg:text-left lg:pt-2">
-                <p className="kicker justify-center lg:justify-start">
-                  Psicóloga Clínica · CRP 06/162899
-                </p>
+                <Reveal animation="fade-up" delay={100}>
+                  <p className="kicker justify-center lg:justify-start">
+                    Psicóloga Clínica · CRP 06/162899
+                  </p>
+                </Reveal>
 
-                <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.4rem] font-medium text-slate-900 leading-[1.12] tracking-tight">
-                  Tudo começa na sua{' '}
-                  <em className="text-brand-700 italic">saúde mental.</em>
-                </h1>
+                <Reveal animation="fade-up" delay={200}>
+                  <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.4rem] font-medium text-slate-900 leading-[1.12] tracking-tight">
+                    Tudo começa na sua{' '}
+                    <em className="text-brand-700 italic">saúde mental.</em>
+                  </h1>
+                </Reveal>
 
-                <p className="text-lg text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                  Quando a mente desacelera, a vida volta a acontecer. Psicoterapia para ansiedade,
-                  burnout, luto e relacionamentos, com escuta acolhedora e fundamento na Análise do
-                  Comportamento.
-                </p>
+                <Reveal animation="fade-up" delay={300}>
+                  <p className="text-lg text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                    Quando a mente desacelera, a vida volta a acontecer. Psicoterapia para ansiedade,
+                    burnout, luto e relacionamentos, com escuta acolhedora e fundamento na Análise do
+                    Comportamento.
+                  </p>
+                </Reveal>
 
-                <div className="pt-1 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5">
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-brand-700 hover:bg-brand-800 text-white font-semibold px-7 py-3.5 rounded-full text-base transition-colors shadow-warm-md"
-                  >
-                    <MessageCircle className="w-5 h-5" />
-                    <span>Agendar pelo WhatsApp</span>
-                  </a>
+                <Reveal animation="fade-up" delay={400}>
+                  <div className="pt-1 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5">
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-brand-700 hover:bg-brand-800 text-white font-semibold px-7 py-3.5 rounded-full text-base transition-colors shadow-warm-md"
+                    >
+                      <MessageCircle className="w-5 h-5" />
+                      <span>Agendar pelo WhatsApp</span>
+                    </a>
 
-                  <Link
-                    href="#especialidades"
-                    className="inline-flex items-center gap-1.5 text-slate-700 hover:text-brand-700 font-medium text-base transition-colors underline decoration-warm-400 underline-offset-4 hover:decoration-brand-400"
-                  >
-                    Conhecer especialidades
-                  </Link>
-                </div>
+                    <Link
+                      href="#especialidades"
+                      className="inline-flex items-center gap-1.5 text-slate-700 hover:text-brand-700 font-medium text-base transition-colors underline decoration-warm-400 underline-offset-4 hover:decoration-brand-400"
+                    >
+                      Conhecer especialidades
+                    </Link>
+                  </div>
+                </Reveal>
 
-                <div className="pt-6 border-t border-warm-200 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-sm text-slate-500">
-                  <span className="inline-flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-brand-600" />
-                    Presencial em Ribeirão Preto — SP
-                  </span>
-                  <span className="inline-flex items-center gap-2">
-                    <Video className="w-4 h-4 text-brand-600" />
-                    On-line para todo o Brasil e exterior
-                  </span>
-                </div>
+                <Reveal animation="fade-in" delay={600}>
+                  <div className="pt-6 border-t border-warm-200 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-sm text-slate-500">
+                    <span className="inline-flex items-center gap-2">
+                      <MapPin className="w-4 h-4 text-brand-600" />
+                      Presencial em Ribeirão Preto — SP
+                    </span>
+                    <span className="inline-flex items-center gap-2">
+                      <Video className="w-4 h-4 text-brand-600" />
+                      On-line para todo o Brasil e exterior
+                    </span>
+                  </div>
+                </Reveal>
               </div>
 
               {/* Cartão de apresentação */}
               <div className="lg:col-span-5">
-                <div className="mx-auto max-w-sm lg:max-w-none">
+                <Reveal animation="slide-left" delay={300} className="mx-auto max-w-sm lg:max-w-none">
                   <div className="bg-white rounded-2xl border border-warm-200 shadow-warm-md overflow-hidden p-6 sm:p-8 space-y-5">
                     <div className="relative w-full h-80 sm:h-96 rounded-2xl overflow-hidden bg-gradient-to-tr from-brand-200 via-warm-100 to-sage-200 border border-brand-100/80 shadow-inner">
                       <img 
                         src="/images/marina-profile.jpg" 
                         alt="Dra. Marina Falcão" 
-                        className="w-full h-[calc(100%+50px)] object-cover object-top -mt-[50px]"
+                        className="w-full h-[calc(100%+50px)] object-cover object-top -mt-[50px] transition-transform duration-[1.5s] ease-out hover:scale-[1.03]"
                       />
                     </div>
                     <div className="text-center space-y-4">
@@ -162,7 +173,7 @@ export default async function HomePage() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </Reveal>
               </div>
             </div>
           </div>
@@ -171,24 +182,30 @@ export default async function HomePage() {
         {/* ESPECIALIDADES */}
         <section id="especialidades" className="py-20 lg:py-24 bg-white border-y border-warm-200">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-2xl space-y-4 mb-14">
-              <p className="kicker">Especialidades</p>
-              <h2 className="font-serif text-3xl sm:text-4xl text-slate-900">
-                Áreas de atuação
-              </h2>
-              <p className="text-slate-600 leading-relaxed">
-                Cada demanda emocional pede um olhar atento e um plano terapêutico singular, sob a
-                perspectiva da Análise do Comportamento.
-              </p>
-            </div>
+            <Reveal animation="fade-up">
+              <div className="max-w-2xl space-y-4 mb-14">
+                <p className="kicker">Especialidades</p>
+                <h2 className="font-serif text-3xl sm:text-4xl text-slate-900">
+                  Áreas de atuação
+                </h2>
+                <p className="text-slate-600 leading-relaxed">
+                  Cada demanda emocional pede um olhar atento e um plano terapêutico singular, sob a
+                  perspectiva da Análise do Comportamento.
+                </p>
+              </div>
+            </Reveal>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
-              {especialidades.map(({ icon: Icon, title, text }) => (
-                <div key={title} className="space-y-3">
-                  <Icon className="w-7 h-7 text-brand-600" strokeWidth={1.5} />
-                  <h3 className="font-serif text-xl text-slate-900">{title}</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">{text}</p>
-                </div>
+              {especialidades.map(({ icon: Icon, title, text }, idx) => (
+                <Reveal key={title} animation="fade-up" delay={idx * 100}>
+                  <div className="space-y-3 group cursor-default">
+                    <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300">
+                      <Icon className="w-6 h-6" strokeWidth={1.5} />
+                    </div>
+                    <h3 className="font-serif text-xl text-slate-900 pt-2">{title}</h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">{text}</p>
+                  </div>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -197,16 +214,18 @@ export default async function HomePage() {
         {/* COMO FUNCIONA O ATENDIMENTO */}
         <section className="py-20 lg:py-24 bg-warm-50">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
-            <div className="max-w-2xl space-y-4">
-              <p className="kicker">Como funciona</p>
-              <h2 className="font-serif text-3xl sm:text-4xl text-slate-900">
-                Do primeiro contato ao acompanhamento
-              </h2>
-              <p className="text-slate-600 leading-relaxed">
-                Cada etapa é pensada para o seu conforto — do primeiro contato pelo WhatsApp até as
-                sessões semanais.
-              </p>
-            </div>
+            <Reveal animation="fade-up">
+              <div className="max-w-2xl space-y-4">
+                <p className="kicker">Como funciona</p>
+                <h2 className="font-serif text-3xl sm:text-4xl text-slate-900">
+                  Do primeiro contato ao acompanhamento
+                </h2>
+                <p className="text-slate-600 leading-relaxed">
+                  Cada etapa é pensada para o seu conforto — do primeiro contato pelo WhatsApp até as
+                  sessões semanais.
+                </p>
+              </div>
+            </Reveal>
 
             <StepTimeline />
           </div>
@@ -216,7 +235,7 @@ export default async function HomePage() {
         <section id="abordagens" className="py-20 lg:py-24 bg-white border-y border-warm-200">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-              <div className="lg:col-span-6 space-y-6">
+              <Reveal animation="fade-up" className="lg:col-span-6 space-y-6">
                 <p className="kicker">Fundamentação</p>
                 <h2 className="font-serif text-3xl sm:text-4xl text-slate-900 leading-tight">
                   Análise do Comportamento
@@ -231,41 +250,37 @@ export default async function HomePage() {
                 <div className="pt-2">
                   <p className="text-sm font-semibold text-slate-900 mb-3">Formações Complementares:</p>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-brand-600" />
-                      <span className="text-slate-700 text-sm">Neuropsicologia</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-brand-600" />
-                      <span className="text-slate-700 text-sm">Suicidologia</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-brand-600" />
-                      <span className="text-slate-700 text-sm">Luto</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-brand-600" />
-                      <span className="text-slate-700 text-sm">Psicofarmacologia</span>
-                    </li>
+                    {[
+                      'Neuropsicologia',
+                      'Suicidologia',
+                      'Luto',
+                      'Psicofarmacologia',
+                    ].map((item, idx) => (
+                      <Reveal key={item} animation="fade-up" delay={idx * 100} as="li" className="flex items-center gap-3">
+                        <CheckCircle2 className="w-4 h-4 text-brand-600" />
+                        <span className="text-slate-700 text-sm">{item}</span>
+                      </Reveal>
+                    ))}
                   </ul>
                 </div>
-              </div>
+              </Reveal>
 
               {/* Citação */}
-              <div className="lg:col-span-6">
-                <figure className="bg-warm-100 rounded-2xl p-8 sm:p-12 relative">
+              <Reveal animation="slide-left" className="lg:col-span-6">
+                <figure className="bg-warm-100 rounded-2xl p-8 sm:p-12 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-brand-100 rounded-bl-full opacity-50 transition-transform duration-700 group-hover:scale-110" />
                   <span
                     aria-hidden="true"
-                    className="font-serif text-7xl text-brand-300 leading-none block mb-4 select-none"
+                    className="font-serif text-7xl text-brand-300 leading-none block mb-4 select-none relative z-10"
                   >
                     &ldquo;
                   </span>
-                  <blockquote className="font-serif text-xl sm:text-2xl text-slate-800 leading-relaxed">
+                  <blockquote className="font-serif text-xl sm:text-2xl text-slate-800 leading-relaxed relative z-10">
                     O processo terapêutico é feito de pequenos movimentos: perceber, nomear,
                     compreender e transformar. Não se trata apenas de eliminar sintomas, mas de
                     resgatar o sentido de viver com presença.
                   </blockquote>
-                  <figcaption className="pt-8 mt-8 border-t border-warm-300/60 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+                  <figcaption className="pt-8 mt-8 border-t border-warm-300/60 flex flex-col sm:flex-row sm:items-center justify-between gap-5 relative z-10">
                     <div>
                       <p className="font-serif text-lg text-slate-900">Dra. Marina Falcão</p>
                       <p className="text-sm text-slate-500 mt-0.5">
@@ -276,14 +291,14 @@ export default async function HomePage() {
                       href={whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-white bg-brand-700 hover:bg-brand-800 px-5 py-2.5 rounded-full transition-colors"
+                      className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-white bg-brand-700 hover:bg-brand-800 px-5 py-2.5 rounded-full transition-all hover:scale-105 shadow-sm"
                     >
                       <MessageCircle className="w-4 h-4" />
                       <span>Agendar consulta</span>
                     </a>
                   </figcaption>
                 </figure>
-              </div>
+              </Reveal>
             </div>
           </div>
         </section>
