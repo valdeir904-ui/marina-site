@@ -52,7 +52,7 @@ function DoctoraliaLogo({ className }: { className?: string }) {
   );
 }
 
-function useDraggableScroll() {
+function useDraggableScroll(dataLoaded: boolean) {
   const ref = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -111,7 +111,7 @@ function useDraggableScroll() {
       slider.removeEventListener('mousemove', onMouseMove);
       clearInterval(interval);
     };
-  }, []);
+  }, [dataLoaded]);
   
   return ref;
 }
@@ -119,8 +119,8 @@ function useDraggableScroll() {
 export default function GoogleReviewsWidget({ compact = false }: { compact?: boolean }) {
   const [data, setData] = useState<GoogleReviewsData | null>(null);
   const [loading, setLoading] = useState(true);
-  const scrollRefCompact = useDraggableScroll();
-  const scrollRefFull = useDraggableScroll();
+  const scrollRefCompact = useDraggableScroll(!!data);
+  const scrollRefFull = useDraggableScroll(!!data);
 
   useEffect(() => {
     async function fetchReviews() {
