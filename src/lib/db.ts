@@ -6,7 +6,8 @@ import path from 'path';
 import { createPool, VercelPool } from '@vercel/postgres';
 
 // Environment variables
-const driver = process.env.POSTGRES_URL ? 'postgres' : (process.env.DB_DRIVER || 'sqlite');
+const pgConnectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL;
+const driver = pgConnectionString ? 'postgres' : (process.env.DB_DRIVER || 'sqlite');
 const host = process.env.DB_HOST || 'localhost';
 const port = parseInt(process.env.DB_PORT || '3306', 10);
 const user = process.env.DB_USER || 'root';
@@ -40,7 +41,7 @@ function getMysqlPool() {
 
 function getPgPool() {
   if (!pgPool) {
-    pgPool = createPool(); // Auto-uses process.env.POSTGRES_URL
+    pgPool = createPool({ connectionString: pgConnectionString });
   }
   return pgPool;
 }
