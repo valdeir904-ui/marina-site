@@ -100,7 +100,13 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
                 {rev.profile_photo_url ? (
                   <img src={rev.profile_photo_url} alt={rev.author_name} className="w-6 h-6 rounded-full object-cover" />
                 ) : (
-                  <GoogleLogo className="w-5 h-5 shrink-0" />
+                  rev.source === 'doctoralia' ? (
+                    <div className="w-5 h-5 rounded-full bg-[#00e3a4]/20 text-[#00b380] font-bold flex items-center justify-center text-[10px] shrink-0">
+                      {rev.author_name.charAt(0)}
+                    </div>
+                  ) : (
+                    <GoogleLogo className="w-5 h-5 shrink-0" />
+                  )
                 )}
                 <span className="text-xs font-semibold text-slate-900 line-clamp-1">{rev.author_name}</span>
               </div>
@@ -127,7 +133,7 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
               </div>
             </div>
             <p className="text-sm text-slate-500 mt-0.5">
-              Baseado em {data.user_ratings_total} avaliações no Google
+              Baseado em {data.user_ratings_total} avaliações (Google e Doctoralia)
             </p>
           </div>
         </div>
@@ -177,10 +183,12 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
                 <img
                   src={rev.profile_photo_url}
                   alt={rev.author_name}
-                  className="w-9 h-9 rounded-full object-cover border border-warm-200"
+                  className="w-9 h-9 rounded-full object-cover border border-warm-200 shrink-0"
                 />
               ) : (
-                <div className="w-9 h-9 rounded-full bg-brand-100 text-brand-700 font-semibold flex items-center justify-center text-xs">
+                <div className={`w-9 h-9 shrink-0 rounded-full font-semibold flex items-center justify-center text-xs ${
+                  rev.source === 'doctoralia' ? 'bg-[#00e3a4]/20 text-[#00b380]' : 'bg-brand-100 text-brand-700'
+                }`}>
                   {rev.author_name.charAt(0)}
                 </div>
               )}
