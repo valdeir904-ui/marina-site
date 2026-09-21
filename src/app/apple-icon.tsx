@@ -14,16 +14,16 @@ export default function Icon() {
     (
       <div
         style={{
-          background: '#0B3B24',
+          background: '#ffffff',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#ffffff',
+          color: '#7A5229',
           borderRadius: '20%', // typical apple icon shape
-          fontSize: '90px',
-          fontWeight: 800,
+          fontSize: '100px',
+          fontWeight: 900,
           fontFamily: 'sans-serif',
           letterSpacing: '-2px'
         }}

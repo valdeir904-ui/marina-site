@@ -14,18 +14,17 @@ export default function Icon() {
     (
       <div
         style={{
-          background: '#0B3B24', // brand-900 ou brand-800
+          background: 'transparent',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#ffffff',
-          borderRadius: '50%',
-          fontSize: '16px',
-          fontWeight: 800,
+          color: '#7A5229', // Bronze/marrom da imagem
+          fontSize: '18px',
+          fontWeight: 900,
           fontFamily: 'sans-serif',
-          letterSpacing: '-0.5px'
+          letterSpacing: '-1px'
         }}
       >
         MF
