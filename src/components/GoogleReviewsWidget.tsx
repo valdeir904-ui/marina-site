@@ -54,6 +54,7 @@ function DoctoraliaLogo({ className }: { className?: string }) {
 
 function useDraggableScroll() {
   const ref = useRef<HTMLDivElement>(null);
+  
   useEffect(() => {
     const slider = ref.current;
     if (!slider) return;
@@ -63,6 +64,7 @@ function useDraggableScroll() {
 
     const onMouseDown = (e: MouseEvent) => {
       isDown = true;
+      slider.style.scrollBehavior = 'auto'; // Disable smooth scroll while dragging
       slider.classList.add('cursor-grabbing');
       startX = e.pageX - slider.offsetLeft;
       scrollLeft = slider.scrollLeft;
@@ -70,16 +72,18 @@ function useDraggableScroll() {
     const onMouseLeave = () => {
       isDown = false;
       slider.classList.remove('cursor-grabbing');
+      slider.style.scrollBehavior = 'smooth';
     };
     const onMouseUp = () => {
       isDown = false;
       slider.classList.remove('cursor-grabbing');
+      slider.style.scrollBehavior = 'smooth';
     };
     const onMouseMove = (e: MouseEvent) => {
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 2;
+      const walk = (x - startX) * 2; // Scroll-fast
       slider.scrollLeft = scrollLeft - walk;
     };
 
@@ -88,13 +92,27 @@ function useDraggableScroll() {
     slider.addEventListener('mouseup', onMouseUp);
     slider.addEventListener('mousemove', onMouseMove);
 
+    // Auto-scroll logic
+    const interval = setInterval(() => {
+      if (!slider.matches(':hover') && !isDown) {
+        slider.style.scrollBehavior = 'smooth';
+        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+          slider.scrollTo({ left: 0 });
+        } else {
+          slider.scrollBy({ left: 320 });
+        }
+      }
+    }, 4000);
+
     return () => {
       slider.removeEventListener('mousedown', onMouseDown);
       slider.removeEventListener('mouseleave', onMouseLeave);
       slider.removeEventListener('mouseup', onMouseUp);
       slider.removeEventListener('mousemove', onMouseMove);
+      clearInterval(interval);
     };
   }, []);
+  
   return ref;
 }
 
@@ -114,6 +132,10 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
           return;
         }
         const json = await res.json();
+        // Embaralha as avaliações
+        if (json.reviews) {
+          json.reviews = json.reviews.sort(() => Math.random() - 0.5);
+        }
         setData(json);
       } catch (err) {
         console.error('Erro ao buscar avaliações:', err);
@@ -147,10 +169,11 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
         `}} />
         <div 
           ref={scrollRefCompact}
-          className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 pb-2 cursor-grab"
+          className="flex overflow-x-auto hide-scrollbar gap-4 pb-2 cursor-grab"
+          style={{ scrollBehavior: 'smooth' }}
         >
           {data.reviews.map((rev, idx) => (
-            <div key={idx} className="flex flex-col items-center text-center space-y-3 shrink-0 w-[80vw] sm:w-[280px] snap-center select-none">
+            <div key={idx} className="flex flex-col items-center text-center space-y-3 shrink-0 w-[70vw] sm:w-[240px] select-none">
               <div className="flex items-center gap-1 text-amber-400 pointer-events-none">
                 {[...Array(rev.rating || 5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-current" />
@@ -226,14 +249,16 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
         ref={scrollRefFull}
         className={`
         ${data.reviews.length > 3 
-          ? 'flex overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 gap-6 md:gap-8 cursor-grab' 
+          ? 'flex overflow-x-auto hide-scrollbar pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 gap-4 md:gap-6 cursor-grab' 
           : 'grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12'}
-      `}>
+      `}
+        style={{ scrollBehavior: 'smooth' }}
+      >
         {data.reviews.map((rev, idx) => (
           <figure 
             key={idx} 
             className={`flex flex-col justify-between space-y-6 select-none
-              ${data.reviews.length > 3 ? 'min-w-[85vw] sm:min-w-[380px] snap-center shrink-0 bg-white p-6 rounded-2xl border border-warm-200 shadow-sm' : ''}
+              ${data.reviews.length > 3 ? 'min-w-[80vw] sm:min-w-[300px] shrink-0 bg-white p-6 rounded-2xl border border-warm-200 shadow-sm hover:shadow-md transition-shadow' : ''}
             `}
           >
             <div className="space-y-4 pointer-events-none">
