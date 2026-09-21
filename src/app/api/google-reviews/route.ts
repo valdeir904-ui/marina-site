@@ -8,23 +8,31 @@ export async function GET() {
     const placeId = process.env.GOOGLE_PLACE_ID;
 
     if (apiKey && placeId) {
-      const googleUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,reviews,user_ratings_total,url&key=${apiKey}&language=pt-BR`;
+      const googleUrl = `https://places.googleapis.com/v1/places/${placeId}`;
       
-      const response = await fetch(googleUrl);
+      const response = await fetch(googleUrl, {
+        method: 'GET',
+        headers: {
+          'X-Goog-Api-Key': apiKey,
+          'X-Goog-FieldMask': 'rating,reviews,userRatingCount,googleMapsUri',
+          'Accept-Language': 'pt-BR'
+        }
+      });
+      
       const data = await response.json();
 
-      if (data.status === 'OK' && data.result) {
+      if (!data.error) {
         const result = {
-          source: 'google_api',
-          rating: data.result.rating || 5.0,
-          user_ratings_total: data.result.user_ratings_total || 24,
-          google_url: data.result.url || 'https://www.google.com/search?q=Marina+Falc%C3%A3o+Psic%C3%B3loga+Ribeir%C3%A3o+Preto',
-          reviews: (data.result.reviews || []).map((rev: any) => ({
-            author_name: rev.author_name,
-            profile_photo_url: rev.profile_photo_url,
+          source: 'google_api_new',
+          rating: data.rating || 5.0,
+          user_ratings_total: data.userRatingCount || 0,
+          google_url: data.googleMapsUri || 'https://www.google.com/search?q=Marina+Falc%C3%A3o+Psic%C3%B3loga',
+          reviews: (data.reviews || []).map((rev: any) => ({
+            author_name: rev.authorAttribution?.displayName,
+            profile_photo_url: rev.authorAttribution?.photoUri,
             rating: rev.rating,
-            relative_time_description: rev.relative_time_description,
-            text: rev.text,
+            relative_time_description: rev.relativePublishTimeDescription,
+            text: rev.text?.text || '',
           })),
         };
 
