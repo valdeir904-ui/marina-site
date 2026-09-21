@@ -573,6 +573,17 @@ export default function AdminDashboardPage() {
                 <form onSubmit={handleSaveSettings} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-1">
+                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Nome / Título do Site</label>
+                      <input type="text" value={siteSettings.site_title || ''} onChange={(e) => setSiteSettings({...siteSettings, site_title: e.target.value})} placeholder="Ex: Psicóloga Marina Falcão" className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Slogan (Frase abaixo da foto)</label>
+                      <input type="text" value={siteSettings.tagline || ''} onChange={(e) => setSiteSettings({...siteSettings, tagline: e.target.value})} placeholder="Ex: Tudo começa na sua saúde mental." className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-1">
                       <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Número do WhatsApp (Apenas Números)</label>
                       <input type="text" value={siteSettings.whatsapp_number} onChange={(e) => setSiteSettings({...siteSettings, whatsapp_number: e.target.value})} placeholder="Ex: 5516997712697" className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
                     </div>
