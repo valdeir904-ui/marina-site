@@ -64,7 +64,7 @@ export default function Header({ settings = {} }: HeaderProps) {
         <div className="hidden md:flex items-center gap-6">
           <div className={`flex items-center gap-4 border-r pr-6 transition-colors duration-500 ${isScrolled ? 'border-brand-600' : 'border-warm-200'}`}>
             <a
-              href={settings.instagram_url || "https://instagram.com/marinafalcaopsi"}
+              href={settings.instagram_url || "https://www.instagram.com/psimarinafalcao/"}
               target="_blank"
               rel="noopener noreferrer"
               className={`p-1 transition-colors duration-300 ${isScrolled ? 'text-brand-100 hover:text-white' : 'text-slate-700 hover:text-brand-700'}`}
@@ -114,7 +114,7 @@ export default function Header({ settings = {} }: HeaderProps) {
 
           <div className="pt-2 border-t border-warm-200 mt-4">
             <a
-              href={settings.instagram_url || "https://instagram.com/marinafalcaopsi"}
+              href={settings.instagram_url || "https://www.instagram.com/psimarinafalcao/"}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-slate-700 hover:text-brand-700 py-2 font-medium text-sm"

@@ -170,7 +170,7 @@ export default async function BioLinksPage() {
 
             {/* Instagram */}
             <a
-              href={settings.instagram_url || "https://www.instagram.com"}
+              href={settings.instagram_url || "https://www.instagram.com/psimarinafalcao/"}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full flex items-center justify-between p-4 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 text-white font-semibold text-sm shadow-warm-sm hover:opacity-95 transition-all"
@@ -181,7 +181,7 @@ export default async function BioLinksPage() {
                 </svg>
                 <span>Siga no Instagram</span>
               </div>
-              <span className="text-xs text-white/80">@marinafalcao.psi</span>
+              <span className="text-xs text-white/80">@psimarinafalcao</span>
             </a>
           </div>
         </div>

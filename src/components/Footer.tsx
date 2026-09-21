@@ -120,8 +120,8 @@ export default function Footer({ settings = {} }: FooterProps) {
               Perfil na Doctoralia
             </a>
             <span>·</span>
-            <a
-              href={settings.instagram_url || "https://instagram.com"}
+            <a 
+              href={settings.instagram_url || "https://www.instagram.com/psimarinafalcao/"}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-slate-300 flex items-center gap-1"
