@@ -151,11 +151,22 @@ export default async function BioLinksPage() {
             </a>
 
             {/* Google Reviews */}
-            <div className="pt-6">
-              <h2 className="font-serif text-xl font-bold text-slate-800 mb-4 text-center">O que dizem os pacientes</h2>
-              <div className="bg-white rounded-3xl p-6 shadow-warm-md border border-warm-200">
-                <GoogleReviewsWidget />
-              </div>
+            <div className="pt-4">
+              <Link
+                href="/"
+                className="w-full flex flex-col items-center justify-center p-6 rounded-3xl bg-white border border-warm-300 shadow-warm-md hover:border-brand-400 transition-all text-center gap-2 relative overflow-hidden group"
+              >
+                <div className="absolute -top-12 -right-12 w-24 h-24 bg-brand-50 rounded-full blur-xl group-hover:bg-brand-100 transition-colors"></div>
+                
+                <h3 className="font-serif text-lg font-bold text-slate-800 mb-1 z-10">O que dizem os pacientes</h3>
+                <div className="z-10 w-full relative">
+                  <GoogleReviewsWidget compact={true} />
+                </div>
+                
+                <span className="text-[10px] text-brand-600 font-bold uppercase tracking-widest mt-4 bg-brand-50 px-3 py-1 rounded-full z-10 group-hover:bg-brand-100 transition-colors">
+                  Ver mais avaliações
+                </span>
+              </Link>
             </div>
 
             {/* Instagram */}
