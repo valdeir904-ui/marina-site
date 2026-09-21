@@ -678,8 +678,8 @@ export default function AdminDashboardPage() {
                           {post.category || 'Artigos'}
                         </span>
                         <div className="flex items-center gap-1.5 text-slate-400">
-                          {post.image_url && <ImageIcon className="w-4 h-4 text-emerald-500" title="Possui Imagem" />}
-                          {post.video_url && <Video className="w-4 h-4 text-rose-500" title={`Possui Vídeo (${post.video_type})`} />}
+                          {post.image_url && <span title="Possui Imagem"><ImageIcon className="w-4 h-4 text-emerald-500" /></span>}
+                          {post.video_url && <span title={`Possui Vídeo (${post.video_type})`}><Video className="w-4 h-4 text-rose-500" /></span>}
                         </div>
                       </div>
                       <div className="text-xs text-slate-400 font-medium">
@@ -742,8 +742,8 @@ export default function AdminDashboardPage() {
                           </td>
                           <td className="py-4 px-6">
                             <div className="flex items-center gap-2 text-slate-400">
-                              {post.image_url && <ImageIcon className="w-4 h-4 text-emerald-500" title="Possui Imagem" />}
-                              {post.video_url && <Video className="w-4 h-4 text-rose-500" title={`Possui Vídeo (${post.video_type})`} />}
+                              {post.image_url && <span title="Possui Imagem"><ImageIcon className="w-4 h-4 text-emerald-500" /></span>}
+                              {post.video_url && <span title={`Possui Vídeo (${post.video_type})`}><Video className="w-4 h-4 text-rose-500" /></span>}
                             </div>
                           </td>
                           <td className="py-4 px-6 text-xs text-slate-500 font-medium whitespace-nowrap">
