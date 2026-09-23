@@ -8,6 +8,7 @@ import StepTimeline from '@/components/StepTimeline';
 import GoogleReviewsWidget from '@/components/GoogleReviewsWidget';
 import Reveal from '@/components/Reveal';
 import TypewriterEffect from '@/components/TypewriterEffect';
+import AboutSection from '@/components/AboutSection';
 import Link from 'next/link';
 import {
   MessageCircle,
@@ -179,31 +180,35 @@ export default async function HomePage() {
           </div>
         </section>
 
+        {/* SOBRE MIM */}
+        <AboutSection whatsappUrl={whatsappUrl} />
+
         {/* ESPECIALIDADES */}
-        <section id="especialidades" className="py-20 lg:py-24 bg-white border-y border-warm-200">
+        <section id="especialidades" className="py-20 lg:py-28 bg-warm-50/50 border-b border-warm-200">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <Reveal animation="fade-up">
-              <div className="max-w-2xl space-y-4 mb-14">
-                <p className="kicker">Especialidades</p>
-                <h2 className="font-serif text-3xl sm:text-4xl text-slate-900">
+              <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
+                <p className="kicker justify-center">Especialidades</p>
+                <h2 className="font-serif text-4xl sm:text-5xl text-slate-900 leading-tight">
                   Áreas de atuação
                 </h2>
-                <p className="text-slate-600 leading-relaxed">
+                <p className="text-slate-600 leading-relaxed text-lg">
                   Cada demanda emocional pede um olhar atento e um plano terapêutico singular, sob a
                   perspectiva da Análise do Comportamento.
                 </p>
               </div>
             </Reveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {especialidades.map(({ icon: Icon, title, text }, idx) => (
                 <Reveal key={title} animation="fade-up" delay={idx * 100}>
-                  <div className="space-y-3 group cursor-default">
-                    <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300">
-                      <Icon className="w-6 h-6" strokeWidth={1.5} />
+                  <div className="group bg-white p-8 sm:p-10 rounded-[2rem] border border-warm-200 shadow-sm hover:shadow-warm-xl hover:-translate-y-2 transition-all duration-500 relative overflow-hidden h-full flex flex-col">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-brand-50/50 rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-700"></div>
+                    <div className="w-14 h-14 bg-brand-50 rounded-2xl flex items-center justify-center text-brand-600 mb-6 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-500 shadow-sm">
+                      <Icon className="w-7 h-7" strokeWidth={1.5} />
                     </div>
-                    <h3 className="font-serif text-xl text-slate-900 pt-2">{title}</h3>
-                    <p className="text-slate-600 text-sm leading-relaxed">{text}</p>
+                    <h3 className="font-serif text-2xl text-slate-900 mb-3 group-hover:text-brand-800 transition-colors">{title}</h3>
+                    <p className="text-slate-600 text-base leading-relaxed flex-1">{text}</p>
                   </div>
                 </Reveal>
               ))}
