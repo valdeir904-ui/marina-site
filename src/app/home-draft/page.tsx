@@ -217,7 +217,7 @@ export default async function HomePage() {
                   Do primeiro contato ao acompanhamento
                 </h2>
                 <p className="text-slate-600 leading-relaxed">
-                  Cada etapa é pensada para o seu conforto — do primeiro contato pelo WhatsApp até as
+                  Cada etapa é pensada para o seu conforto do primeiro contato pelo WhatsApp até as
                   sessões semanais.
                 </p>
               </div>
