@@ -141,7 +141,7 @@ export default async function HomePage() {
 
               {/* Cartão de apresentação */}
               <div className="lg:col-span-5 relative animate-float">
-                <Reveal animation="fade-left" delay={400} className="mx-auto max-w-sm lg:max-w-none">
+                <Reveal animation="slide-left" delay={400} className="mx-auto max-w-sm lg:max-w-none">
                   <div className="bg-white rounded-2xl border border-warm-200 shadow-warm-md overflow-hidden p-6 sm:p-8 space-y-5">
                     <div className="relative w-full h-80 sm:h-96 rounded-2xl overflow-hidden bg-gradient-to-tr from-brand-200 via-warm-100 to-sage-200 border border-brand-100/80 shadow-inner">
                       <img 
