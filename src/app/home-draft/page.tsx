@@ -10,6 +10,7 @@ import Reveal from '@/components/Reveal';
 import TypewriterEffect from '@/components/TypewriterEffect';
 import AboutSection from '@/components/AboutSection';
 import HeroWave from '@/components/HeroWave';
+import DeepDiveSections from '@/components/DeepDiveSections';
 import Link from 'next/link';
 import {
   MessageCircle,
@@ -244,6 +245,9 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* MÓDULOS DE APROFUNDAMENTO (TESTE MVP) */}
+        <DeepDiveSections />
 
         {/* COMO FUNCIONA O ATENDIMENTO */}
         <section className="py-20 lg:py-24 bg-warm-50">
