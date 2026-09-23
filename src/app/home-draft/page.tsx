@@ -147,7 +147,7 @@ export default async function HomePage() {
                   <div className="absolute -inset-2 bg-gradient-to-tr from-brand-200/50 to-sage-200/50 rounded-[3rem] blur-2xl -z-10"></div>
                   
                   <div className="bg-white/80 backdrop-blur-xl rounded-[2.5rem] border border-white shadow-2xl overflow-hidden p-6 sm:p-8 space-y-6">
-                    <div className="relative w-full aspect-[4/5] sm:h-[400px] rounded-[2rem] overflow-hidden bg-gradient-to-tr from-brand-200 via-warm-100 to-sage-200 shadow-inner group">
+                    <div className="relative w-full aspect-[4/5] max-w-sm mx-auto rounded-[2rem] overflow-hidden bg-gradient-to-tr from-brand-200 via-warm-100 to-sage-200 shadow-inner group">
                       <img 
                         src="/images/marina-profile.jpg" 
                         alt="Marina Falcão" 
