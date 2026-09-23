@@ -9,6 +9,7 @@ import GoogleReviewsWidget from '@/components/GoogleReviewsWidget';
 import Reveal from '@/components/Reveal';
 import TypewriterEffect from '@/components/TypewriterEffect';
 import AboutSection from '@/components/AboutSection';
+import HeroWave from '@/components/HeroWave';
 import Link from 'next/link';
 import {
   MessageCircle,
@@ -44,31 +45,67 @@ const especialidades = [
     icon: Brain,
     title: 'Ansiedade & Pânico',
     text: 'Manejo de pensamentos acelerados, crises de pânico, apreensão constante e sintomas físicos causados pelo estresse.',
+    bgHover: 'hover:bg-teal-100',
+    textHover: 'hover:text-teal-900',
+    iconWrapperHover: 'group-hover:bg-white',
+    iconHover: 'group-hover:text-teal-700',
+    titleHover: 'group-hover:text-teal-950',
+    descHover: 'group-hover:text-teal-900'
   },
   {
     icon: Activity,
     title: 'Burnout & Esgotamento',
     text: 'Superação da exaustão profissional, perda de motivação e estresse de trabalho, com reconstrução de limites saudáveis.',
+    bgHover: 'hover:bg-orange-100',
+    textHover: 'hover:text-orange-900',
+    iconWrapperHover: 'group-hover:bg-white',
+    iconHover: 'group-hover:text-orange-700',
+    titleHover: 'group-hover:text-orange-950',
+    descHover: 'group-hover:text-orange-900'
   },
   {
     icon: Heart,
     title: 'Luto',
     text: 'Acolhimento para a dor de perdas afetivas, falecimentos e transições de vida. Um espaço para ressignificar sem pressa.',
+    bgHover: 'hover:bg-black',
+    textHover: 'hover:text-white',
+    iconWrapperHover: 'group-hover:bg-white/10',
+    iconHover: 'group-hover:text-white',
+    titleHover: 'group-hover:text-white',
+    descHover: 'group-hover:text-slate-300'
   },
   {
     icon: Users,
     title: 'Relacionamentos, separações e conflitos afetivos',
     text: 'Melhoria da comunicação, resolução construtiva de conflitos e fortalecimento do vínculo e da parceria afetiva.',
+    bgHover: 'hover:bg-rose-100',
+    textHover: 'hover:text-rose-900',
+    iconWrapperHover: 'group-hover:bg-white',
+    iconHover: 'group-hover:text-rose-700',
+    titleHover: 'group-hover:text-rose-950',
+    descHover: 'group-hover:text-rose-900'
   },
   {
     icon: Sun,
     title: 'Depressão & Apatia',
     text: 'Intervenções para resgatar a vitalidade, tratar o desânimo persistente e reorganizar a rotina com novos propósitos.',
+    bgHover: 'hover:bg-yellow-400',
+    textHover: 'hover:text-black',
+    iconWrapperHover: 'group-hover:bg-white/50',
+    iconHover: 'group-hover:text-black',
+    titleHover: 'group-hover:text-black',
+    descHover: 'group-hover:text-black/80'
   },
   {
     icon: ShieldCheck,
     title: 'TOC & Oscilações Emocionais',
     text: 'Manejo de pensamentos obsessivos, rituais compulsivos e sobrecarga emocional com técnicas comportamentais validadas.',
+    bgHover: 'hover:bg-purple-100',
+    textHover: 'hover:text-purple-900',
+    iconWrapperHover: 'group-hover:bg-white',
+    iconHover: 'group-hover:text-purple-700',
+    titleHover: 'group-hover:text-purple-950',
+    descHover: 'group-hover:text-purple-900'
   },
 ];
 
@@ -87,7 +124,8 @@ export default async function HomePage() {
       <main className="flex-grow">
         {/* HERO */}
         <section className="relative overflow-hidden pt-8 pb-20 lg:pt-12 lg:pb-28 bg-warm-50">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+          <HeroWave />
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
               <div className="lg:col-span-7 space-y-7 text-center lg:text-left lg:pt-2">
                 <Reveal animation="fade-up" delay={100}>
@@ -187,16 +225,19 @@ export default async function HomePage() {
               </div>
             </Reveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {especialidades.map(({ icon: Icon, title, text }, idx) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {especialidades.map(({ icon: Icon, title, text, bgHover, textHover, iconWrapperHover, iconHover, titleHover, descHover }, idx) => (
                 <Reveal key={title} animation="fade-up" delay={idx * 100}>
-                  <div className="group bg-white p-8 sm:p-10 rounded-[2rem] border border-warm-200 shadow-sm hover:shadow-warm-xl hover:-translate-y-2 transition-all duration-500 relative overflow-hidden h-full flex flex-col">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-brand-50/50 rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-700"></div>
-                    <div className="w-14 h-14 bg-brand-50 rounded-2xl flex items-center justify-center text-brand-600 mb-6 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-500 shadow-sm">
-                      <Icon className="w-7 h-7" strokeWidth={1.5} />
+                  <div className={`group bg-white rounded-[2rem] p-8 sm:p-10 shadow-sm border border-brand-100/50 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col cursor-default ${bgHover} ${textHover}`}>
+                    <div className={`w-16 h-16 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-600 mb-8 transition-colors duration-500 ${iconWrapperHover} ${iconHover}`}>
+                      <Icon className="w-8 h-8" />
                     </div>
-                    <h3 className="font-serif text-2xl text-slate-900 mb-3 group-hover:text-brand-800 transition-colors">{title}</h3>
-                    <p className="text-slate-600 text-base leading-relaxed flex-1">{text}</p>
+                    <h3 className={`font-serif text-2xl font-bold text-slate-900 mb-4 transition-colors duration-500 ${titleHover}`}>
+                      {title}
+                    </h3>
+                    <p className={`text-slate-600 leading-relaxed font-medium transition-colors duration-500 ${descHover}`}>
+                      {text}
+                    </p>
                   </div>
                 </Reveal>
               ))}
