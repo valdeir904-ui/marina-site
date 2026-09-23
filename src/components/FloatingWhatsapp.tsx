@@ -89,7 +89,7 @@ export default function FloatingWhatsapp({
                   <path d="M1.533 3.568L8 12.193V1H2.812C1.042 1 .474 2.156 1.533 3.568z"></path>
                 </svg>
               </span>
-              <span className="pr-2">Olá! 😊 Se você está atravessando um luto, enfrentando ansiedade, esgotamento emocional ou algum momento difícil da vida, este pode ser um espaço de acolhimento e elaboração. Como posso te ajudar hoje?</span>
+              <span className="pr-2">Olá! 😊 Se você está atravessando um <strong>luto</strong>, enfrentando <strong>ansiedade</strong>, <strong>esgotamento emocional</strong> ou algum momento difícil da vida, este pode ser um espaço de acolhimento e elaboração. Como posso te ajudar hoje?</span>
               <span className="float-right text-[10px] text-slate-400 mt-2 ml-2">Agora</span>
               <div className="clear-both"></div>
             </div>
