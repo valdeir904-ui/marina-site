@@ -140,32 +140,37 @@ export default async function HomePage() {
               </div>
 
               {/* Cartão de apresentação */}
-              <div className="lg:col-span-5 relative animate-float">
+              <div className="lg:col-span-5 relative">
                 <Reveal animation="slide-left" delay={400} className="mx-auto max-w-sm lg:max-w-none">
-                  <div className="bg-white rounded-2xl border border-warm-200 shadow-warm-md overflow-hidden p-6 sm:p-8 space-y-5">
-                    <div className="relative w-full h-80 sm:h-96 rounded-2xl overflow-hidden bg-gradient-to-tr from-brand-200 via-warm-100 to-sage-200 border border-brand-100/80 shadow-inner">
+                  {/* Glow decorativo de fundo */}
+                  <div className="absolute -inset-2 bg-gradient-to-tr from-brand-200/50 to-sage-200/50 rounded-[3rem] blur-2xl -z-10"></div>
+                  
+                  <div className="bg-white/80 backdrop-blur-xl rounded-[2.5rem] border border-white shadow-2xl overflow-hidden p-6 sm:p-8 space-y-6">
+                    <div className="relative w-full aspect-[4/5] sm:h-[400px] rounded-[2rem] overflow-hidden bg-gradient-to-tr from-brand-200 via-warm-100 to-sage-200 shadow-inner group">
                       <img 
                         src="/images/marina-profile.jpg" 
                         alt="Marina Falcão" 
-                        className="w-full h-[calc(100%+50px)] object-cover object-top -mt-[50px] transition-transform duration-[1.5s] ease-out hover:scale-[1.03]"
+                        className="w-full h-[calc(100%+50px)] object-cover object-top -mt-[50px] transition-transform duration-700 ease-out group-hover:scale-105"
                       />
+                      {/* Selo flutuante dentro da foto */}
+                      <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-lg border border-white/60 transform transition-transform group-hover:-translate-y-1">
+                        <div className="flex items-center justify-center gap-2 text-brand-800">
+                          <ShieldCheck className="w-5 h-5 text-brand-600" />
+                          <span className="text-xs font-bold uppercase tracking-wider">Sigilo Garantido</span>
+                        </div>
+                      </div>
                     </div>
+                    
                     <div className="text-center space-y-4">
                       <div>
-                        <h3 className="font-serif text-2xl font-bold text-slate-900">Marina Falcão</h3>
-                        <p className="text-xs font-bold text-brand-700 uppercase tracking-wider mt-1">
+                        <h3 className="font-serif text-3xl font-bold text-slate-900">Marina Falcão</h3>
+                        <p className="text-xs font-bold text-brand-600 uppercase tracking-wider mt-1.5">
                           Psicóloga Clínica • CRP 06/162899
                         </p>
                       </div>
-                      <p className="text-xs text-slate-600 leading-relaxed italic bg-warm-50 p-3 rounded-xl border border-warm-200/60">
+                      <p className="text-sm text-slate-700 leading-relaxed font-medium bg-white/60 p-4 rounded-2xl border border-white/80 shadow-sm">
                         "Especialista em Luto, Neuropsicologia, Saúde Mental, Suicidologia, Burnout e Relacionamentos e vínculos afetivos."
                       </p>
-                      <div className="pt-2 flex justify-center">
-                        <span className="inline-flex items-center gap-1.5 text-slate-500 text-sm">
-                          <ShieldCheck className="w-4 h-4 text-sage-600" />
-                          Sigilo profissional garantido
-                        </span>
-                      </div>
                     </div>
                   </div>
                 </Reveal>
