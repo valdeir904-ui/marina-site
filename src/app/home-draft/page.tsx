@@ -153,24 +153,12 @@ export default async function HomePage() {
                         alt="Marina Falcão" 
                         className="w-full h-full object-cover object-[center_15%] transition-transform duration-700 ease-out group-hover:scale-105"
                       />
-                      {/* Selo flutuante dentro da foto */}
-                      <div className="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md rounded-xl p-2.5 shadow-lg border border-white/60 transform transition-transform group-hover:-translate-y-1">
-                        <div className="flex items-center justify-center gap-1.5 text-brand-800">
-                          <ShieldCheck className="w-4 h-4 text-brand-600" />
-                          <span className="text-[10px] font-bold uppercase tracking-wider">Sigilo Garantido</span>
-                        </div>
-                      </div>
                     </div>
                     
-                    <div className="text-center space-y-3">
-                      <div>
-                        <h3 className="font-serif text-2xl font-bold text-slate-900">Marina Falcão</h3>
-                        <p className="text-[11px] font-bold text-brand-600 uppercase tracking-wider mt-1">
-                          Psicóloga Clínica • CRP 06/162899
-                        </p>
-                      </div>
-                      <p className="text-xs text-slate-700 leading-relaxed font-medium bg-white/60 p-3.5 rounded-xl border border-white/80 shadow-sm">
-                        "Especialista em Luto, Neuropsicologia, Saúde Mental, Suicidologia, Burnout e Relacionamentos e vínculos afetivos."
+                    <div className="text-center pt-2">
+                      <h3 className="font-serif text-2xl font-bold text-slate-900">Marina Falcão</h3>
+                      <p className="text-xs font-bold text-brand-600 uppercase tracking-wider mt-1.5">
+                        Psicóloga Clínica • CRP 06/162899
                       </p>
                     </div>
                   </div>
