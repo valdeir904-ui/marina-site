@@ -88,8 +88,11 @@ export default async function HomePage() {
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center lg:items-start">
               <div className="lg:col-span-7 space-y-7 text-center lg:text-left lg:pt-2">
-
-
+                <Reveal animation="fade-up" delay={100}>
+                  <p className="kicker justify-center lg:justify-start">
+                    Um espaço seguro de acolhimento
+                  </p>
+                </Reveal>
                 <Reveal animation="fade-up" delay={200}>
                   <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.4rem] font-medium text-slate-900 leading-[1.12] tracking-tight">
                     Tudo começa na sua{' '}
