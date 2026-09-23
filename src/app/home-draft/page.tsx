@@ -151,7 +151,7 @@ export default async function HomePage() {
                       <img 
                         src="/images/marina-profile.jpg" 
                         alt="Marina Falcão" 
-                        className="w-full h-full object-cover object-[center_15%] transition-transform duration-700 ease-out group-hover:scale-105"
+                        className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                       />
                       {/* Selo flutuante dentro da foto */}
                       <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-lg border border-white/60 transform transition-transform group-hover:-translate-y-1">
