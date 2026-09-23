@@ -7,6 +7,7 @@ import FaqAccordion from '@/components/FaqAccordion';
 import StepTimeline from '@/components/StepTimeline';
 import GoogleReviewsWidget from '@/components/GoogleReviewsWidget';
 import Reveal from '@/components/Reveal';
+import TypewriterEffect from '@/components/TypewriterEffect';
 import Link from 'next/link';
 import {
   MessageCircle,
@@ -94,9 +95,8 @@ export default async function HomePage() {
                   </p>
                 </Reveal>
                 <Reveal animation="fade-up" delay={200}>
-                  <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.4rem] font-medium text-slate-900 leading-[1.12] tracking-tight">
-                    Tudo começa na sua{' '}
-                    <em className="text-brand-700 italic">saúde mental.</em>
+                  <h1 className="font-serif text-5xl sm:text-6xl lg:text-[4rem] font-medium text-slate-900 leading-[1.12] tracking-tight">
+                    Tudo começa na sua <TypewriterEffect />
                   </h1>
                 </Reveal>
 
