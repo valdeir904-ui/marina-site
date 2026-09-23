@@ -53,8 +53,9 @@ export default function DeepDiveSections() {
                   "O luto não é uma doença a ser curada, é um processo a ser vivido. E você não precisa passar por isso em silêncio."
                 </blockquote>
                 <Link 
-                  href="https://wa.me/5511999999999" 
+                  href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20um%20acolhimento%20para%20mim." 
                   target="_blank" 
+                  data-track="cta-luto-crise"
                   className="inline-flex items-center justify-center w-full px-8 py-4 bg-brand-300 text-slate-950 rounded-full font-semibold hover:bg-brand-200 transition-colors"
                 >
                   Agendar acolhimento
@@ -109,8 +110,9 @@ export default function DeepDiveSections() {
                    A exaustão não é um troféu. É um sinal de que algo precisa mudar.
                  </h3>
                  <Link 
-                  href="https://wa.me/5511999999999" 
+                  href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20minha%20rotina%20e%20cansa%C3%A7o." 
                   target="_blank" 
+                  data-track="cta-burnout-rotina"
                   className="relative z-10 px-8 py-4 bg-brand-800 text-white rounded-full font-semibold hover:bg-brand-700 transition-colors shadow-lg"
                 >
                   Falar sobre minha rotina
