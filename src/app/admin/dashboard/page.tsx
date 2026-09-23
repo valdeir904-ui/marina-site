@@ -71,13 +71,15 @@ export default function AdminDashboardPage() {
 
   // Settings State
   const [siteSettings, setSiteSettings] = useState({
-    site_title: '', tagline: '', whatsapp_number: '', whatsapp_message: '',
-    crp: '', address: '', google_reviews_url: '', doctoralia_url: '', instagram_url: '',
-    bio_image_url: '', google_reviews_sync_enabled: 'false'
+    site_title: 'Psicóloga Marina Falcão', tagline: 'Tudo começa com um tratamento', 
+    whatsapp_number: '5516997712697', whatsapp_message: 'Olá, Marina! Gostaria de agendar uma sessão e iniciar meu processo de psicoterapia.',
+    crp: 'CRP 06/162899', address: '', google_reviews_url: '', doctoralia_url: '', instagram_url: '',
+    bio_image_url: '', google_reviews_sync_enabled: 'true'
   });
   const [settingsSubmitting, setSettingsSubmitting] = useState(false);
   const [settingsSuccess, setSettingsSuccess] = useState(false);
   const [syncingReviews, setSyncingReviews] = useState(false);
+  const [settingsTab, setSettingsTab] = useState<'details' | 'reviews'>('details');
 
   const handleSyncReviews = async () => {
     try {
@@ -351,7 +353,7 @@ export default function AdminDashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans flex flex-col md:flex-row">
+    <div className="h-screen overflow-hidden bg-slate-50 text-slate-800 font-sans flex flex-col md:flex-row">
       
       {/* Mobile Sidebar Overlay */}
       {mobileMenuOpen && (
@@ -420,7 +422,7 @@ export default function AdminDashboardPage() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col min-w-0">
+      <main className="flex-1 flex flex-col min-w-0 h-full overflow-y-auto relative">
         
         {/* Header mobile (visible if needed) / Topbar for actions */}
         <header className="bg-white border-b border-slate-200 px-4 sm:px-8 py-4 flex items-center justify-between sticky top-0 z-10">
@@ -449,7 +451,7 @@ export default function AdminDashboardPage() {
           </div>
         </header>
 
-        <div className="flex-1 p-6 md:p-8 overflow-y-auto">
+        <div className="flex-1 p-6 md:p-8">
           {loading ? (
             <div className="flex items-center justify-center h-64 text-slate-400">Carregando dados...</div>
           ) : activeTab === 'dashboard' ? (
@@ -575,150 +577,163 @@ export default function AdminDashboardPage() {
                 </div>
               </div>
 
-              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                <div className="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
-                  <div>
-                    <h3 className="font-bold text-slate-800 text-lg">Detalhes do Consultório</h3>
-                    <p className="text-slate-500 text-sm">Atualize seus dados de contato e informações públicas.</p>
-                  </div>
-                  {settingsSuccess && (
-                    <span className="flex items-center gap-2 text-emerald-600 font-bold bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200">
-                      <CheckCircle className="w-4 h-4" /> Salvo
-                    </span>
-                  )}
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div className="flex items-center gap-6 px-6 pt-4 border-b border-slate-100 bg-slate-50/50">
+                  <button 
+                    onClick={() => setSettingsTab('details')}
+                    className={`pb-4 text-sm font-bold border-b-2 transition-colors ${settingsTab === 'details' ? 'border-brand-600 text-brand-700' : 'border-transparent text-slate-500 hover:text-slate-700'}`}
+                  >
+                    Detalhes do Consultório
+                  </button>
+                  <button 
+                    onClick={() => setSettingsTab('reviews')}
+                    className={`pb-4 text-sm font-bold border-b-2 transition-colors ${settingsTab === 'reviews' ? 'border-brand-600 text-brand-700' : 'border-transparent text-slate-500 hover:text-slate-700'}`}
+                  >
+                    Automação de Avaliações
+                  </button>
                 </div>
 
-                <form onSubmit={handleSaveSettings} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Nome / Título do Site</label>
-                      <input type="text" value={siteSettings.site_title || ''} onChange={(e) => setSiteSettings({...siteSettings, site_title: e.target.value})} placeholder="Ex: Psicóloga Marina Falcão" className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Slogan (Frase abaixo da foto)</label>
-                      <input type="text" value={siteSettings.tagline || ''} onChange={(e) => setSiteSettings({...siteSettings, tagline: e.target.value})} placeholder="Ex: Tudo começa na sua saúde mental." className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Número do WhatsApp (Apenas Números)</label>
-                      <input type="text" value={siteSettings.whatsapp_number} onChange={(e) => setSiteSettings({...siteSettings, whatsapp_number: e.target.value})} placeholder="Ex: 5516997712697" className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Número do CRP</label>
-                      <input type="text" value={siteSettings.crp} onChange={(e) => setSiteSettings({...siteSettings, crp: e.target.value})} placeholder="Ex: CRP 06/162899" className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
-                    </div>
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Mensagem Padrão do WhatsApp</label>
-                    <textarea rows={2} value={siteSettings.whatsapp_message} onChange={(e) => setSiteSettings({...siteSettings, whatsapp_message: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none resize-none" />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Endereço de Atendimento</label>
-                    <input type="text" value={siteSettings.address} onChange={(e) => setSiteSettings({...siteSettings, address: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100">
-                    <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Link do Instagram</label>
-                      <input type="url" value={siteSettings.instagram_url || ''} onChange={(e) => setSiteSettings({...siteSettings, instagram_url: e.target.value})} placeholder="https://instagram.com/..." className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Link do Doctoralia</label>
-                      <input type="url" value={siteSettings.doctoralia_url || ''} onChange={(e) => setSiteSettings({...siteSettings, doctoralia_url: e.target.value})} placeholder="https://www.doctoralia.com.br/..." className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
-                    </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-slate-100">
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">Foto da página "Link da Bio"</label>
-                    <div className="flex items-center gap-4">
-                      {siteSettings.bio_image_url ? (
-                        <img src={siteSettings.bio_image_url} alt="Foto da Bio" className="w-16 h-16 rounded-full object-cover border-2 border-brand-500" />
-                      ) : (
-                        <img src="/images/marina-avatar.jpg" alt="Foto da Bio" className="w-16 h-16 rounded-full object-cover border-2 border-brand-500" />
-                      )}
-                      <label className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2.5 rounded-xl border border-slate-200 font-semibold transition-colors flex items-center gap-2 text-sm">
-                        <UploadCloud className="w-4 h-4" />
-                        {uploadingImage ? 'Enviando...' : 'Trocar Foto'}
-                        <input type="file" accept="image/*" onChange={async (e) => {
-                          if (!e.target.files || e.target.files.length === 0) return;
-                          const file = e.target.files[0];
-                          const formData = new FormData();
-                          formData.append('file', file);
-                          try {
-                            setUploadingImage(true);
-                            const res = await fetch('/api/upload', { method: 'POST', body: formData });
-                            const data = await res.json();
-                            if (!res.ok) throw new Error(data.error);
-                            setSiteSettings({...siteSettings, bio_image_url: data.url});
-                          } catch (err: any) {
-                            alert('Erro ao enviar imagem: ' + err.message);
-                          } finally {
-                            setUploadingImage(false);
-                          }
-                        }} className="hidden" disabled={uploadingImage} />
-                      </label>
-                      {siteSettings.bio_image_url && (
-                        <button type="button" onClick={() => setSiteSettings({...siteSettings, bio_image_url: ''})} className="text-rose-500 hover:bg-rose-50 px-3 py-2 rounded-lg text-sm font-semibold transition-colors">
-                          Remover
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <div className="pt-8 border-t border-slate-100">
-                    <div className="mb-6">
-                      <h3 className="font-bold text-slate-800 text-lg">Automação de Avaliações</h3>
-                      <p className="text-slate-500 text-sm">Gerencie como os depoimentos do Google são buscados e atualizados.</p>
-                    </div>
-                    
-                    <div className="bg-slate-50 rounded-xl border border-slate-200 p-5 space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <strong className="block text-slate-900 mb-1">Sincronização Automática (7 em 7 dias)</strong>
-                          <span className="text-xs text-slate-500 block max-w-sm">
-                            Habilita ou desabilita o cron job que busca novas avaliações periodicamente.
-                          </span>
+                <div className="p-6 md:p-8">
+                  <form onSubmit={handleSaveSettings} className="space-y-8">
+                    {settingsTab === 'details' ? (
+                      <div className="space-y-8 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h3 className="font-bold text-slate-800 text-lg">Detalhes Principais</h3>
+                            <p className="text-slate-500 text-sm">Atualize seus dados básicos e foto.</p>
+                          </div>
+                          {settingsSuccess && (
+                            <span className="flex items-center gap-2 text-emerald-600 font-bold bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200">
+                              <CheckCircle className="w-4 h-4" /> Salvo
+                            </span>
+                          )}
                         </div>
-                        <label className="relative inline-flex items-center cursor-pointer">
-                          <input 
-                            type="checkbox" 
-                            className="sr-only peer" 
-                            checked={siteSettings.google_reviews_sync_enabled === 'true'}
-                            onChange={(e) => setSiteSettings({...siteSettings, google_reviews_sync_enabled: e.target.checked ? 'true' : 'false'})}
-                          />
-                          <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-600"></div>
-                        </label>
-                      </div>
 
-                      <div className="pt-4 border-t border-slate-200 flex items-center justify-between">
-                        <div>
-                          <strong className="block text-slate-900 mb-1">Forçar Sincronização Agora</strong>
-                          <span className="text-xs text-slate-500 block max-w-sm">
-                            Busca imediatamente as avaliações no Google Places e junta com os depoimentos fixos.
-                          </span>
+                        {/* Foto Section at the Top */}
+                        <div className="bg-slate-50/50 p-5 rounded-xl border border-slate-100">
+                          <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-3">Foto da página "Link da Bio"</label>
+                          <div className="flex items-center gap-4">
+                            {siteSettings.bio_image_url ? (
+                              <img src={siteSettings.bio_image_url} alt="Foto da Bio" className="w-16 h-16 rounded-full object-cover border-2 border-brand-500 shadow-sm" />
+                            ) : (
+                              <img src="/images/marina-avatar.jpg" alt="Foto da Bio" className="w-16 h-16 rounded-full object-cover border-2 border-brand-500 shadow-sm" />
+                            )}
+                            <label className="cursor-pointer bg-white hover:bg-slate-50 text-slate-700 px-4 py-2.5 rounded-xl border border-slate-200 font-semibold transition-colors flex items-center gap-2 text-sm shadow-sm">
+                              <UploadCloud className="w-4 h-4" />
+                              {uploadingImage ? 'Enviando...' : 'Trocar Foto'}
+                              <input type="file" accept="image/*" onChange={async (e) => {
+                                if (!e.target.files || e.target.files.length === 0) return;
+                                const file = e.target.files[0];
+                                const formData = new FormData();
+                                formData.append('file', file);
+                                try {
+                                  setUploadingImage(true);
+                                  const res = await fetch('/api/upload', { method: 'POST', body: formData });
+                                  const data = await res.json();
+                                  if (!res.ok) throw new Error(data.error);
+                                  setSiteSettings({...siteSettings, bio_image_url: data.url});
+                                } catch (err: any) {
+                                  alert('Erro ao enviar imagem: ' + err.message);
+                                } finally {
+                                  setUploadingImage(false);
+                                }
+                              }} className="hidden" disabled={uploadingImage} />
+                            </label>
+                            {siteSettings.bio_image_url && (
+                              <button type="button" onClick={() => setSiteSettings({...siteSettings, bio_image_url: ''})} className="text-rose-500 hover:bg-rose-50 px-3 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                Remover
+                              </button>
+                            )}
+                          </div>
                         </div>
-                        <button 
-                          type="button" 
-                          onClick={handleSyncReviews}
-                          disabled={syncingReviews}
-                          className="px-4 py-2 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 text-sm font-bold rounded-lg shadow-sm transition-colors disabled:opacity-50"
-                        >
-                          {syncingReviews ? 'Buscando...' : 'Buscar avaliações agora'}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div className="flex justify-end pt-4 mt-6">
-                    <button type="submit" disabled={settingsSubmitting} className="px-8 py-3 rounded-xl bg-brand-700 text-white font-bold hover:bg-brand-800 transition-all shadow-md disabled:opacity-50">
-                      {settingsSubmitting ? 'Salvando...' : 'Salvar Configurações'}
-                    </button>
-                  </div>
-                </form>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="space-y-1">
+                            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Nome / Título do Site</label>
+                            <input type="text" value={siteSettings.site_title || ''} onChange={(e) => setSiteSettings({...siteSettings, site_title: e.target.value})} placeholder="Ex: Psicóloga Marina Falcão" className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Slogan (Frase abaixo da foto)</label>
+                            <input type="text" value={siteSettings.tagline || ''} onChange={(e) => setSiteSettings({...siteSettings, tagline: e.target.value})} placeholder="Ex: Tudo começa com um tratamento" className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="space-y-1">
+                            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Número do WhatsApp (Apenas Números)</label>
+                            <input type="text" value={siteSettings.whatsapp_number} onChange={(e) => setSiteSettings({...siteSettings, whatsapp_number: e.target.value})} placeholder="Ex: 5516997712697" className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Número do CRP</label>
+                            <input type="text" value={siteSettings.crp} onChange={(e) => setSiteSettings({...siteSettings, crp: e.target.value})} placeholder="Ex: CRP 06/162899" className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
+                          </div>
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Mensagem Padrão do WhatsApp</label>
+                          <textarea rows={2} value={siteSettings.whatsapp_message} onChange={(e) => setSiteSettings({...siteSettings, whatsapp_message: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none resize-none" />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-8 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                        <div className="flex items-center justify-between mb-2">
+                          <div>
+                            <h3 className="font-bold text-slate-800 text-lg">Automação de Avaliações</h3>
+                            <p className="text-slate-500 text-sm">Gerencie como os depoimentos do Google são buscados.</p>
+                          </div>
+                          {settingsSuccess && (
+                            <span className="flex items-center gap-2 text-emerald-600 font-bold bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200">
+                              <CheckCircle className="w-4 h-4" /> Salvo
+                            </span>
+                          )}
+                        </div>
+                        
+                        <div className="bg-slate-50 rounded-xl border border-slate-200 p-5 space-y-4">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <strong className="block text-slate-900 mb-1">Sincronização Automática (7 em 7 dias)</strong>
+                              <span className="text-xs text-slate-500 block max-w-sm">
+                                Habilita ou desabilita o cron job que busca novas avaliações periodicamente.
+                              </span>
+                            </div>
+                            <label className="relative inline-flex items-center cursor-pointer">
+                              <input 
+                                type="checkbox" 
+                                className="sr-only peer" 
+                                checked={siteSettings.google_reviews_sync_enabled === 'true'}
+                                onChange={(e) => setSiteSettings({...siteSettings, google_reviews_sync_enabled: e.target.checked ? 'true' : 'false'})}
+                              />
+                              <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-600"></div>
+                            </label>
+                          </div>
+
+                          <div className="pt-4 border-t border-slate-200 flex items-center justify-between">
+                            <div>
+                              <strong className="block text-slate-900 mb-1">Forçar Sincronização Agora</strong>
+                              <span className="text-xs text-slate-500 block max-w-sm">
+                                Busca imediatamente as avaliações no Google Places e junta com os depoimentos fixos.
+                              </span>
+                            </div>
+                            <button 
+                              type="button" 
+                              onClick={handleSyncReviews}
+                              disabled={syncingReviews}
+                              className="px-4 py-2 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 text-sm font-bold rounded-lg shadow-sm transition-colors disabled:opacity-50"
+                            >
+                              {syncingReviews ? 'Buscando...' : 'Buscar avaliações agora'}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="flex justify-end pt-6 border-t border-slate-100">
+                      <button type="submit" disabled={settingsSubmitting} className="px-8 py-3 rounded-xl bg-brand-700 text-white font-bold hover:bg-brand-800 transition-all shadow-md disabled:opacity-50">
+                        {settingsSubmitting ? 'Salvando...' : 'Salvar Configurações'}
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           ) : (
