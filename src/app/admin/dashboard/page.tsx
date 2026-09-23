@@ -79,7 +79,7 @@ export default function AdminDashboardPage() {
   const [settingsSubmitting, setSettingsSubmitting] = useState(false);
   const [settingsSuccess, setSettingsSuccess] = useState(false);
   const [syncingReviews, setSyncingReviews] = useState(false);
-  const [settingsTab, setSettingsTab] = useState<'details' | 'reviews'>('details');
+  const [settingsTab, setSettingsTab] = useState<'details' | 'link-bio' | 'reviews'>('details');
 
   const handleSyncReviews = async () => {
     try {
@@ -422,10 +422,10 @@ export default function AdminDashboardPage() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col min-w-0 h-full overflow-y-auto relative">
+      <main className="flex-1 flex flex-col min-w-0 h-full relative overflow-hidden">
         
         {/* Header mobile (visible if needed) / Topbar for actions */}
-        <header className="bg-white border-b border-slate-200 px-4 sm:px-8 py-4 flex items-center justify-between sticky top-0 z-10">
+        <header className="bg-white border-b border-slate-200 px-4 sm:px-8 py-4 flex items-center justify-between z-10 shrink-0">
           <div className="flex items-center gap-3">
             <button onClick={() => setMobileMenuOpen(true)} className="md:hidden p-2 -ml-2 text-slate-600 hover:text-brand-700">
               <Menu className="w-6 h-6" />
@@ -451,7 +451,7 @@ export default function AdminDashboardPage() {
           </div>
         </header>
 
-        <div className="flex-1 p-6 md:p-8">
+        <div className="flex-1 p-6 md:p-8 overflow-y-auto">
           {loading ? (
             <div className="flex items-center justify-center h-64 text-slate-400">Carregando dados...</div>
           ) : activeTab === 'dashboard' ? (
@@ -553,41 +553,23 @@ export default function AdminDashboardPage() {
           ) : activeTab === 'settings' ? (
             // TAB: SETTINGS
             <div className="max-w-4xl mx-auto space-y-6">
-              
-              <div className="bg-gradient-to-r from-brand-600 to-brand-800 p-6 sm:p-8 rounded-2xl shadow-sm text-white flex flex-col md:flex-row items-center justify-between gap-6">
-                <div>
-                  <h3 className="font-bold text-xl flex items-center gap-2"><Globe className="w-5 h-5 text-brand-200" /> Seu Link da Bio</h3>
-                  <p className="text-brand-100 text-sm mt-1 max-w-md">Este é o link oficial para você colocar no perfil do seu Instagram. Ele centraliza o seu WhatsApp, artigos e avaliações em um só lugar.</p>
-                </div>
-                <div className="flex items-center gap-3 w-full md:w-auto">
-                  <button 
-                    onClick={() => {
-                      // Usar o window.location.origin para pegar o domínio atual (localhost ou o domínio oficial)
-                      const url = `${window.location.origin}/links`;
-                      navigator.clipboard.writeText(url);
-                      alert('Link copiado para a área de transferência!');
-                    }}
-                    className="flex-1 md:flex-none bg-white text-brand-800 px-6 py-3 rounded-xl font-bold text-sm hover:bg-brand-50 transition-colors shadow-sm"
-                  >
-                    Copiar Link
-                  </button>
-                  <a href="/links" target="_blank" className="bg-brand-900/40 hover:bg-brand-900/60 px-5 py-3 rounded-xl font-bold text-sm transition-colors flex items-center justify-center gap-2 border border-white/10">
-                    <Eye className="w-4 h-4" /> Acessar
-                  </a>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                <div className="flex items-center gap-6 px-6 pt-4 border-b border-slate-100 bg-slate-50/50">
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col h-full">
+                <div className="flex items-center gap-6 px-6 pt-4 border-b border-slate-100 bg-slate-50/50 overflow-x-auto shrink-0">
                   <button 
                     onClick={() => setSettingsTab('details')}
-                    className={`pb-4 text-sm font-bold border-b-2 transition-colors ${settingsTab === 'details' ? 'border-brand-600 text-brand-700' : 'border-transparent text-slate-500 hover:text-slate-700'}`}
+                    className={`pb-4 text-sm font-bold border-b-2 transition-colors whitespace-nowrap ${settingsTab === 'details' ? 'border-brand-600 text-brand-700' : 'border-transparent text-slate-500 hover:text-slate-700'}`}
                   >
                     Detalhes do Consultório
                   </button>
                   <button 
+                    onClick={() => setSettingsTab('link-bio')}
+                    className={`pb-4 text-sm font-bold border-b-2 transition-colors whitespace-nowrap ${settingsTab === 'link-bio' ? 'border-brand-600 text-brand-700' : 'border-transparent text-slate-500 hover:text-slate-700'}`}
+                  >
+                    Link da Bio
+                  </button>
+                  <button 
                     onClick={() => setSettingsTab('reviews')}
-                    className={`pb-4 text-sm font-bold border-b-2 transition-colors ${settingsTab === 'reviews' ? 'border-brand-600 text-brand-700' : 'border-transparent text-slate-500 hover:text-slate-700'}`}
+                    className={`pb-4 text-sm font-bold border-b-2 transition-colors whitespace-nowrap ${settingsTab === 'reviews' ? 'border-brand-600 text-brand-700' : 'border-transparent text-slate-500 hover:text-slate-700'}`}
                   >
                     Automação de Avaliações
                   </button>
@@ -672,6 +654,38 @@ export default function AdminDashboardPage() {
                         <div className="space-y-1">
                           <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Mensagem Padrão do WhatsApp</label>
                           <textarea rows={2} value={siteSettings.whatsapp_message} onChange={(e) => setSiteSettings({...siteSettings, whatsapp_message: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none resize-none" />
+                        </div>
+                      </div>
+                    ) : settingsTab === 'link-bio' ? (
+                      <div className="space-y-8 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                        <div className="flex items-center justify-between mb-2">
+                          <div>
+                            <h3 className="font-bold text-slate-800 text-lg">Página de Links (Link da Bio)</h3>
+                            <p className="text-slate-500 text-sm">Visualize e copie o link para usar no seu Instagram.</p>
+                          </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-brand-600 to-brand-800 p-6 sm:p-8 rounded-2xl shadow-sm text-white flex flex-col md:flex-row items-center justify-between gap-6">
+                          <div>
+                            <h3 className="font-bold text-xl flex items-center gap-2"><Globe className="w-5 h-5 text-brand-200" /> Seu Link da Bio</h3>
+                            <p className="text-brand-100 text-sm mt-1 max-w-md">Este é o link oficial para você colocar no perfil do seu Instagram. Ele centraliza o seu WhatsApp, artigos e avaliações em um só lugar.</p>
+                          </div>
+                          <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+                            <button 
+                              type="button"
+                              onClick={() => {
+                                const url = `${window.location.origin}/links`;
+                                navigator.clipboard.writeText(url);
+                                alert('Link copiado para a área de transferência!');
+                              }}
+                              className="w-full sm:w-auto bg-white text-brand-800 px-6 py-3 rounded-xl font-bold text-sm hover:bg-brand-50 transition-colors shadow-sm text-center"
+                            >
+                              Copiar Link
+                            </button>
+                            <a href="/links" target="_blank" className="w-full sm:w-auto bg-brand-900/40 hover:bg-brand-900/60 px-5 py-3 rounded-xl font-bold text-sm transition-colors flex items-center justify-center gap-2 border border-white/10">
+                              <Eye className="w-4 h-4" /> Acessar
+                            </a>
+                          </div>
                         </div>
                       </div>
                     ) : (
