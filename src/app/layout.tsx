@@ -24,7 +24,7 @@ const madefor = Wix_Madefor_Text({
 export const metadata: Metadata = {
   title: 'Psicóloga Marina Falcão | Ribeirão Preto & On-line',
   description:
-    'Psicoterapia especializada em ansiedade, burnout, luto, terapia de casal, depressão, psicossomática e psicogerontologia. Atendimento presencial em Ribeirão Preto e on-line.',
+    'Psicoterapia especializada em ansiedade, burnout, luto, terapia de casal, depressão, psicossomática e psicogerontologia. Atendimento on-line.',
   keywords: [
     'Psicóloga Ribeirão Preto',
     'Marina Falcão',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Marina Falcão', url: 'https://marinafalcao.com.br' }],
   openGraph: {
     title: 'Psicóloga Marina Falcão | Saúde Mental & Psicoterapia',
-    description: 'Tudo começa na sua saúde mental. Agende sua sessão presencial em Ribeirão Preto ou on-line.',
+    description: 'Tudo começa na sua saúde mental. Agende sua sessão on-line.',
     url: 'https://marinafalcao.com.br',
     siteName: 'Psicóloga Marina Falcão',
     locale: 'pt_BR',

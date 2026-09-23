@@ -18,8 +18,8 @@ import GoogleReviewsWidget from '@/components/GoogleReviewsWidget';
 import { getSiteSettings } from '@/lib/settings';
 
 export const metadata = {
-  title: 'Links da Bio | Dra. Marina Falcão Psicóloga',
-  description: 'Agende sua sessão no WhatsApp, leia os artigos do blog e confira as avaliações da Dra. Marina Falcão.',
+  title: 'Links da Bio | Marina Falcão Psicóloga',
+  description: 'Agende sua sessão no WhatsApp, leia os artigos do blog e confira as avaliações da Marina Falcão.',
 };
 
 async function getLatestPost() {
@@ -50,9 +50,9 @@ export default async function BioLinksPage() {
             <div className="relative inline-block">
               <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto rounded-full bg-brand-700 text-white flex items-center justify-center text-3xl font-serif font-bold shadow-warm-md border-4 border-white overflow-hidden">
                 {settings.bio_image_url ? (
-                  <img src={settings.bio_image_url} alt="Dra. Marina Falcão" className="w-full h-full object-cover" />
+                  <img src={settings.bio_image_url} alt="Marina Falcão" className="w-full h-full object-cover" />
                 ) : (
-                  <img src="/images/marina-avatar.jpg" alt="Dra. Marina Falcão" className="w-full h-full object-cover" />
+                  <img src="/images/marina-avatar.jpg" alt="Marina Falcão" className="w-full h-full object-cover" />
                 )}
               </div>
               <span className="absolute bottom-1 right-1 w-5 h-5 bg-emerald-500 border-2 border-white rounded-full flex items-center justify-center" title="Atendimento Ativo">
@@ -62,19 +62,19 @@ export default async function BioLinksPage() {
 
             <div>
               <h1 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
-                {settings.site_title || 'Dra. Marina Falcão'}
+                {settings.site_title || 'Marina Falcão'}
               </h1>
               <p className="text-xs font-bold text-brand-700 uppercase tracking-wider mt-0.5">
                 {settings.crp ? `Psicóloga Clínica • ${settings.crp}` : 'Psicóloga Clínica'}
               </p>
               <p className="text-sm text-slate-600 font-medium mt-2 max-w-xs mx-auto">
-                "{settings.tagline || 'Tudo começa na sua saúde mental.'}"
+                Especialista em Luto, Neuropsicologia, Saúde Mental, Suicidologia, Burnout e Relacionamentos e vínculos afetivos.
               </p>
             </div>
 
             <div className="inline-flex items-center gap-2 text-xs font-semibold text-slate-500 bg-white/80 px-3.5 py-1.5 rounded-full border border-warm-200">
-              <MapPin className="w-3.5 h-3.5 text-brand-600" />
-              <span>Ribeirão Preto - SP & On-line</span>
+              <Globe className="w-3.5 h-3.5 text-brand-600" />
+              <span>Atendimento On-line</span>
             </div>
           </div>
 

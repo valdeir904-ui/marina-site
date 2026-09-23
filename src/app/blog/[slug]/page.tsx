@@ -147,13 +147,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className="mt-12 p-8 rounded-3xl bg-gradient-to-br from-brand-100/80 via-warm-100 to-sage-100/60 border border-brand-200 flex flex-col md:flex-row items-center justify-between gap-6 shadow-warm-md">
             <div className="space-y-2 text-center md:text-left">
               <span className="text-xs font-bold uppercase text-brand-700 tracking-wider">
-                Escrito por Dra. Marina Falcão
+                Escrito por Marina Falcão
               </span>
               <h3 className="font-serif text-xl font-bold text-slate-900">
                 Gostaria de agendar uma consulta para conversar sobre este assunto?
               </h3>
               <p className="text-sm text-slate-600">
-                Atendimento presencial em Ribeirão Preto - SP e sessões de psicoterapia on-line.
+                Sessões de psicoterapia on-line.
               </p>
             </div>
 

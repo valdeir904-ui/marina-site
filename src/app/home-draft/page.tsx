@@ -50,12 +50,12 @@ const especialidades = [
   },
   {
     icon: Heart,
-    title: 'Elaboração do Luto',
+    title: 'Luto',
     text: 'Acolhimento para a dor de perdas afetivas, falecimentos e transições de vida. Um espaço para ressignificar sem pressa.',
   },
   {
     icon: Users,
-    title: 'Terapia de Casais',
+    title: 'Relacionamentos, separações e conflitos afetivos',
     text: 'Melhoria da comunicação, resolução construtiva de conflitos e fortalecimento do vínculo e da parceria afetiva.',
   },
   {
@@ -133,12 +133,8 @@ export default async function HomePage() {
                 <Reveal animation="fade-in" delay={600}>
                   <div className="pt-6 border-t border-warm-200 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-sm text-slate-500">
                     <span className="inline-flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-brand-600" />
-                      Presencial em Ribeirão Preto — SP
-                    </span>
-                    <span className="inline-flex items-center gap-2">
                       <Video className="w-4 h-4 text-brand-600" />
-                      On-line para todo o Brasil e exterior
+                      Atendimento on-line para todo o Brasil e exterior
                     </span>
                   </div>
                 </Reveal>
@@ -151,19 +147,19 @@ export default async function HomePage() {
                     <div className="relative w-full h-80 sm:h-96 rounded-2xl overflow-hidden bg-gradient-to-tr from-brand-200 via-warm-100 to-sage-200 border border-brand-100/80 shadow-inner">
                       <img 
                         src="/images/marina-profile.jpg" 
-                        alt="Dra. Marina Falcão" 
+                        alt="Marina Falcão" 
                         className="w-full h-[calc(100%+50px)] object-cover object-top -mt-[50px] transition-transform duration-[1.5s] ease-out hover:scale-[1.03]"
                       />
                     </div>
                     <div className="text-center space-y-4">
                       <div>
-                        <h3 className="font-serif text-2xl font-bold text-slate-900">Dra. Marina Falcão</h3>
+                        <h3 className="font-serif text-2xl font-bold text-slate-900">Marina Falcão</h3>
                         <p className="text-xs font-bold text-brand-700 uppercase tracking-wider mt-1">
                           Psicóloga Clínica • CRP 06/162899
                         </p>
                       </div>
                       <p className="text-xs text-slate-600 leading-relaxed italic bg-warm-50 p-3 rounded-xl border border-warm-200/60">
-                        "Especialista em Saúde Mental do Trabalhador, Ansiedade, Burnout, Luto e Terapia de Casal."
+                        "Especialista em Luto, Neuropsicologia, Saúde Mental, Suicidologia, Burnout e Relacionamentos e vínculos afetivos."
                       </p>
                       <div className="pt-2 flex justify-center">
                         <span className="inline-flex items-center gap-1.5 text-slate-500 text-sm">
@@ -241,7 +237,7 @@ export default async function HomePage() {
                   Análise do Comportamento
                 </h2>
                 <p className="text-slate-600 leading-relaxed">
-                  A atuação clínica da Dra. Marina Falcão se fundamenta na{' '}
+                  A atuação clínica da Marina Falcão se fundamenta na{' '}
                   <strong className="font-semibold text-slate-800">Análise do Comportamento</strong>,
                   abordagem que compreende a mente e os hábitos a partir da relação entre emoção,
                   ambiente e história de vida.
@@ -251,10 +247,12 @@ export default async function HomePage() {
                   <p className="text-sm font-semibold text-slate-900 mb-3">Formações Complementares:</p>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {[
+                      'Luto e Tanatologia',
                       'Neuropsicologia',
+                      'Saúde Mental',
+                      'Burnout',
+                      'Neurobiologia e psicofarmacologia dos transtornos mentais',
                       'Suicidologia',
-                      'Luto',
-                      'Psicofarmacologia',
                     ].map((item, idx) => (
                       <Reveal key={item} animation="fade-up" delay={idx * 100} as="li" className="flex items-center gap-3">
                         <CheckCircle2 className="w-4 h-4 text-brand-600" />
@@ -282,9 +280,9 @@ export default async function HomePage() {
                   </blockquote>
                   <figcaption className="pt-8 mt-8 border-t border-warm-300/60 flex flex-col sm:flex-row sm:items-center justify-between gap-5 relative z-10">
                     <div>
-                      <p className="font-serif text-lg text-slate-900">Dra. Marina Falcão</p>
+                      <p className="font-serif text-lg text-slate-900">Marina Falcão</p>
                       <p className="text-sm text-slate-500 mt-0.5">
-                        CRP 06/162899 · Ribeirão Preto & On-line
+                        CRP 06/162899 · Atendimento On-line
                       </p>
                     </div>
                     <a
@@ -432,8 +430,7 @@ export default async function HomePage() {
               Entre o caos e o cuidado, existe um lugar seguro.
             </h2>
             <p className="text-brand-100 text-lg max-w-xl mx-auto leading-relaxed">
-              Dê o primeiro passo para resgatar seu equilíbrio emocional. Atendimentos presenciais
-              em Ribeirão Preto e sessões on-line.
+              Dê o primeiro passo para resgatar seu equilíbrio emocional. Sessões on-line para todo o Brasil e exterior.
             </p>
             <div className="pt-2">
               <a

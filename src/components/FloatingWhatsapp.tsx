@@ -48,13 +48,13 @@ export default function FloatingWhatsapp({
               <div className="relative shrink-0">
                 <img 
                   src={avatarUrl} 
-                  alt="Dra. Marina Falcão" 
+                  alt="Marina Falcão" 
                   className="w-11 h-11 rounded-full object-cover object-center shadow-sm bg-white"
                 />
                 <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#25D366] border-2 border-[#075e54] rounded-full"></span>
               </div>
               <div className="flex flex-col">
-                <h4 className="text-white font-bold text-[15px] leading-tight">Dra. Marina Falcão</h4>
+                <h4 className="text-white font-bold text-[15px] leading-tight">Marina Falcão</h4>
                 <p className="text-white/80 text-[12px] mt-0.5">Online agora</p>
               </div>
             </div>
@@ -89,7 +89,7 @@ export default function FloatingWhatsapp({
                   <path d="M1.533 3.568L8 12.193V1H2.812C1.042 1 .474 2.156 1.533 3.568z"></path>
                 </svg>
               </span>
-              <span className="pr-2">Olá! 😊 Se você está enfrentando ansiedade, esgotamento ou apenas sentindo que as coisas estão pesadas demais, saiba que você não precisa passar por isso sozinha. Como posso te ajudar hoje?</span>
+              <span className="pr-2">Olá! 😊 Se você está atravessando um luto, enfrentando ansiedade, esgotamento emocional ou algum momento difícil da vida, este pode ser um espaço de acolhimento e elaboração. Como posso te ajudar hoje?</span>
               <span className="float-right text-[10px] text-slate-400 mt-2 ml-2">Agora</span>
               <div className="clear-both"></div>
             </div>

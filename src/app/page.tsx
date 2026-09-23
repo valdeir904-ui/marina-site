@@ -3,7 +3,7 @@ import { getSiteSettings } from '@/lib/settings';
 import Reveal from '@/components/Reveal';
 
 export const metadata = {
-  title: 'Em Construção | Dra. Marina Falcão Psicóloga',
+  title: 'Em Construção | Marina Falcão Psicóloga',
   description: 'Site em construção. Agende sua sessão no WhatsApp.',
 };
 
@@ -23,15 +23,15 @@ export default async function ConstructionPage() {
 
         <Reveal animation="fade-up" delay={200} className="w-24 h-24 sm:w-28 sm:h-28 mx-auto rounded-full bg-brand-700 text-white flex items-center justify-center text-3xl font-serif font-bold shadow-warm-md border-4 border-white mb-6">
           {settings.bio_image_url ? (
-            <img src={settings.bio_image_url} alt="Dra. Marina Falcão" className="w-full h-full object-cover rounded-full" />
+            <img src={settings.bio_image_url} alt="Marina Falcão" className="w-full h-full object-cover rounded-full" />
           ) : (
-            <img src="/images/marina-avatar.jpg" alt="Dra. Marina Falcão" className="w-full h-full object-cover rounded-full" />
+            <img src="/images/marina-avatar.jpg" alt="Marina Falcão" className="w-full h-full object-cover rounded-full" />
           )}
         </Reveal>
 
         <Reveal animation="fade-up" delay={300}>
           <h1 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 mb-2">
-            {settings.site_title || 'Dra. Marina Falcão'}
+            {settings.site_title || 'Marina Falcão'}
           </h1>
           <p className="text-sm font-bold text-brand-700 uppercase tracking-wider mb-8">
             {settings.tagline || (settings.crp ? `Psicóloga Clínica • ${settings.crp}` : 'Psicóloga Clínica')}

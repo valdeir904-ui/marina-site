@@ -10,7 +10,7 @@ export default function StepTimeline() {
     {
       number: '2',
       title: 'Agendamento',
-      description: 'Escolha a modalidade — presencial em Ribeirão Preto ou on-line — e o melhor dia para você.',
+      description: 'Escolha o melhor dia e horário para a sua sessão on-line.',
     },
     {
       number: '3',

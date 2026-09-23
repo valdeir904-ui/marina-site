@@ -16,7 +16,7 @@ export async function getSiteSettings(): Promise<Record<string, string>> {
       whatsapp_number: settingsObj.whatsapp_number || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516997712697',
       whatsapp_message: settingsObj.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!',
       crp: settingsObj.crp || 'CRP 06/162899',
-      address: settingsObj.address || 'Atendimento presencial em Ribeirão Preto - SP e on-line para todo o Brasil',
+      address: settingsObj.address || 'Atendimento on-line para todo o Brasil',
       instagram_url: settingsObj.instagram_url || 'https://www.instagram.com/psimarinafalcao/',
       doctoralia_url: settingsObj.doctoralia_url || 'https://www.doctoralia.com.br',
       google_reviews_url: settingsObj.google_reviews_url || '',
@@ -28,7 +28,7 @@ export async function getSiteSettings(): Promise<Record<string, string>> {
       whatsapp_number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516997712697',
       whatsapp_message: 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!',
       crp: 'CRP 06/162899',
-      address: 'Atendimento presencial em Ribeirão Preto - SP e on-line para todo o Brasil',
+      address: 'Atendimento on-line para todo o Brasil',
       instagram_url: 'https://www.instagram.com/psimarinafalcao/',
       doctoralia_url: 'https://www.doctoralia.com.br',
       google_reviews_url: ''
