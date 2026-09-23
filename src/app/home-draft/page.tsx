@@ -115,8 +115,17 @@ export default async function HomePage() {
   const latestPosts = await getFeaturedPosts();
 
   const whatsappNumber = settings.whatsapp_number || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516997712697';
-  const whatsappMessage = settings.whatsapp_message || 'Olá, Marina! Gostaria de saber mais sobre as sessões de terapia e agendar uma consulta.';
-  const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
+  const heroWaMessage = 'Olá, Marina! Gostaria de saber mais sobre as sessões de terapia e agendar uma consulta.';
+  const heroWaUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(heroWaMessage)}`;
+
+  const sobreWaMessage = 'Olá, Marina! Gostaria de agendar uma sessão e iniciar meu processo terapêutico.';
+  const sobreWaUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(sobreWaMessage)}`;
+
+  const citaWaMessage = 'Olá, Marina! Gostaria de resgatar o sentido de viver com presença. Podemos agendar uma consulta?';
+  const citaWaUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(citaWaMessage)}`;
+
+  const ctaWaMessage = 'Olá, Marina! Vim pelo site e gostaria de agendar uma sessão on-line.';
+  const ctaWaUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(ctaWaMessage)}`;
 
   return (
     <div className="min-h-screen bg-warm-50 text-slate-800 flex flex-col font-sans">
@@ -151,9 +160,10 @@ export default async function HomePage() {
                 <Reveal animation="fade-up" delay={400}>
                   <div className="pt-1 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5">
                     <a
-                      href={whatsappUrl}
+                      href={heroWaUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      data-track="cta-hero"
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-brand-700 hover:bg-brand-800 text-white font-semibold px-7 py-3.5 rounded-full text-base transition-colors shadow-warm-md"
                     >
                       <MessageCircle className="w-5 h-5" />
@@ -208,7 +218,7 @@ export default async function HomePage() {
         </section>
 
         {/* SOBRE MIM */}
-        <AboutSection whatsappUrl={whatsappUrl} />
+        <AboutSection whatsappUrl={sobreWaUrl} />
 
         {/* ESPECIALIDADES */}
         <section id="especialidades" className="py-20 lg:py-28 bg-warm-50/50 border-b border-warm-200">
@@ -328,9 +338,10 @@ export default async function HomePage() {
                       </p>
                     </div>
                     <a
-                      href={whatsappUrl}
+                      href={citaWaUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      data-track="cta-citacao"
                       className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-white bg-brand-700 hover:bg-brand-800 px-5 py-2.5 rounded-full transition-all hover:scale-105 shadow-sm"
                     >
                       <MessageCircle className="w-4 h-4" />
@@ -476,9 +487,10 @@ export default async function HomePage() {
             </p>
             <div className="pt-2">
               <a
-                href={whatsappUrl}
+                href={ctaWaUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-track="cta-final"
                 className="inline-flex items-center justify-center gap-3 bg-white hover:bg-warm-100 text-brand-900 font-semibold px-8 py-4 rounded-full text-base shadow-warm-lg transition-colors"
               >
                 <MessageCircle className="w-5 h-5" />

@@ -151,6 +151,17 @@ export async function initDb() {
         );
       `);
 
+      await pool.query(`
+        CREATE TABLE IF NOT EXISTS reviews_cache (
+          id VARCHAR(50) PRIMARY KEY,
+          rating DECIMAL(3,1) DEFAULT 5.0,
+          user_ratings_total INT DEFAULT 0,
+          google_url VARCHAR(500),
+          reviews TEXT,
+          updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+      `);
+
       // Seed initial admin if empty
       const userCount = await pool.query('SELECT COUNT(*) as count FROM users');
       if (parseInt(userCount.rows[0].count) === 0) {
@@ -199,6 +210,14 @@ export async function initDb() {
           time_spent INTEGER DEFAULT 0,
           conversions INTEGER DEFAULT 0
         );
+        CREATE TABLE IF NOT EXISTS reviews_cache (
+          id TEXT PRIMARY KEY,
+          rating REAL DEFAULT 5.0,
+          user_ratings_total INTEGER DEFAULT 0,
+          google_url TEXT,
+          reviews TEXT,
+          updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
       `);
 
       const existingUser = await db.get('SELECT id FROM users WHERE email = ?', [process.env.ADMIN_EMAIL || 'marina@marinafalcao.com.br']);
@@ -240,6 +259,16 @@ export async function initDb() {
       `);
       await pool.query(`CREATE TABLE IF NOT EXISTS settings (\`key\` VARCHAR(100) PRIMARY KEY, \`value\` TEXT NOT NULL);`);
       await pool.query(`CREATE TABLE IF NOT EXISTS page_stats (path VARCHAR(255) PRIMARY KEY, views INT DEFAULT 0, time_spent INT DEFAULT 0, conversions INT DEFAULT 0);`);
+      await pool.query(`
+        CREATE TABLE IF NOT EXISTS reviews_cache (
+          id VARCHAR(50) PRIMARY KEY,
+          rating DECIMAL(3,1) DEFAULT 5.0,
+          user_ratings_total INT DEFAULT 0,
+          google_url VARCHAR(500),
+          reviews LONGTEXT,
+          updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+      `);
       
       const [users]: any = await pool.query('SELECT COUNT(*) as count FROM users');
       if (users[0].count === 0) {

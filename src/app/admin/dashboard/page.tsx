@@ -73,10 +73,28 @@ export default function AdminDashboardPage() {
   const [siteSettings, setSiteSettings] = useState({
     site_title: '', tagline: '', whatsapp_number: '', whatsapp_message: '',
     crp: '', address: '', google_reviews_url: '', doctoralia_url: '', instagram_url: '',
-    bio_image_url: ''
+    bio_image_url: '', google_reviews_sync_enabled: 'false'
   });
   const [settingsSubmitting, setSettingsSubmitting] = useState(false);
   const [settingsSuccess, setSettingsSuccess] = useState(false);
+  const [syncingReviews, setSyncingReviews] = useState(false);
+
+  const handleSyncReviews = async () => {
+    try {
+      setSyncingReviews(true);
+      const res = await fetch('/api/google-reviews/sync');
+      if (res.ok) {
+        alert('Avaliações do Google e Doctoralia sincronizadas com sucesso!');
+      } else {
+        const error = await res.json();
+        alert('Erro ao sincronizar: ' + (error.error || 'Erro Desconhecido'));
+      }
+    } catch (err: any) {
+      alert('Erro: ' + err.message);
+    } finally {
+      setSyncingReviews(false);
+    }
+  };
 
   const router = useRouter();
 
@@ -651,7 +669,51 @@ export default function AdminDashboardPage() {
                     </div>
                   </div>
                   
-                  <div className="flex justify-end pt-4">
+                  <div className="pt-8 border-t border-slate-100">
+                    <div className="mb-6">
+                      <h3 className="font-bold text-slate-800 text-lg">Automação de Avaliações</h3>
+                      <p className="text-slate-500 text-sm">Gerencie como os depoimentos do Google são buscados e atualizados.</p>
+                    </div>
+                    
+                    <div className="bg-slate-50 rounded-xl border border-slate-200 p-5 space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <strong className="block text-slate-900 mb-1">Sincronização Automática (7 em 7 dias)</strong>
+                          <span className="text-xs text-slate-500 block max-w-sm">
+                            Habilita ou desabilita o cron job que busca novas avaliações periodicamente.
+                          </span>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input 
+                            type="checkbox" 
+                            className="sr-only peer" 
+                            checked={siteSettings.google_reviews_sync_enabled === 'true'}
+                            onChange={(e) => setSiteSettings({...siteSettings, google_reviews_sync_enabled: e.target.checked ? 'true' : 'false'})}
+                          />
+                          <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-600"></div>
+                        </label>
+                      </div>
+
+                      <div className="pt-4 border-t border-slate-200 flex items-center justify-between">
+                        <div>
+                          <strong className="block text-slate-900 mb-1">Forçar Sincronização Agora</strong>
+                          <span className="text-xs text-slate-500 block max-w-sm">
+                            Busca imediatamente as avaliações no Google Places e junta com os depoimentos fixos.
+                          </span>
+                        </div>
+                        <button 
+                          type="button" 
+                          onClick={handleSyncReviews}
+                          disabled={syncingReviews}
+                          className="px-4 py-2 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 text-sm font-bold rounded-lg shadow-sm transition-colors disabled:opacity-50"
+                        >
+                          {syncingReviews ? 'Buscando...' : 'Buscar avaliações agora'}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-end pt-4 mt-6">
                     <button type="submit" disabled={settingsSubmitting} className="px-8 py-3 rounded-xl bg-brand-700 text-white font-bold hover:bg-brand-800 transition-all shadow-md disabled:opacity-50">
                       {settingsSubmitting ? 'Salvando...' : 'Salvar Configurações'}
                     </button>

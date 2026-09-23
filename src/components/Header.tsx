@@ -14,7 +14,6 @@ const navLinks = [
   { href: '/#sobre', label: 'Sobre Mim' },
   { href: '/#especialidades', label: 'Especialidades' },
   { href: '/#abordagens', label: 'Abordagens' },
-  { href: '/#videos', label: 'Vídeos' },
   { href: '/blog', label: 'Blog' },
 ];
 
@@ -77,6 +76,7 @@ export default function Header({ settings = {} }: HeaderProps) {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
+            data-track="cta-header-desktop"
             className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm transition-all duration-500 transform hover:-translate-y-0.5 ${
               isScrolled 
                 ? 'bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-md hover:shadow-lg' 
@@ -129,6 +129,7 @@ export default function Header({ settings = {} }: HeaderProps) {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
+            data-track="cta-header-mobile"
             className="w-full flex items-center justify-center gap-2 bg-brand-700 hover:bg-brand-800 text-white px-5 py-3 rounded-full font-medium text-sm transition-colors mt-2"
             onClick={() => setMobileMenuOpen(false)}
           >
