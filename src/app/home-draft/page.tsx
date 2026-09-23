@@ -133,7 +133,7 @@ export default async function HomePage() {
 
       <main className="flex-grow">
         {/* HERO */}
-        <section className="relative overflow-hidden pt-8 pb-20 lg:pt-12 lg:pb-28 bg-warm-50">
+        <section className="relative overflow-hidden pt-28 pb-20 lg:pt-32 lg:pb-28 bg-warm-50 -mt-20">
           <HeroWave />
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
