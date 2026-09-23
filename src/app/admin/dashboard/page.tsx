@@ -422,7 +422,7 @@ export default function AdminDashboardPage() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col min-w-0 h-full relative overflow-hidden">
+      <main className="flex-1 flex flex-col min-w-0 min-h-0 h-full relative overflow-hidden">
         
         {/* Header mobile (visible if needed) / Topbar for actions */}
         <header className="bg-white border-b border-slate-200 px-4 sm:px-8 py-4 flex items-center justify-between z-10 shrink-0">
@@ -451,7 +451,7 @@ export default function AdminDashboardPage() {
           </div>
         </header>
 
-        <div className="flex-1 p-6 md:p-8 overflow-y-auto">
+        <div className="flex-1 p-6 md:p-8 overflow-y-auto min-h-0">
           {loading ? (
             <div className="flex items-center justify-center h-64 text-slate-400">Carregando dados...</div>
           ) : activeTab === 'dashboard' ? (
