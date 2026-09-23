@@ -13,7 +13,7 @@ export default function TypewriterEffect() {
         'qualidade de vida.',
         3000,
       ]}
-      wrapper="em"
+      wrapper="span"
       speed={50}
       className="text-brand-700 italic relative inline-block min-w-[280px]"
       repeat={Infinity}
