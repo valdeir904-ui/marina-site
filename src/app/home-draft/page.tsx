@@ -142,16 +142,16 @@ export default async function HomePage() {
 
               {/* Cartão de apresentação */}
               <div className="lg:col-span-5 relative">
-                <Reveal animation="slide-left" delay={400} className="mx-auto max-w-sm lg:max-w-none">
+                <Reveal animation="slide-left" delay={400} className="mx-auto w-full max-w-[320px] sm:max-w-[360px]">
                   {/* Glow decorativo de fundo */}
                   <div className="absolute -inset-2 bg-gradient-to-tr from-brand-200/50 to-sage-200/50 rounded-[3rem] blur-2xl -z-10"></div>
                   
                   <div className="bg-white/80 backdrop-blur-xl rounded-[2rem] border border-white shadow-2xl overflow-hidden p-5 sm:p-6 space-y-5">
-                    <div className="relative w-full h-60 sm:h-72 rounded-2xl overflow-hidden bg-gradient-to-tr from-brand-200 via-warm-100 to-sage-200 shadow-inner group">
+                    <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-tr from-brand-200 via-warm-100 to-sage-200 shadow-inner group">
                       <img 
                         src="/images/marina-profile.jpg" 
                         alt="Marina Falcão" 
-                        className="w-full h-full object-cover object-[center_15%] transition-transform duration-700 ease-out group-hover:scale-105"
+                        className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                       />
                     </div>
                     
