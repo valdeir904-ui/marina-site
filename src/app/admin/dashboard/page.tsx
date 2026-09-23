@@ -353,7 +353,7 @@ export default function AdminDashboardPage() {
   };
 
   return (
-    <div className="h-screen overflow-hidden bg-slate-50 text-slate-800 font-sans flex flex-col md:flex-row">
+    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans flex flex-col md:flex-row">
       
       {/* Mobile Sidebar Overlay */}
       {mobileMenuOpen && (
@@ -364,7 +364,7 @@ export default function AdminDashboardPage() {
       )}
 
       {/* Sidebar */}
-      <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 flex flex-col transform transition-transform duration-300 md:relative md:translate-x-0 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 flex flex-col transform transition-transform duration-300 md:sticky md:top-0 md:h-screen md:translate-x-0 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="p-6 border-b border-slate-800 flex items-center justify-between">
           <div>
             <h1 className="font-serif text-xl font-bold text-white leading-tight">Painel Admin</h1>
@@ -422,10 +422,10 @@ export default function AdminDashboardPage() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col min-w-0 min-h-0 h-full relative overflow-hidden">
+      <main className="flex-1 flex flex-col min-w-0">
         
         {/* Header mobile (visible if needed) / Topbar for actions */}
-        <header className="bg-white border-b border-slate-200 px-4 sm:px-8 py-4 flex items-center justify-between z-10 shrink-0">
+        <header className="bg-white border-b border-slate-200 px-4 sm:px-8 py-4 flex items-center justify-between sticky top-0 z-10">
           <div className="flex items-center gap-3">
             <button onClick={() => setMobileMenuOpen(true)} className="md:hidden p-2 -ml-2 text-slate-600 hover:text-brand-700">
               <Menu className="w-6 h-6" />
@@ -451,7 +451,7 @@ export default function AdminDashboardPage() {
           </div>
         </header>
 
-        <div className="flex-1 p-6 md:p-8 overflow-y-auto min-h-0">
+        <div className="flex-1 p-6 md:p-8">
           {loading ? (
             <div className="flex items-center justify-center h-64 text-slate-400">Carregando dados...</div>
           ) : activeTab === 'dashboard' ? (
