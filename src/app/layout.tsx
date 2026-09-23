@@ -47,6 +47,8 @@ export const metadata: Metadata = {
   },
 };
 
+import SmoothScroll from '@/components/SmoothScroll';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -56,7 +58,9 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${playfair.variable} ${montserrat.variable} ${madefor.variable}`}>
       <body className="min-h-screen bg-warm-50 text-slate-800 font-sans antialiased selection:bg-brand-200 selection:text-brand-900">
         <AnalyticsTracker />
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
