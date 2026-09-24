@@ -73,8 +73,8 @@ export default function DeepDiveSections() {
       {/* SEÇÃO ANSIEDADE */}
       <section className="py-24 lg:py-32 bg-white text-slate-900 relative overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-            <Reveal animation="fade-up" className="lg:col-span-5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <Reveal animation="fade-up">
               <div className="space-y-6">
                 <span className="kicker">Ansiedade & Pânico</span>
                 <h2 className="font-serif text-4xl sm:text-5xl font-bold text-teal-900 leading-tight">
@@ -106,7 +106,7 @@ export default function DeepDiveSections() {
               </div>
             </Reveal>
 
-            <Reveal animation="fade-up" delay={200} className="lg:col-span-7 relative w-full">
+            <Reveal animation="fade-up" delay={200} className="lg:justify-self-end w-full max-w-md">
               <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-teal-100 w-full">
                 <div className="aspect-square w-full relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -132,9 +132,9 @@ export default function DeepDiveSections() {
       {/* SEÇÃO 2: Esgotamento e Rotina (Burnout & Saúde Mental) */}
       <section className="py-24 lg:py-32 bg-warm-100 text-slate-900 relative overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             
-            <Reveal animation="fade-up" className="lg:col-span-5 lg:order-2">
+            <Reveal animation="fade-up" className="lg:order-2">
               <div className="space-y-6">
                 <span className="kicker">Rotina & Esgotamento</span>
                 <h2 className="font-serif text-4xl sm:text-5xl font-bold text-brand-900 leading-tight">
@@ -166,7 +166,7 @@ export default function DeepDiveSections() {
               </div>
             </Reveal>
 
-            <Reveal animation="fade-up" delay={200} className="lg:col-span-7 lg:order-1 relative w-full">
+            <Reveal animation="fade-up" delay={200} className="lg:order-1 lg:justify-self-start w-full max-w-md">
               <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-brand-100 w-full">
                 <div className="aspect-square w-full relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
