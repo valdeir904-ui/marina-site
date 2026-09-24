@@ -25,10 +25,10 @@ export async function GET() {
         featured: 0
       },
       {
-        title: 'A importância da Terapia de Casal antes da crise',
-        slug: 'importancia-terapia-casal-antes-crise',
-        summary: 'Muitos casais procuram ajuda apenas quando o relacionamento está por um fio. Entenda por que a terapia de casal preventiva pode fortalecer ainda mais o seu vínculo.',
-        content: '<p>A terapia de casal frequentemente é vista como o "último recurso" antes do divórcio. No entanto, buscar ajuda profissional quando as coisas ainda estão relativamente bem pode ser uma das melhores decisões para o futuro do relacionamento.</p><h2>Prevenção e Fortalecimento</h2><p>Na terapia de casal preventiva, trabalhamos a <strong>comunicação</strong> e o <strong>alinhamento de expectativas</strong>. É o momento ideal para discutir temas como finanças, planos de carreira e criação de filhos, sem a carga emocional de uma crise instalada.</p><h2>Benefícios de Começar Cedo</h2><ul><li>Criação de um espaço seguro para conversas difíceis;</li><li>Aprendizado de técnicas de resolução de conflitos;</li><li>Fortalecimento da intimidade e da parceria.</li></ul><p>Não espere o balão estourar. Investir no seu relacionamento hoje é garantir um futuro mais tranquilo a dois.</p>',
+        title: 'A importância de cuidar dos Vínculos Afetivos antes da crise',
+        slug: 'importancia-vinculos-afetivos-antes-crise',
+        summary: 'Muitos procuram ajuda apenas quando o relacionamento está por um fio. Entenda por que a terapia focada em vínculos afetivos pode fortalecer suas relações.',
+        content: '<p>A terapia de relacionamento frequentemente é vista como o "último recurso". No entanto, buscar ajuda profissional quando as coisas ainda estão relativamente bem pode ser uma das melhores decisões para o futuro das suas relações.</p><h2>Prevenção e Fortalecimento</h2><p>Na terapia focada em vínculos, trabalhamos a <strong>comunicação</strong> e o <strong>alinhamento de expectativas</strong>. É o momento ideal para refletir sobre os próprios limites, desejos e desafios sem a carga emocional de uma crise instalada.</p><h2>Benefícios de Começar Cedo</h2><ul><li>Criação de um espaço seguro para reflexões difíceis;</li><li>Aprendizado de técnicas de resolução de conflitos internos;</li><li>Fortalecimento da empatia e da capacidade de se relacionar.</li></ul><p>Não espere o balão estourar. Investir no autoconhecimento hoje é garantir um futuro mais tranquilo em seus relacionamentos.</p>',
         category: 'Relacionamentos',
         image_url: 'https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?q=80&w=1470&auto=format&fit=crop',
         published: 1,

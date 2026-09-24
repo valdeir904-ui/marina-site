@@ -14,7 +14,7 @@ interface FooterProps {
 
 export default function Footer({ settings = {} }: FooterProps) {
   const currentYear = new Date().getFullYear();
-  const whatsappNumber = settings.whatsapp_number || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516997712697';
+  const whatsappNumber = settings.whatsapp_number || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516994244626';
   const whatsappMessage = encodeURIComponent(settings.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!');
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
@@ -74,7 +74,7 @@ export default function Footer({ settings = {} }: FooterProps) {
               <li>Ansiedade & Síndrome do Pânico</li>
               <li>Burnout & Estresse Ocupacional</li>
               <li>Elaboração do Luto & Perdas</li>
-              <li>Terapia de Casal</li>
+              <li>Questões de Relacionamento e Vínculos Afetivos</li>
               <li>Psicossomática & Psicogerontologia</li>
             </ul>
           </div>

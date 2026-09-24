@@ -24,13 +24,13 @@ const madefor = Wix_Madefor_Text({
 export const metadata: Metadata = {
   title: 'Psicóloga Marina Falcão | Ribeirão Preto & On-line',
   description:
-    'Psicoterapia especializada em ansiedade, burnout, luto, terapia de casal, depressão, psicossomática e psicogerontologia. Atendimento on-line.',
+    'Psicoterapia especializada em ansiedade, burnout, luto, questões de relacionamento e vínculos afetivos, depressão, psicossomática e psicogerontologia. Atendimento on-line.',
   keywords: [
     'Psicóloga Ribeirão Preto',
     'Marina Falcão',
     'Psicoterapia Ansiedade',
     'Burnout',
-    'Terapia de Casal',
+    'Questões de Relacionamento e Vínculos Afetivos',
     'Luto',
     'Psicossomática',
     'Psicogerontologia',

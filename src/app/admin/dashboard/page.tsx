@@ -72,7 +72,7 @@ export default function AdminDashboardPage() {
   // Settings State
   const [siteSettings, setSiteSettings] = useState({
     site_title: 'Psicóloga Marina Falcão', tagline: 'Tudo começa com um tratamento', 
-    whatsapp_number: '5516997712697', whatsapp_message: 'Olá, Marina! Gostaria de agendar uma sessão e iniciar meu processo de psicoterapia.',
+    whatsapp_number: '5516994244626', whatsapp_message: 'Olá, Marina! Gostaria de agendar uma sessão e iniciar meu processo de psicoterapia.',
     crp: 'CRP 06/162899', address: '', google_reviews_url: '', doctoralia_url: '', instagram_url: '',
     bio_image_url: '', google_reviews_sync_enabled: 'true'
   });
@@ -643,7 +643,7 @@ export default function AdminDashboardPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div className="space-y-1">
                             <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Número do WhatsApp (Apenas Números)</label>
-                            <input type="text" value={siteSettings.whatsapp_number} onChange={(e) => setSiteSettings({...siteSettings, whatsapp_number: e.target.value})} placeholder="Ex: 5516997712697" className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
+                            <input type="text" value={siteSettings.whatsapp_number} onChange={(e) => setSiteSettings({...siteSettings, whatsapp_number: e.target.value})} placeholder="Ex: 5516994244626" className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none" />
                           </div>
                           <div className="space-y-1">
                             <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Número do CRP</label>

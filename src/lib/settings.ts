@@ -13,7 +13,7 @@ export async function getSiteSettings(): Promise<Record<string, string>> {
     
     // Fallbacks if not set
     return {
-      whatsapp_number: settingsObj.whatsapp_number || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516997712697',
+      whatsapp_number: settingsObj.whatsapp_number || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516994244626',
       whatsapp_message: settingsObj.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!',
       crp: settingsObj.crp || 'CRP 06/162899',
       address: settingsObj.address || 'Atendimento on-line para todo o Brasil',
@@ -25,7 +25,7 @@ export async function getSiteSettings(): Promise<Record<string, string>> {
   } catch (error) {
     console.error('Error fetching settings:', error);
     return {
-      whatsapp_number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516997712697',
+      whatsapp_number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516994244626',
       whatsapp_message: 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!',
       crp: 'CRP 06/162899',
       address: 'Atendimento on-line para todo o Brasil',

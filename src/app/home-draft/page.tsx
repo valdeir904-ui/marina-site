@@ -114,7 +114,7 @@ export default async function HomePage() {
   const settings = await getSiteSettings();
   const latestPosts = await getFeaturedPosts();
 
-  const whatsappNumber = settings.whatsapp_number || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516997712697';
+  const whatsappNumber = settings.whatsapp_number || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516994244626';
   const heroWaMessage = 'Olá, Marina! Gostaria de saber mais sobre as sessões de terapia e agendar uma consulta.';
   const heroWaUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(heroWaMessage)}`;
 

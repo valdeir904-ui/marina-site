@@ -10,7 +10,7 @@ export const metadata = {
 export default async function ConstructionPage() {
   const settings = await getSiteSettings();
 
-  const whatsappNumber = settings.whatsapp_number || '5516997712697';
+  const whatsappNumber = settings.whatsapp_number || '5516994244626';
   const whatsappMessage = encodeURIComponent(settings.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!');
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 

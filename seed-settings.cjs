@@ -5,7 +5,7 @@ const dbPath = path.join(__dirname, 'database.sqlite');
 const db = new sqlite3.Database(dbPath);
 
 const settings = [
-  ['whatsapp_number', '5516997712697'],
+  ['whatsapp_number', '5516994244626'],
   ['whatsapp_message', 'Oi Marina! 🖐 Preciso de ajuda com alguns problemas e gostaria de conversar com você.'],
   ['instagram_url', 'https://instagram.com/marinafalcaopsi'],
   ['crp', 'CRP 06/162899'],

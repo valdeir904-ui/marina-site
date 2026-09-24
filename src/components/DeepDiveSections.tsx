@@ -53,7 +53,7 @@ export default function DeepDiveSections() {
                   "O luto não é uma doença a ser curada, é um processo a ser vivido. E você não precisa passar por isso em silêncio."
                 </blockquote>
                 <Link 
-                  href="https://wa.me/5516997712697?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20um%20acolhimento%20para%20mim." 
+                  href="https://wa.me/5516994244626?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20um%20acolhimento%20para%20mim." 
                   target="_blank" 
                   data-track="cta-luto-crise"
                   className="inline-flex items-center justify-center w-full px-8 py-4 bg-brand-300 text-slate-950 rounded-full font-semibold hover:bg-brand-200 transition-colors"
@@ -109,7 +109,7 @@ export default function DeepDiveSections() {
                    O futuro não precisa ser assustador. Dê o primeiro passo para o agora.
                  </h3>
                  <Link 
-                  href="https://wa.me/5516997712697?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20ansiedade." 
+                  href="https://wa.me/5516994244626?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20ansiedade." 
                   target="_blank" 
                   data-track="cta-ansiedade"
                   className="relative z-10 px-8 py-4 bg-teal-700 text-white rounded-full font-semibold hover:bg-teal-800 transition-colors shadow-lg"
@@ -166,7 +166,7 @@ export default function DeepDiveSections() {
                    A exaustão não é um troféu. É um sinal de que algo precisa mudar.
                  </h3>
                  <Link 
-                  href="https://wa.me/5516997712697?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20minha%20rotina%20e%20cansa%C3%A7o." 
+                  href="https://wa.me/5516994244626?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20minha%20rotina%20e%20cansa%C3%A7o." 
                   target="_blank" 
                   data-track="cta-burnout-rotina"
                   className="relative z-10 px-8 py-4 bg-brand-800 text-white rounded-full font-semibold hover:bg-brand-700 transition-colors shadow-lg"
@@ -187,13 +187,13 @@ export default function DeepDiveSections() {
             <Reveal animation="slide-right">
               <div className="space-y-6">
                 <span className="inline-flex items-center gap-3 font-serif text-sm font-semibold tracking-widest uppercase text-rose-600">
-                  <span className="w-8 h-px bg-rose-300"></span> Terapia de Casal
+                  <span className="w-8 h-px bg-rose-300"></span> Questões de Relacionamento
                 </span>
                 <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-rose-950 font-bold leading-tight">
                   Reconstruindo pontes no relacionamento.
                 </h2>
                 <p className="text-lg text-slate-700 leading-relaxed max-w-xl">
-                  A comunicação violenta e as expectativas frustradas podem desgastar qualquer união. Na Terapia de Casal, criamos um espaço neutro para mediar conflitos, promover a empatia e fortalecer a parceria afetiva.
+                  A comunicação violenta e as expectativas frustradas podem desgastar qualquer relação. Na psicoterapia focada em vínculos afetivos, criamos um espaço seguro para mediar conflitos internos, promover a empatia e fortalecer sua capacidade de se relacionar.
                 </p>
                 <div className="pt-4 flex flex-col sm:flex-row gap-4">
                   <div className="flex items-center gap-4 bg-white p-4 rounded-2xl border border-rose-100 shadow-sm">
@@ -223,12 +223,12 @@ export default function DeepDiveSections() {
                   "O amor sobrevive quando ambos aprendem a escutar o que não está sendo dito."
                 </blockquote>
                 <Link 
-                  href="https://wa.me/5516997712697?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20sobre%20terapia%20de%20casal." 
+                  href="https://wa.me/5516994244626?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20sobre%20quest%C3%B5es%20de%20relacionamento." 
                   target="_blank" 
-                  data-track="cta-casal"
+                  data-track="cta-relacionamento"
                   className="inline-flex items-center justify-center w-full px-8 py-4 bg-rose-600 text-white rounded-full font-semibold hover:bg-rose-700 transition-colors shadow-md hover:shadow-lg"
                 >
-                  Saber sobre Terapia de Casal
+                  Saber sobre Vínculos Afetivos
                 </Link>
               </div>
             </Reveal>
@@ -246,7 +246,7 @@ export default function DeepDiveSections() {
                 Compreendendo o funcionamento biológico e psíquico.
               </h2>
               <p className="text-lg text-slate-600 leading-relaxed">
-                Tratamentos modernos exigem conhecimento profundo. Compreender a <strong>Neurobiologia</strong> e a <strong>Psicofarmacologia</strong> dos transtornos mentais permite uma intervenção muito mais precisa, atuando na raiz do problema e otimizando resultados — inclusive trabalhando em conjunto com seu psiquiatra.
+                Tratamentos modernos exigem conhecimento profundo. Compreender a <strong>Neurobiologia</strong> e a <strong>Psicofarmacologia</strong> dos transtornos mentais permite uma intervenção muito mais precisa, atuando na raiz do problema e otimizando resultados inclusive trabalhando em conjunto com seu psiquiatra.
               </p>
             </Reveal>
           </div>

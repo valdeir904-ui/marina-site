@@ -10,7 +10,7 @@ interface FloatingWhatsappProps {
 }
 
 export default function FloatingWhatsapp({
-  whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516997712697',
+  whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516994244626',
   whatsappMessage = process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE || 'Olá, Marina! Gostaria de saber mais sobre as sessões de terapia e agendar uma consulta.',
   avatarUrl = '/images/marina-avatar.jpg',
 }: FloatingWhatsappProps) {

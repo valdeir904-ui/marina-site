@@ -47,7 +47,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound();
   }
 
-  const whatsappNumber = settings.whatsapp_number || '5516997712697';
+  const whatsappNumber = settings.whatsapp_number || '5516994244626';
   const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(
     `Oi Marina! 🖐 Li o artigo "${post.title}" e gostaria de agendar uma consulta de terapia!`
   )}`;

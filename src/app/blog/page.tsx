@@ -9,7 +9,7 @@ import { getSiteSettings } from '@/lib/settings';
 
 export const metadata = {
   title: 'Blog de Saúde Mental | Dra. Marina Falcão',
-  description: 'Artigos sobre ansiedade, burnout, luto, terapia de casal e saúde mental do trabalhador por Marina Falcão.',
+  description: 'Artigos sobre ansiedade, burnout, luto, questões de relacionamento e vínculos afetivos e saúde mental do trabalhador por Marina Falcão.',
 };
 
 async function getPosts(category?: string, search?: string) {
@@ -48,7 +48,7 @@ export default async function BlogIndexPage({
     'Ansiedade',
     'Burnout & Estresse',
     'Luto',
-    'Terapia de Casal',
+    'Questões de Relacionamento e Vínculos Afetivos',
     'Saúde Mental',
   ];
 
