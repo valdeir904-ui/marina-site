@@ -49,9 +49,9 @@ export default function DeepDiveSections() {
             </Reveal>
             <Reveal animation="slide-left" delay={200} className="lg:justify-self-end w-full max-w-md">
               <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-slate-700/50">
-                <div className="aspect-[4/5] w-full relative">
+                <div className="aspect-square w-full relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="https://images.unsplash.com/photo-1544367567-0f2fcb046ebf?q=80&w=800&auto=format&fit=crop" alt="Acolhimento Luto" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <img src="/images/luto.png" alt="Acolhimento Luto" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent pointer-events-none"></div>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6">
@@ -106,11 +106,11 @@ export default function DeepDiveSections() {
               </div>
             </Reveal>
 
-            <Reveal animation="fade-up" delay={200} className="lg:col-span-7 relative w-full h-full min-h-[400px]">
-              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-teal-100 h-full w-full">
-                <div className="absolute inset-0 w-full h-full">
+            <Reveal animation="fade-up" delay={200} className="lg:col-span-7 relative w-full">
+              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-teal-100 w-full">
+                <div className="aspect-square w-full relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?q=80&w=1000&auto=format&fit=crop" alt="Paz e Ansiedade" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <img src="/images/ansiedade.png" alt="Paz e Ansiedade" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-teal-900/80 via-teal-900/20 to-transparent pointer-events-none"></div>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 flex justify-center">
@@ -166,11 +166,11 @@ export default function DeepDiveSections() {
               </div>
             </Reveal>
 
-            <Reveal animation="fade-up" delay={200} className="lg:col-span-7 lg:order-1 relative w-full h-full min-h-[400px]">
-              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-brand-100 h-full w-full">
-                <div className="absolute inset-0 w-full h-full">
+            <Reveal animation="fade-up" delay={200} className="lg:col-span-7 lg:order-1 relative w-full">
+              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-brand-100 w-full">
+                <div className="aspect-square w-full relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="https://images.unsplash.com/photo-1517673132405-a56a62b18caf?q=80&w=1000&auto=format&fit=crop" alt="Descanso e Rotina" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <img src="/images/burnout.png" alt="Descanso e Rotina" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-900/80 via-brand-900/20 to-transparent pointer-events-none"></div>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 flex justify-center">
@@ -229,9 +229,9 @@ export default function DeepDiveSections() {
             </Reveal>
             <Reveal animation="slide-left" delay={200} className="lg:justify-self-end w-full max-w-md">
               <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-rose-100">
-                <div className="aspect-[4/5] w-full relative">
+                <div className="aspect-square w-full relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=800&auto=format&fit=crop" alt="Vínculos Afetivos" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <img src="/images/relacionamentos.png" alt="Vínculos Afetivos" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-rose-950/80 via-rose-950/20 to-transparent pointer-events-none"></div>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6">
