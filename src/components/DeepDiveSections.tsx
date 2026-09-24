@@ -47,19 +47,23 @@ export default function DeepDiveSections() {
                 </div>
               </div>
             </Reveal>
-            <Reveal animation="slide-left" delay={200} className="lg:justify-self-end">
-              <div className="bg-slate-800/40 p-8 sm:p-12 rounded-[3rem] border border-slate-700/50 backdrop-blur-sm max-w-md">
-                <blockquote className="font-serif text-xl sm:text-2xl text-slate-200 leading-relaxed italic mb-8">
-                  "O luto não é uma doença a ser curada, é um processo a ser vivido. E você não precisa passar por isso em silêncio."
-                </blockquote>
-                <Link 
-                  href="https://wa.me/5516994244626?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20um%20acolhimento%20para%20mim." 
-                  target="_blank" 
-                  data-track="cta-luto-crise"
-                  className="inline-flex items-center justify-center w-full px-8 py-4 bg-brand-300 text-slate-950 rounded-full font-semibold hover:bg-brand-200 transition-colors"
-                >
-                  Agendar acolhimento
-                </Link>
+            <Reveal animation="slide-left" delay={200} className="lg:justify-self-end w-full max-w-md">
+              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-slate-700/50">
+                <div className="aspect-[4/5] w-full relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="https://images.unsplash.com/photo-1544367567-0f2fcb046ebf?q=80&w=800&auto=format&fit=crop" alt="Acolhimento Luto" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent pointer-events-none"></div>
+                </div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <Link 
+                    href="https://wa.me/5516994244626?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20um%20acolhimento%20para%20mim." 
+                    target="_blank" 
+                    data-track="cta-luto-crise"
+                    className="inline-flex items-center justify-center w-full px-8 py-4 bg-brand-300 text-slate-950 rounded-full font-semibold hover:bg-brand-200 transition-colors shadow-lg"
+                  >
+                    Agendar acolhimento
+                  </Link>
+                </div>
               </div>
             </Reveal>
           </div>
@@ -74,7 +78,7 @@ export default function DeepDiveSections() {
               <div className="space-y-6">
                 <span className="kicker">Ansiedade & Pânico</span>
                 <h2 className="font-serif text-4xl sm:text-5xl font-bold text-teal-900 leading-tight">
-                  Sua mente não precisa ser sua inimiga.
+                  Não precisa ser inimiga.
                 </h2>
                 <p className="text-lg text-slate-600 leading-relaxed">
                   A ansiedade crônica coloca seu corpo em constante estado de alerta. Através da psicoterapia baseada em evidências, trabalhamos para desacelerar seus pensamentos, reduzir sintomas físicos do pânico e devolver sua paz de espírito.
@@ -102,20 +106,23 @@ export default function DeepDiveSections() {
               </div>
             </Reveal>
 
-            <Reveal animation="fade-up" delay={200} className="lg:col-span-7 relative">
-              <div className="aspect-[4/3] sm:aspect-[16/9] lg:aspect-auto lg:h-[500px] w-full bg-teal-50/50 rounded-[3rem] border border-teal-100 flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
-                 <div className="absolute inset-0 bg-gradient-to-tr from-teal-50 to-emerald-50/20 mix-blend-overlay"></div>
-                 <h3 className="font-serif text-3xl sm:text-4xl text-teal-900 mb-6 relative z-10 max-w-lg">
-                   O futuro não precisa ser assustador. Dê o primeiro passo para o agora.
-                 </h3>
-                 <Link 
-                  href="https://wa.me/5516994244626?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20ansiedade." 
-                  target="_blank" 
-                  data-track="cta-ansiedade"
-                  className="relative z-10 px-8 py-4 bg-teal-700 text-white rounded-full font-semibold hover:bg-teal-800 transition-colors shadow-lg"
-                >
-                  Falar sobre minha ansiedade
-                </Link>
+            <Reveal animation="fade-up" delay={200} className="lg:col-span-7 relative w-full h-full min-h-[400px]">
+              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-teal-100 h-full w-full">
+                <div className="absolute inset-0 w-full h-full">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?q=80&w=1000&auto=format&fit=crop" alt="Paz e Ansiedade" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-teal-900/80 via-teal-900/20 to-transparent pointer-events-none"></div>
+                </div>
+                <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 flex justify-center">
+                  <Link 
+                    href="https://wa.me/5516994244626?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20ansiedade." 
+                    target="_blank" 
+                    data-track="cta-ansiedade"
+                    className="inline-flex items-center justify-center px-10 py-4 bg-teal-700 text-white rounded-full font-semibold hover:bg-teal-800 transition-colors shadow-xl"
+                  >
+                    O primeiro passo agora
+                  </Link>
+                </div>
               </div>
             </Reveal>
           </div>
@@ -159,20 +166,23 @@ export default function DeepDiveSections() {
               </div>
             </Reveal>
 
-            <Reveal animation="fade-up" delay={200} className="lg:col-span-7 lg:order-1 relative">
-              <div className="aspect-[4/3] sm:aspect-[16/9] lg:aspect-auto lg:h-[500px] w-full bg-brand-200/30 rounded-[3rem] border border-brand-100/50 flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
-                 <div className="absolute inset-0 bg-gradient-to-tr from-orange-50/50 to-warm-100/20 mix-blend-overlay"></div>
-                 <h3 className="font-serif text-3xl sm:text-4xl text-brand-800 mb-6 relative z-10 max-w-lg">
-                   A exaustão não é um troféu. É um sinal de que algo precisa mudar.
-                 </h3>
-                 <Link 
-                  href="https://wa.me/5516994244626?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20minha%20rotina%20e%20cansa%C3%A7o." 
-                  target="_blank" 
-                  data-track="cta-burnout-rotina"
-                  className="relative z-10 px-8 py-4 bg-brand-800 text-white rounded-full font-semibold hover:bg-brand-700 transition-colors shadow-lg"
-                >
-                  Falar sobre minha rotina
-                </Link>
+            <Reveal animation="fade-up" delay={200} className="lg:col-span-7 lg:order-1 relative w-full h-full min-h-[400px]">
+              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-brand-100 h-full w-full">
+                <div className="absolute inset-0 w-full h-full">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="https://images.unsplash.com/photo-1517673132405-a56a62b18caf?q=80&w=1000&auto=format&fit=crop" alt="Descanso e Rotina" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-900/80 via-brand-900/20 to-transparent pointer-events-none"></div>
+                </div>
+                <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 flex justify-center">
+                  <Link 
+                    href="https://wa.me/5516994244626?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20minha%20rotina%20e%20cansa%C3%A7o." 
+                    target="_blank" 
+                    data-track="cta-burnout-rotina"
+                    className="inline-flex items-center justify-center px-10 py-4 bg-brand-800 text-white rounded-full font-semibold hover:bg-brand-700 transition-colors shadow-xl"
+                  >
+                    Falar sobre minha rotina
+                  </Link>
+                </div>
               </div>
             </Reveal>
 
@@ -190,10 +200,10 @@ export default function DeepDiveSections() {
                   <span className="w-8 h-px bg-rose-300"></span> Questões de Relacionamento
                 </span>
                 <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-rose-950 font-bold leading-tight">
-                  Reconstruindo pontes no relacionamento.
+                  Relacionamentos começam com você.
                 </h2>
                 <p className="text-lg text-slate-700 leading-relaxed max-w-xl">
-                  A comunicação violenta e as expectativas frustradas podem desgastar qualquer relação. Na psicoterapia focada em vínculos afetivos, criamos um espaço seguro para mediar conflitos internos, promover a empatia e fortalecer sua capacidade de se relacionar.
+                  A comunicação violenta e as frustrações desgastam qualquer união. Ao olhar para dentro na terapia, criamos um ambiente seguro para entender seus gatilhos, mediar seus conflitos internos e fortalecer a forma como você se conecta com o mundo.
                 </p>
                 <div className="pt-4 flex flex-col sm:flex-row gap-4">
                   <div className="flex items-center gap-4 bg-white p-4 rounded-2xl border border-rose-100 shadow-sm">
@@ -201,8 +211,8 @@ export default function DeepDiveSections() {
                       <Users className="w-6 h-6 text-rose-600" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-slate-900 text-sm">Comunicação Assertiva</h4>
-                      <p className="text-xs text-slate-500">Resolução de conflitos</p>
+                      <h4 className="font-bold text-slate-900 text-sm">Autoconhecimento</h4>
+                      <p className="text-xs text-slate-500">Entendendo gatilhos</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4 bg-white p-4 rounded-2xl border border-rose-100 shadow-sm">
@@ -210,26 +220,30 @@ export default function DeepDiveSections() {
                       <MessageSquareHeart className="w-6 h-6 text-rose-600" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-slate-900 text-sm">Resgate de Vínculo</h4>
-                      <p className="text-xs text-slate-500">Reconstrução da intimidade</p>
+                      <h4 className="font-bold text-slate-900 text-sm">Inteligência Afetiva</h4>
+                      <p className="text-xs text-slate-500">Gerenciando emoções</p>
                     </div>
                   </div>
                 </div>
               </div>
             </Reveal>
-            <Reveal animation="slide-left" delay={200} className="lg:justify-self-end">
-              <div className="bg-white p-8 sm:p-12 rounded-[3rem] border border-rose-100 shadow-xl max-w-md">
-                <blockquote className="font-serif text-xl sm:text-2xl text-slate-700 leading-relaxed italic mb-8">
-                  "O amor sobrevive quando ambos aprendem a escutar o que não está sendo dito."
-                </blockquote>
-                <Link 
-                  href="https://wa.me/5516994244626?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20sobre%20quest%C3%B5es%20de%20relacionamento." 
-                  target="_blank" 
-                  data-track="cta-relacionamento"
-                  className="inline-flex items-center justify-center w-full px-8 py-4 bg-rose-600 text-white rounded-full font-semibold hover:bg-rose-700 transition-colors shadow-md hover:shadow-lg"
-                >
-                  Saber sobre Vínculos Afetivos
-                </Link>
+            <Reveal animation="slide-left" delay={200} className="lg:justify-self-end w-full max-w-md">
+              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-rose-100">
+                <div className="aspect-[4/5] w-full relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=800&auto=format&fit=crop" alt="Vínculos Afetivos" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-rose-950/80 via-rose-950/20 to-transparent pointer-events-none"></div>
+                </div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <Link 
+                    href="https://wa.me/5516994244626?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20sobre%20quest%C3%B5es%20de%20relacionamento." 
+                    target="_blank" 
+                    data-track="cta-relacionamento"
+                    className="inline-flex items-center justify-center w-full px-8 py-4 bg-rose-600 text-white rounded-full font-semibold hover:bg-rose-700 transition-colors shadow-md hover:shadow-lg"
+                  >
+                    Agendar sessão
+                  </Link>
+                </div>
               </div>
             </Reveal>
           </div>
