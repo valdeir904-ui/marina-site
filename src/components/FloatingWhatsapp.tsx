@@ -31,7 +31,7 @@ export default function FloatingWhatsapp({
           setIsOpen(true);
           hasTriggered = true;
         }
-      }, 20000);
+      }, 30000);
       return () => clearTimeout(timer);
     } else {
       // Mobile rules: Scroll to section or Scroll UP

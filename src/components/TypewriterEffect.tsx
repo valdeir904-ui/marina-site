@@ -15,7 +15,7 @@ export default function TypewriterEffect() {
       ]}
       wrapper="span"
       speed={50}
-      className="text-brand-700 italic relative inline-block min-w-[280px]"
+      className="text-brand-700 italic"
       repeat={Infinity}
     />
   );
