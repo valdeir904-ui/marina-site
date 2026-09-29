@@ -15,7 +15,7 @@ export default async function ConstructionPage() {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-warm-100 via-warm-50 to-sage-50 text-slate-800 flex flex-col items-center justify-center font-sans p-6">
+    <div className="min-h-screen bg-gradient-to-b from-warm-100 via-warm-50 to-sage-50 text-slate-800 flex flex-col items-center justify-center font-sans p-6 overflow-x-hidden">
       
       <Reveal animation="zoom-in" duration={800} className="max-w-xl w-full bg-white rounded-3xl shadow-warm-xl border border-warm-200 p-8 sm:p-12 text-center relative overflow-hidden">
         {/* Decorative element */}

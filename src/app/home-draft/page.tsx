@@ -128,7 +128,7 @@ export default async function HomePage() {
   const ctaWaUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(ctaWaMessage)}`;
 
   return (
-    <div className="min-h-screen bg-warm-50 text-slate-800 flex flex-col font-sans">
+    <div className="min-h-screen bg-warm-50 text-slate-800 flex flex-col font-sans overflow-x-hidden">
       <Header settings={settings} />
 
       <main className="flex-grow">

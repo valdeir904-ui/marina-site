@@ -55,8 +55,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${playfair.variable} ${montserrat.variable} ${madefor.variable}`}>
-      <body className="min-h-screen bg-warm-50 text-slate-800 font-sans antialiased selection:bg-brand-200 selection:text-brand-900">
+    <html lang="pt-BR" className={`${playfair.variable} ${montserrat.variable} ${madefor.variable} overflow-x-hidden`}>
+      <body className="min-h-screen bg-warm-50 text-slate-800 font-sans antialiased selection:bg-brand-200 selection:text-brand-900 overflow-x-hidden">
         <AnalyticsTracker />
         <SmoothScroll>
           {children}
