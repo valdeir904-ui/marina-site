@@ -145,7 +145,8 @@ export default async function HomePage() {
                 </Reveal>
                 <Reveal animation="fade-up" delay={200}>
                   <h1 className="font-serif text-4xl sm:text-5xl lg:text-[4rem] font-medium text-slate-900 leading-[1.2] tracking-tight">
-                    Tudo começa na sua <TypewriterEffect />
+                    Tudo começa na sua <br className="md:hidden" />
+                    <TypewriterEffect />
                   </h1>
                 </Reveal>
 
