@@ -130,7 +130,7 @@ export default function DeepDiveSections() {
       </section>
 
       {/* SEÇÃO 2: Esgotamento e Rotina (Burnout & Saúde Mental) */}
-      <section className="py-24 lg:py-32 bg-warm-100 text-slate-900 relative overflow-hidden">
+      <section id="esgotamento" className="py-24 lg:py-32 bg-warm-100 text-slate-900 relative overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             

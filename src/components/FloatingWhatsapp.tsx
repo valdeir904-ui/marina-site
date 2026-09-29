@@ -21,14 +21,55 @@ export default function FloatingWhatsapp({
   const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${message}`;
 
   useEffect(() => {
-    // Show pop-up after 20 seconds
-    const timer = setTimeout(() => {
-      if (!isDismissed) {
-        setIsOpen(true);
-      }
-    }, 20000);
+    const isMobile = window.innerWidth < 768;
+    let hasTriggered = false;
 
-    return () => clearTimeout(timer);
+    if (!isMobile) {
+      // Show pop-up after 20 seconds on desktop
+      const timer = setTimeout(() => {
+        if (!isDismissed && !hasTriggered) {
+          setIsOpen(true);
+          hasTriggered = true;
+        }
+      }, 20000);
+      return () => clearTimeout(timer);
+    } else {
+      // Mobile rules: Scroll to section or Scroll UP
+      let maxScroll = window.scrollY;
+
+      const handleScroll = () => {
+        if (isDismissed || hasTriggered) return;
+
+        const currentScroll = window.scrollY;
+        
+        // Track the maximum scroll depth
+        if (currentScroll > maxScroll) {
+          maxScroll = currentScroll;
+        }
+
+        // Check if reached the Burnout section
+        const burnoutSection = document.getElementById('esgotamento');
+        if (burnoutSection) {
+          const rect = burnoutSection.getBoundingClientRect();
+          // If the section is somewhat in view
+          if (rect.top < window.innerHeight - 100) {
+            setIsOpen(true);
+            hasTriggered = true;
+            return;
+          }
+        }
+
+        // Check if user scrolled down a reasonable amount (e.g. past hero) and then scrolled UP
+        if (maxScroll > 800 && (maxScroll - currentScroll) > 100) {
+          setIsOpen(true);
+          hasTriggered = true;
+          return;
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
   }, [isDismissed]);
 
   const handleClose = (e: React.MouseEvent) => {
