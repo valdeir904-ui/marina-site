@@ -4,6 +4,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import dynamic from 'next/dynamic';
 
+export const revalidate = 60; // Cache page for 60 seconds (ISR) to fix slow TTFB and LCP
+
 const FloatingWhatsapp = dynamic(() => import('@/components/FloatingWhatsapp'), { ssr: false });
 const FlowField = dynamic(() => import('@/components/FlowField'), { ssr: false });
 import { getSiteSettings } from '@/lib/settings';
