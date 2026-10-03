@@ -1,34 +1,29 @@
 'use client';
 import { useState, useEffect } from 'react';
 
-import { TypeAnimation } from 'react-type-animation';
+const words = ['saúde mental.', 'paz interior.', 'qualidade de vida.'];
 
 export default function TypewriterEffect() {
-  const [mounted, setMounted] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [fade, setFade] = useState(true);
 
   useEffect(() => {
-    setMounted(true);
+    const interval = setInterval(() => {
+      setFade(false); // start fade out
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % words.length);
+        setFade(true); // fade in new word
+      }, 500); // Wait half a second for fade out
+    }, 3500); // Change every 3.5s
+    
+    return () => clearInterval(interval);
   }, []);
 
-  if (!mounted) {
-    // Renderiza o primeiro texto no servidor para evitar bloqueio de LCP e salto de layout
-    return <span className="text-brand-700 italic inline-block min-h-[1.2em]">saúde mental.</span>;
-  }
-
   return (
-    <TypeAnimation
-      sequence={[
-        'saúde mental.',
-        3000,
-        'paz interior.',
-        3000,
-        'qualidade de vida.',
-        3000,
-      ]}
-      wrapper="span"
-      speed={50}
-      className="text-brand-700 italic inline-block min-h-[1.2em]"
-      repeat={Infinity}
-    />
+    <span 
+      className={`text-brand-700 italic inline-block min-h-[1.2em] transition-opacity duration-500 ease-in-out ${fade ? 'opacity-100' : 'opacity-0'}`}
+    >
+      {words[index]}
+    </span>
   );
 }
