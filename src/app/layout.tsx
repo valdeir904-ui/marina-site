@@ -47,7 +47,11 @@ export const metadata: Metadata = {
   },
 };
 
-import SmoothScroll from '@/components/SmoothScroll';
+import dynamic from 'next/dynamic';
+
+const SmoothScroll = dynamic(() => import('@/components/SmoothScroll'), {
+  ssr: false,
+});
 
 export default function RootLayout({
   children,
@@ -58,9 +62,8 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${playfair.variable} ${montserrat.variable} ${madefor.variable} overflow-x-hidden`}>
       <body className="min-h-screen bg-warm-50 text-slate-800 font-sans antialiased selection:bg-brand-200 selection:text-brand-900 overflow-x-hidden">
         <AnalyticsTracker />
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
+        {children}
+        <SmoothScroll>{null}</SmoothScroll>
       </body>
     </html>
   );

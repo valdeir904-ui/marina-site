@@ -1,9 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
-import FlowField from '@/components/FlowField';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import FloatingWhatsapp from '@/components/FloatingWhatsapp';
+import dynamic from 'next/dynamic';
+
+const FloatingWhatsapp = dynamic(() => import('@/components/FloatingWhatsapp'), { ssr: false });
+const FlowField = dynamic(() => import('@/components/FlowField'), { ssr: false });
 import { getSiteSettings } from '@/lib/settings';
 import FaqAccordion from '@/components/FaqAccordion';
 import StepTimeline from '@/components/StepTimeline';
@@ -137,7 +139,10 @@ export default async function HomePage() {
         {/* HERO */}
         {/* HERO */}
         <section className="relative overflow-hidden">
-          <FlowField theme="warm" density="sparse">
+          <div className="absolute inset-0 z-0">
+            <FlowField theme="warm" density="sparse" />
+          </div>
+          <div className="relative z-10 w-full">
             <HeroWave />
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-28 pb-20 lg:pt-32 lg:pb-28">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -216,9 +221,9 @@ export default async function HomePage() {
                 </div>
               </div>
             </div>
+            </div>
           </div>
-        </FlowField>
-      </section>
+        </section>
 
         {/* SOBRE MIM */}
         <AboutSection whatsappUrl={sobreWaUrl} />
