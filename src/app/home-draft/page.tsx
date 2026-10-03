@@ -207,7 +207,7 @@ export default async function HomePage() {
                     </div>
                     
                     <div className="text-center pt-2">
-                      <h3 className="font-serif text-2xl font-bold text-slate-900">Marina Falcão</h3>
+                      <h2 className="font-serif text-2xl font-bold text-slate-900">Marina Falcão</h2>
                       <p className="text-xs font-bold text-brand-600 uppercase tracking-wider mt-1.5">
                         Psicóloga Clínica • CRP 06/162899
                       </p>
@@ -432,7 +432,7 @@ export default async function HomePage() {
                           <span className="text-[10px] font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-3 py-1 rounded-full">
                             {post.category || 'Artigo'}
                           </span>
-                          <span className="text-xs font-medium text-slate-400">
+                          <span className="text-xs font-medium text-slate-500">
                             {new Date(post.created_at).toLocaleDateString('pt-BR')}
                           </span>
                         </div>

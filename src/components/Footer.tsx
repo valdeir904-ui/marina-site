@@ -30,15 +30,15 @@ export default function Footer({ settings = {} }: FooterProps) {
                 Psicóloga · CRP 06/162899
               </span>
             </div>
-            <p className="text-sm text-slate-400 leading-relaxed">
+            <p className="text-sm text-slate-300 leading-relaxed">
               Escuta clínica guiada pela ciência, sensibilidade e acolhimento. Especialista em Saúde Mental do Trabalhador, Ansiedade, Burnout e Luto.
             </p>
           </div>
 
           {/* Col 2: Navigation */}
           <div>
-            <h4 className="font-serif text-lg font-semibold text-white mb-4">Navegação</h4>
-            <ul className="space-y-2.5 text-sm">
+            <h3 className="font-serif text-lg font-semibold text-white mb-4">Navegação</h3>
+            <ul className="space-y-2.5 text-sm text-slate-300">
               <li>
                 <Link href="/#sobre" className="hover:text-brand-300 transition-colors">
                   Sobre Mim
@@ -69,7 +69,7 @@ export default function Footer({ settings = {} }: FooterProps) {
 
           {/* Col 3: Specialties */}
           <div>
-            <h4 className="font-serif text-lg font-semibold text-white mb-4">Áreas de Atuação</h4>
+            <h3 className="font-serif text-lg font-semibold text-white mb-4">Áreas de Atuação</h3>
             <ul className="space-y-2.5 text-sm text-slate-400">
               <li>Ansiedade & Síndrome do Pânico</li>
               <li>Burnout & Estresse Ocupacional</li>
@@ -81,7 +81,7 @@ export default function Footer({ settings = {} }: FooterProps) {
 
           {/* Col 4: Contact & Locations */}
           <div className="space-y-3">
-            <h4 className="font-serif text-lg font-semibold text-white mb-4">Atendimentos</h4>
+            <h3 className="font-serif text-lg font-semibold text-white mb-4">Atendimentos</h3>
             <div className="flex items-start gap-3 text-sm text-slate-400">
               <MapPin className="w-5 h-5 text-brand-600 mt-0.5 shrink-0" />
               <span>{settings.address || 'Presencial em Ribeirão Preto - SP e On-line para todo o Brasil'} e Exterior.</span>
@@ -92,7 +92,7 @@ export default function Footer({ settings = {} }: FooterProps) {
             </div>
             <div className="pt-2 flex items-center gap-3 text-xs text-slate-500">
               <Lock className="w-4 h-4" />
-              <Link href="/admin/login" className="hover:text-slate-400 transition-colors">
+              <Link href="/admin/login" className="hover:text-slate-100 transition-colors">
                 Área restrita
               </Link>
             </div>

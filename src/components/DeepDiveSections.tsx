@@ -32,7 +32,7 @@ export default function DeepDiveSections() {
                       <HeartCrack className="w-6 h-6 text-brand-300" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-white text-sm">Acolhimento ao Luto</h4>
+                      <h3 className="font-bold text-white text-sm">Acolhimento ao Luto</h3>
                       <p className="text-xs text-slate-400">Ressignificação de perdas</p>
                     </div>
                   </div>
@@ -41,7 +41,7 @@ export default function DeepDiveSections() {
                       <ShieldAlert className="w-6 h-6 text-brand-300" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-white text-sm">Prevenção e Crises</h4>
+                      <h3 className="font-bold text-white text-sm">Prevenção e Crises</h3>
                       <p className="text-xs text-slate-400">Intervenção em Suicidologia</p>
                     </div>
                   </div>
@@ -230,7 +230,7 @@ export default function DeepDiveSections() {
                       <Users className="w-6 h-6 text-[#223C3C]" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-slate-900 text-sm">Autoconhecimento</h4>
+                      <h3 className="font-bold text-slate-900 text-sm">Autoconhecimento</h3>
                       <p className="text-xs text-slate-500">Entendendo gatilhos</p>
                     </div>
                   </div>
@@ -239,7 +239,7 @@ export default function DeepDiveSections() {
                       <MessageSquareHeart className="w-6 h-6 text-[#223C3C]" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-slate-900 text-sm">Inteligência Afetiva</h4>
+                      <h3 className="font-bold text-slate-900 text-sm">Inteligência Afetiva</h3>
                       <p className="text-xs text-slate-500">Gerenciando emoções</p>
                     </div>
                   </div>

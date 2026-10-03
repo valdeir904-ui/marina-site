@@ -95,7 +95,7 @@ export default function FloatingWhatsapp({
                 <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#25D366] border-2 border-[#075e54] rounded-full"></span>
               </div>
               <div className="flex flex-col">
-                <h4 className="text-white font-bold text-[15px] leading-tight">Marina Falcão</h4>
+                <h3 className="text-white font-bold text-[15px] leading-tight">Marina Falcão</h3>
                 <p className="text-white/80 text-[12px] mt-0.5">Online agora</p>
               </div>
             </div>
