@@ -51,7 +51,7 @@ export default function DeepDiveSections() {
               <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-slate-700/50">
                 <div className="aspect-square w-full relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/luto.png" alt="Acolhimento Luto" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <img src="/images/luto-body.png" alt="Acolhimento Luto" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent pointer-events-none"></div>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6">
@@ -110,7 +110,7 @@ export default function DeepDiveSections() {
               <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-teal-100 w-full">
                 <div className="aspect-square w-full relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/ansiedade.png" alt="Paz e Ansiedade" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <img src="/images/ansiedade-body.png" alt="Paz e Ansiedade" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-teal-900/80 via-teal-900/20 to-transparent pointer-events-none"></div>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 flex justify-center">
@@ -170,7 +170,7 @@ export default function DeepDiveSections() {
               <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-brand-100 w-full">
                 <div className="aspect-square w-full relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/burnout.png" alt="Descanso e Rotina" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <img src="/images/burnout-body.png" alt="Descanso e Rotina" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-900/80 via-brand-900/20 to-transparent pointer-events-none"></div>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 flex justify-center">
@@ -196,28 +196,28 @@ export default function DeepDiveSections() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <Reveal animation="slide-right">
               <div className="space-y-6">
-                <span className="inline-flex items-center gap-3 font-serif text-sm font-semibold tracking-widest uppercase text-rose-600">
-                  <span className="w-8 h-px bg-rose-300"></span> Questões de Relacionamento
+                <span className="inline-flex items-center gap-3 font-serif text-sm font-semibold tracking-widest uppercase text-[#223C3C]">
+                  <span className="w-8 h-px bg-[#C8C0B3]"></span> Questões de Relacionamento
                 </span>
-                <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-rose-950 font-bold leading-tight">
+                <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-[#223C3C] font-bold leading-tight">
                   Relacionamentos começam com você.
                 </h2>
                 <p className="text-lg text-slate-700 leading-relaxed max-w-xl">
                   A comunicação violenta e as frustrações desgastam qualquer união. Ao olhar para dentro na terapia, criamos um ambiente seguro para entender seus gatilhos, mediar seus conflitos internos e fortalecer a forma como você se conecta com o mundo.
                 </p>
                 <div className="pt-4 flex flex-col sm:flex-row gap-4">
-                  <div className="flex items-center gap-4 bg-white p-4 rounded-2xl border border-rose-100 shadow-sm">
-                    <div className="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center shrink-0">
-                      <Users className="w-6 h-6 text-rose-600" />
+                  <div className="flex items-center gap-4 bg-white p-4 rounded-2xl border border-[#C8C0B3] shadow-sm">
+                    <div className="w-12 h-12 rounded-full bg-[#C8C0B3]/30 flex items-center justify-center shrink-0">
+                      <Users className="w-6 h-6 text-[#223C3C]" />
                     </div>
                     <div>
                       <h4 className="font-bold text-slate-900 text-sm">Autoconhecimento</h4>
                       <p className="text-xs text-slate-500">Entendendo gatilhos</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4 bg-white p-4 rounded-2xl border border-rose-100 shadow-sm">
-                    <div className="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center shrink-0">
-                      <MessageSquareHeart className="w-6 h-6 text-rose-600" />
+                  <div className="flex items-center gap-4 bg-white p-4 rounded-2xl border border-[#C8C0B3] shadow-sm">
+                    <div className="w-12 h-12 rounded-full bg-[#C8C0B3]/30 flex items-center justify-center shrink-0">
+                      <MessageSquareHeart className="w-6 h-6 text-[#223C3C]" />
                     </div>
                     <div>
                       <h4 className="font-bold text-slate-900 text-sm">Inteligência Afetiva</h4>
@@ -228,18 +228,18 @@ export default function DeepDiveSections() {
               </div>
             </Reveal>
             <Reveal animation="slide-left" delay={200} className="lg:justify-self-end w-full max-w-md">
-              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-rose-100">
+              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-[#C8C0B3]">
                 <div className="aspect-square w-full relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/relacionamentos.png" alt="Vínculos Afetivos" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-rose-950/80 via-rose-950/20 to-transparent pointer-events-none"></div>
+                  <img src="/images/relacionamentos-body.png" alt="Vínculos Afetivos" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#223C3C]/90 via-[#223C3C]/20 to-transparent pointer-events-none"></div>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6">
                   <Link 
                     href="https://wa.me/5516994244626?text=Ol%C3%A1%2C%20Marina.%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20sobre%20quest%C3%B5es%20de%20relacionamento." 
                     target="_blank" 
                     data-track="cta-relacionamento"
-                    className="inline-flex items-center justify-center w-full px-8 py-4 bg-rose-600 text-white rounded-full font-semibold hover:bg-rose-700 transition-colors shadow-md hover:shadow-lg"
+                    className="inline-flex items-center justify-center w-full px-8 py-4 bg-[#223C3C] text-white rounded-full font-semibold hover:bg-[#1a2d2d] transition-colors shadow-md hover:shadow-lg"
                   >
                     Agendar sessão
                   </Link>

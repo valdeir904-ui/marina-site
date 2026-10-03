@@ -1,4 +1,5 @@
 import React from 'react';
+import FlowField from '@/components/FlowField';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingWhatsapp from '@/components/FloatingWhatsapp';
@@ -31,7 +32,7 @@ import { query } from '@/lib/db';
 
 async function getFeaturedPosts() {
   try {
-    let posts = await query('SELECT * FROM posts WHERE published = 1 AND featured = 1 ORDER BY created_at DESC');
+    let posts = await query('SELECT * FROM posts WHERE published = 1 AND featured = 1 ORDER BY created_at DESC LIMIT 10');
     if (!posts || posts.length === 0) {
       posts = await query('SELECT * FROM posts WHERE published = 1 ORDER BY created_at DESC LIMIT 3');
     }
@@ -57,12 +58,12 @@ const especialidades = [
     icon: Activity,
     title: 'Burnout & Esgotamento',
     text: 'Superação da exaustão profissional, perda de motivação e estresse de trabalho, com reconstrução de limites saudáveis.',
-    bgHover: 'hover:bg-orange-100',
-    textHover: 'hover:text-orange-900',
-    iconWrapperHover: 'group-hover:bg-white',
-    iconHover: 'group-hover:text-orange-700',
-    titleHover: 'group-hover:text-orange-950',
-    descHover: 'group-hover:text-orange-900'
+    bgHover: 'hover:bg-[#6D5E42]',
+    textHover: 'hover:text-white',
+    iconWrapperHover: 'group-hover:bg-white/20',
+    iconHover: 'group-hover:text-white',
+    titleHover: 'group-hover:text-white',
+    descHover: 'group-hover:text-white/90'
   },
   {
     icon: Heart,
@@ -79,34 +80,34 @@ const especialidades = [
     icon: Users,
     title: 'Relacionamentos, separações e conflitos afetivos',
     text: 'Melhoria da comunicação, resolução construtiva de conflitos e fortalecimento do vínculo e da parceria afetiva.',
-    bgHover: 'hover:bg-rose-100',
-    textHover: 'hover:text-rose-900',
+    bgHover: 'hover:bg-[#C8C0B3]',
+    textHover: 'hover:text-[#223C3C]',
     iconWrapperHover: 'group-hover:bg-white',
-    iconHover: 'group-hover:text-rose-700',
-    titleHover: 'group-hover:text-rose-950',
-    descHover: 'group-hover:text-rose-900'
+    iconHover: 'group-hover:text-[#223C3C]',
+    titleHover: 'group-hover:text-[#223C3C]',
+    descHover: 'group-hover:text-[#223C3C]/90'
   },
   {
     icon: Sun,
     title: 'Depressão & Apatia',
     text: 'Intervenções para resgatar a vitalidade, tratar o desânimo persistente e reorganizar a rotina com novos propósitos.',
-    bgHover: 'hover:bg-yellow-400',
-    textHover: 'hover:text-black',
-    iconWrapperHover: 'group-hover:bg-white/50',
-    iconHover: 'group-hover:text-black',
-    titleHover: 'group-hover:text-black',
-    descHover: 'group-hover:text-black/80'
+    bgHover: 'hover:bg-[#223C3C]',
+    textHover: 'hover:text-white',
+    iconWrapperHover: 'group-hover:bg-white/20',
+    iconHover: 'group-hover:text-white',
+    titleHover: 'group-hover:text-white',
+    descHover: 'group-hover:text-white/90'
   },
   {
     icon: ShieldCheck,
     title: 'TOC & Oscilações Emocionais',
     text: 'Manejo de pensamentos obsessivos, rituais compulsivos e sobrecarga emocional com técnicas comportamentais validadas.',
-    bgHover: 'hover:bg-purple-100',
-    textHover: 'hover:text-purple-900',
+    bgHover: 'hover:bg-[#96ACAB]',
+    textHover: 'hover:text-[#223C3C]',
     iconWrapperHover: 'group-hover:bg-white',
-    iconHover: 'group-hover:text-purple-700',
-    titleHover: 'group-hover:text-purple-950',
-    descHover: 'group-hover:text-purple-900'
+    iconHover: 'group-hover:text-[#223C3C]',
+    titleHover: 'group-hover:text-[#223C3C]',
+    descHover: 'group-hover:text-[#223C3C]/90'
   },
 ];
 
@@ -133,19 +134,21 @@ export default async function HomePage() {
 
       <main className="flex-grow">
         {/* HERO */}
-        <section className="relative overflow-hidden pt-28 pb-20 lg:pt-32 lg:pb-28 bg-warm-50 -mt-20">
-          <HeroWave />
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-              <div className="lg:col-span-7 space-y-7 text-center lg:text-left lg:pt-2">
-                <Reveal animation="fade-up" delay={100}>
-                  <p className="kicker justify-center lg:justify-start">
+        {/* HERO */}
+        <section className="relative overflow-hidden">
+          <FlowField theme="warm" density="sparse">
+            <HeroWave />
+            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-28 pb-20 lg:pt-32 lg:pb-28">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                <div className="lg:col-span-7 space-y-7 text-center lg:text-left lg:pt-2">
+                  <Reveal animation="fade-up" delay={100}>
+                    <p className="kicker justify-center lg:justify-start">
                     Um espaço seguro de acolhimento
                   </p>
                 </Reveal>
                 <Reveal animation="fade-up" delay={200}>
                   <h1 className="font-serif text-4xl sm:text-5xl lg:text-[4rem] font-medium text-slate-900 leading-[1.2] tracking-tight">
-                    Tudo começa na sua <br className="md:hidden" />
+                    Tudo começa na sua <br />
                     <TypewriterEffect />
                   </h1>
                 </Reveal>
@@ -216,7 +219,8 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
-        </section>
+        </FlowField>
+      </section>
 
         {/* SOBRE MIM */}
         <AboutSection whatsappUrl={sobreWaUrl} />
@@ -380,67 +384,72 @@ export default async function HomePage() {
               </div>
 
               <style dangerouslySetInnerHTML={{ __html: `
-                .hide-scrollbar::-webkit-scrollbar { display: none; }
-                .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+                @keyframes marquee {
+                  0% { transform: translateX(0); }
+                  100% { transform: translateX(-50%); }
+                }
+                .animate-marquee {
+                  display: flex;
+                  align-items: stretch;
+                  width: max-content;
+                  animation: marquee 30s linear infinite;
+                }
+                .animate-marquee:hover {
+                  animation-play-state: paused;
+                }
               `}} />
 
               <div className={`
-                ${latestPosts.length > 3 
-                  ? 'flex overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 gap-6' 
-                  : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'}
+                ${latestPosts.length > 3 ? 'overflow-hidden pb-6 -mx-4 px-4 sm:mx-0 sm:px-0' : ''}
               `}>
-                {latestPosts.map((post: any) => (
-                  <Link 
-                    key={post.id} 
-                    href={`/blog/${post.slug}`} 
-                    className={`
-                      group bg-white rounded-2xl border border-warm-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow flex flex-col h-full
-                      ${latestPosts.length > 3 ? 'min-w-[85vw] sm:min-w-[400px] snap-center shrink-0' : ''}
-                    `}
-                  >
-                    {post.image_url ? (
-                      <div className="aspect-[16/10] overflow-hidden bg-slate-100">
-                        <img
-                          src={post.image_url}
-                          alt={post.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
+                <div className={`
+                  ${latestPosts.length > 3 ? 'animate-marquee items-stretch' : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch'}
+                `}>
+                  {(latestPosts.length > 3 ? [...latestPosts, ...latestPosts] : latestPosts).map((post: any, index: number) => (
+                    <Link 
+                      key={`${post.id}-${index}`} 
+                      href={`/blog/${post.slug}`} 
+                      className={`
+                        group bg-white rounded-2xl border border-warm-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow flex flex-col
+                        ${latestPosts.length > 3 ? 'w-[85vw] sm:w-[350px] shrink-0 mr-6' : 'h-full'}
+                      `}
+                    >
+                      {post.image_url ? (
+                        <div className="aspect-[16/10] overflow-hidden bg-slate-100">
+                          <img
+                            src={post.image_url}
+                            alt={post.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                      ) : (
+                        <div className="aspect-[16/10] bg-gradient-to-tr from-warm-100 to-sage-50 flex items-center justify-center border-b border-warm-100">
+                          <FileText className="w-12 h-12 text-warm-300" />
+                        </div>
+                      )}
+                      <div className="p-6 flex flex-col flex-1">
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-3 py-1 rounded-full">
+                            {post.category || 'Artigo'}
+                          </span>
+                          <span className="text-xs font-medium text-slate-400">
+                            {new Date(post.created_at).toLocaleDateString('pt-BR')}
+                          </span>
+                        </div>
+                        <h3 className="font-serif text-xl font-bold text-slate-900 mb-3 group-hover:text-brand-700 transition-colors line-clamp-2">
+                          {post.title}
+                        </h3>
+                        <p className="text-sm text-slate-600 leading-relaxed line-clamp-3 mb-6 flex-1">
+                          {post.summary}
+                        </p>
+                        <div className="mt-auto flex items-center gap-2 text-sm font-bold text-brand-600 group-hover:text-brand-700">
+                          Ler artigo <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        </div>
                       </div>
-                    ) : (
-                      <div className="aspect-[16/10] bg-gradient-to-tr from-warm-100 to-sage-50 flex items-center justify-center border-b border-warm-100">
-                        <FileText className="w-12 h-12 text-warm-300" />
-                      </div>
-                    )}
-                    <div className="p-6 flex flex-col flex-1">
-                      <div className="flex items-center justify-between mb-4">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-3 py-1 rounded-full">
-                          {post.category || 'Artigo'}
-                        </span>
-                        <span className="text-xs font-medium text-slate-400">
-                          {new Date(post.created_at).toLocaleDateString('pt-BR')}
-                        </span>
-                      </div>
-                      <h3 className="font-serif text-xl font-bold text-slate-900 mb-3 group-hover:text-brand-700 transition-colors line-clamp-2">
-                        {post.title}
-                      </h3>
-                      <p className="text-sm text-slate-600 leading-relaxed line-clamp-3 mb-6 flex-1">
-                        {post.summary}
-                      </p>
-                      <div className="mt-auto flex items-center gap-2 text-sm font-bold text-brand-600 group-hover:text-brand-700">
-                        Ler artigo <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-              
-              {latestPosts.length > 3 && (
-                <div className="text-center text-sm text-slate-500 font-medium flex items-center justify-center gap-2">
-                  <ArrowRight className="w-4 h-4 rotate-180" />
-                  Deslize para ver mais artigos
-                  <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  ))}
                 </div>
-              )}
+              </div>
             </div>
           </section>
         )}
@@ -478,7 +487,7 @@ export default async function HomePage() {
         </section>
 
         {/* CTA FINAL */}
-        <section className="py-20 lg:py-28 bg-brand-900 text-white">
+        <section className="py-20 lg:py-28 bg-brand-700 text-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center space-y-7">
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl leading-tight">
               Entre o caos e o cuidado, existe um lugar seguro.
@@ -492,7 +501,7 @@ export default async function HomePage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-track="cta-final"
-                className="inline-flex items-center justify-center gap-3 bg-white hover:bg-warm-100 text-brand-900 font-semibold px-8 py-4 rounded-full text-base shadow-warm-lg transition-colors"
+                className="inline-flex items-center justify-center gap-3 bg-white hover:bg-warm-100 text-brand-700 font-semibold px-8 py-4 rounded-full text-base shadow-warm-lg transition-colors"
               >
                 <MessageCircle className="w-5 h-5" />
                 <span>Agendar sessão pelo WhatsApp</span>

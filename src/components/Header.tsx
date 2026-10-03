@@ -38,7 +38,7 @@ export default function Header({ settings = {} }: HeaderProps) {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   return (
-    <header className={`sticky top-0 z-40 transition-all duration-500 ${isScrolled ? 'bg-brand-700/95 shadow-md border-b-transparent backdrop-blur-md' : 'bg-transparent border-transparent'}`}>
+    <header className={`fixed w-full left-0 right-0 top-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-brand-700/95 shadow-md border-b-transparent backdrop-blur-md' : 'bg-transparent border-transparent'}`}>
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand / Logo */}
         <Link href="/" className="block group">

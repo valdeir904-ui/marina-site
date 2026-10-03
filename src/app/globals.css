@@ -104,9 +104,9 @@
   background: #fdfbf7;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbbfb1;
+  background: #74532f; /* brand-700 */
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #b1a190;
+  background: #62462b; /* brand-800 */
 }
