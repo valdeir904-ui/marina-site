@@ -142,25 +142,19 @@ export default async function HomePage() {
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-28 pb-20 lg:pt-32 lg:pb-28">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
                 <div className="lg:col-span-7 space-y-7 text-center lg:text-left lg:pt-2">
-                  <Reveal animation="fade-up" delay={100}>
-                    <p className="kicker justify-center lg:justify-start">
+                  <p className="kicker justify-center lg:justify-start">
                     Um espaço seguro de acolhimento
                   </p>
-                </Reveal>
-                <Reveal animation="fade-up" delay={200}>
                   <h1 className="font-serif text-4xl sm:text-5xl lg:text-[4rem] font-medium text-slate-900 leading-[1.2] tracking-tight">
                     Tudo começa na sua <br />
                     <TypewriterEffect />
                   </h1>
-                </Reveal>
 
-                <Reveal animation="fade-up" delay={300}>
                   <p className="text-lg text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
                     Quando a mente desacelera, a vida volta a acontecer. Psicoterapia para ansiedade,
                     burnout, luto e relacionamentos, com escuta acolhedora e fundamento na Análise do
                     Comportamento.
                   </p>
-                </Reveal>
 
                 <Reveal animation="fade-up" delay={400}>
                   <div className="pt-1 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5">
@@ -196,7 +190,7 @@ export default async function HomePage() {
 
               {/* Cartão de apresentação */}
               <div className="lg:col-span-5 relative">
-                <Reveal animation="slide-left" delay={400} className="mx-auto w-full max-w-[320px] sm:max-w-[360px]">
+                <div className="mx-auto w-full max-w-[320px] sm:max-w-[360px] animate-fade-in">
                   {/* Glow decorativo de fundo */}
                   <div className="absolute -inset-2 bg-gradient-to-tr from-brand-200/50 to-sage-200/50 rounded-[3rem] blur-2xl -z-10"></div>
                   
@@ -219,7 +213,7 @@ export default async function HomePage() {
                       </p>
                     </div>
                   </div>
-                </Reveal>
+                </div>
               </div>
             </div>
           </div>
