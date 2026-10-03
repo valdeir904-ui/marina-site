@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Playfair_Display, Montserrat, Wix_Madefor_Text } from 'next/font/google';
-import AnalyticsTracker from '@/components/AnalyticsTracker';
 import './globals.css';
 
 const playfair = Playfair_Display({
@@ -52,6 +51,7 @@ import dynamic from 'next/dynamic';
 const SmoothScroll = dynamic(() => import('@/components/SmoothScroll'), {
   ssr: false,
 });
+const AnalyticsTracker = dynamic(() => import('@/components/AnalyticsTracker'), { ssr: false });
 
 export default function RootLayout({
   children,

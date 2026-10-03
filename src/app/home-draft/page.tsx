@@ -13,7 +13,7 @@ import GoogleReviewsWidget from '@/components/GoogleReviewsWidget';
 import Reveal from '@/components/Reveal';
 import TypewriterEffect from '@/components/TypewriterEffect';
 import AboutSection from '@/components/AboutSection';
-import HeroWave from '@/components/HeroWave';
+const HeroWave = dynamic(() => import('@/components/HeroWave'), { ssr: false });
 import DeepDiveSections from '@/components/DeepDiveSections';
 import Link from 'next/link';
 import {
@@ -195,7 +195,7 @@ export default async function HomePage() {
 
               {/* Cartão de apresentação */}
               <div className="lg:col-span-5 relative">
-                <div className="mx-auto w-full max-w-[320px] sm:max-w-[360px] animate-fade-in">
+                <div className="mx-auto w-full max-w-[320px] sm:max-w-[360px]">
                   {/* Glow decorativo de fundo */}
                   <div className="absolute -inset-2 bg-gradient-to-tr from-brand-200/50 to-sage-200/50 rounded-[3rem] blur-2xl -z-10"></div>
                   
@@ -206,6 +206,7 @@ export default async function HomePage() {
                         alt="Marina Falcão"
                         fill
                         priority
+                        fetchPriority="high"
                         sizes="(max-width: 768px) 100vw, 400px"
                         className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                       />
