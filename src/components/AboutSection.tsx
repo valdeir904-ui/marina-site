@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Reveal from './Reveal';
 
 interface AboutSectionProps {
@@ -14,10 +15,12 @@ export default function AboutSection({ whatsappUrl }: AboutSectionProps) {
           {/* Imagem (Esquerda) */}
           <Reveal animation="slide-right" className="relative order-2 lg:order-1">
             <div className="relative w-full aspect-[4/5] max-w-md mx-auto lg:max-w-none rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
-              <img 
+              <Image 
                 src="/images/marina-profile.jpg" 
                 alt="Psicóloga Marina Falcão" 
-                className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-1000"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-top hover:scale-105 transition-transform duration-1000"
               />
               <div className="absolute inset-0 bg-brand-900/10 mix-blend-overlay"></div>
             </div>

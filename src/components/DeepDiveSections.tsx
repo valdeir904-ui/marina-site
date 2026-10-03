@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Reveal from './Reveal';
 import { HeartCrack, ShieldAlert, BrainCircuit, Activity, BatteryWarning, TestTubeDiagonal, Wind, Brain, Users, MessageSquareHeart } from 'lucide-react';
 import Link from 'next/link';
@@ -51,7 +52,13 @@ export default function DeepDiveSections() {
               <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-slate-700/50">
                 <div className="aspect-square w-full relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/luto-body.png" alt="Acolhimento Luto" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <Image 
+                    src="/images/luto-body.png" 
+                    alt="Acolhimento Luto" 
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105" 
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent pointer-events-none"></div>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6">
@@ -110,7 +117,13 @@ export default function DeepDiveSections() {
               <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-teal-100 w-full">
                 <div className="aspect-square w-full relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/ansiedade-body.png" alt="Paz e Ansiedade" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <Image 
+                    src="/images/ansiedade-body.png" 
+                    alt="Paz e Ansiedade" 
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105" 
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-teal-900/80 via-teal-900/20 to-transparent pointer-events-none"></div>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 flex justify-center">
@@ -170,7 +183,13 @@ export default function DeepDiveSections() {
               <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-brand-100 w-full">
                 <div className="aspect-square w-full relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/burnout-body.png" alt="Descanso e Rotina" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <Image 
+                    src="/images/burnout-body.png" 
+                    alt="Descanso e Rotina" 
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105" 
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-900/80 via-brand-900/20 to-transparent pointer-events-none"></div>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 flex justify-center">
@@ -231,7 +250,13 @@ export default function DeepDiveSections() {
               <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border border-[#C8C0B3]">
                 <div className="aspect-square w-full relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/relacionamentos-body.png" alt="Vínculos Afetivos" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <Image 
+                    src="/images/relacionamentos-body.png" 
+                    alt="Vínculos Afetivos" 
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105" 
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#223C3C]/90 via-[#223C3C]/20 to-transparent pointer-events-none"></div>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6">

@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import FlowField from '@/components/FlowField';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -201,10 +202,13 @@ export default async function HomePage() {
                   
                   <div className="bg-white/80 backdrop-blur-xl rounded-[2rem] border border-white shadow-2xl overflow-hidden p-5 sm:p-6 space-y-5">
                     <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-tr from-brand-200 via-warm-100 to-sage-200 shadow-inner group">
-                      <img 
+                      <Image 
                         src="/images/marina-profile.jpg" 
-                        alt="Marina Falcão" 
-                        className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                        alt="Marina Falcão"
+                        fill
+                        priority
+                        sizes="(max-width: 768px) 100vw, 400px"
+                        className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                       />
                     </div>
                     
@@ -415,11 +419,13 @@ export default async function HomePage() {
                       `}
                     >
                       {post.image_url ? (
-                        <div className="aspect-[16/10] overflow-hidden bg-slate-100">
-                          <img
+                        <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                          <Image
                             src={post.image_url}
                             alt={post.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 400px"
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
                           />
                         </div>
                       ) : (

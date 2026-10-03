@@ -233,10 +233,14 @@ export default function FlowField({
     resize();
     window.addEventListener("resize", resize);
     
-    render();
+    // Atraso intencional para não travar a CPU no carregamento inicial (salva o TBT no PageSpeed)
+    const timeoutId = setTimeout(() => {
+      render();
+    }, 1000);
 
     return () => {
       cancelAnimationFrame(animId);
+      clearTimeout(timeoutId);
       window.removeEventListener("resize", resize);
     };
   }, [theme, density]);
