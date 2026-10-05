@@ -39,7 +39,15 @@ async function getFeaturedPosts() {
     if (!posts || posts.length === 0) {
       posts = await query('SELECT * FROM posts WHERE published = 1 ORDER BY created_at DESC LIMIT 3');
     }
-    return posts || [];
+    
+    // Force override images from database to local assets
+    return (posts || []).map((post: any) => {
+      if (post.slug.includes('burnout')) post.image_url = '/images/burnout.png';
+      else if (post.slug.includes('ansiedade')) post.image_url = '/images/blog-ansiedade.png';
+      else if (post.slug.includes('luto')) post.image_url = '/images/luto.png';
+      else if (post.slug.includes('casal') || post.slug.includes('relacionamento')) post.image_url = '/images/blog-relacionamentos.png';
+      return post;
+    });
   } catch (error) {
     return [];
   }
