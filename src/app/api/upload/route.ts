@@ -45,8 +45,11 @@ export async function POST(req: NextRequest) {
     const fileUrl = `/uploads/${filename}`;
     
     return NextResponse.json({ url: fileUrl });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Erro no upload:', error);
-    return NextResponse.json({ error: 'Erro ao processar o upload do arquivo. Verifique se o Vercel Blob está configurado corretamente.' }, { status: 500 });
+    const hasToken = !!process.env.BLOB_READ_WRITE_TOKEN;
+    return NextResponse.json({ 
+      error: `Erro: ${error.message} (Token: ${hasToken ? 'SIM' : 'NAO'})`
+    }, { status: 500 });
   }
 }
