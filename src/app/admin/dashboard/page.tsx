@@ -965,9 +965,8 @@ export default function AdminDashboardPage() {
                     </label>
                     <p className="text-xs text-slate-400">Tamanho recomendado: 1200x630 pixels. (Formato: Retangular)</p>
                   </div>
-                </div>
 
-                <div className="p-5 bg-slate-50 rounded-2xl border border-slate-100 space-y-4">
+                  <div className="p-5 bg-slate-50 rounded-2xl border border-slate-100 space-y-4">
                   <div className="flex items-center justify-between">
                     <h4 className="text-sm font-bold text-slate-700 flex items-center gap-2">
                       <Video className="w-4 h-4 text-brand-600" /> Mídia em Vídeo (Opcional)
@@ -1101,6 +1100,7 @@ export default function AdminDashboardPage() {
                   {submitting && published === 1 ? 'Publicando...' : <><CheckCircle className="w-4 h-4"/> Publicar Artigo</>}
                 </button>
               </div>
+            </div>
           </div>
         </div>
       )}
