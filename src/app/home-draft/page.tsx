@@ -7,7 +7,6 @@ import dynamic from 'next/dynamic';
 export const revalidate = 60; // Cache page for 60 seconds (ISR) to fix slow TTFB and LCP
 
 const FloatingWhatsapp = dynamic(() => import('@/components/FloatingWhatsapp'), { ssr: false });
-const FlowField = dynamic(() => import('@/components/FlowField'), { ssr: false });
 import { getSiteSettings } from '@/lib/settings';
 import FaqAccordion from '@/components/FaqAccordion';
 import StepTimeline from '@/components/StepTimeline';
@@ -141,9 +140,6 @@ export default async function HomePage() {
         {/* HERO */}
         {/* HERO */}
         <section className="relative overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <FlowField theme="warm" density="sparse" />
-          </div>
           <div className="relative z-10 w-full">
             <HeroWave />
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-28 pb-20 lg:pt-32 lg:pb-28">
