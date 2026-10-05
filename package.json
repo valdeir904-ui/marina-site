@@ -16,6 +16,7 @@
   "dependencies": {
     "@studio-freight/react-lenis": "^0.0.47",
     "@tailwindcss/postcss": "^4.3.3",
+    "@vercel/blob": "^2.8.0",
     "@vercel/postgres": "^0.10.0",
     "bcryptjs": "^3.0.3",
     "framer-motion": "^13.4.1",
