@@ -1040,7 +1040,7 @@ export default function AdminDashboardPage() {
                     rows={2} required value={summary} onChange={(e) => setSummary(e.target.value)}
                     placeholder="Breve chamada descritiva do artigo..."
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none resize-none"
-                  />
+                  ></textarea>
                 </div>
 
                 </div>
