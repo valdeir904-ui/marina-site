@@ -59,14 +59,24 @@ export default function AdminDashboardPage() {
   const [submitting, setSubmitting] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [error, setError] = useState('');
-
-  // Password Change State
+  
+  // Password change states
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [passwordSuccess, setPasswordSuccess] = useState('');
+
+  // Block body scroll when any modal is open
+  useEffect(() => {
+    if (isModalOpen || isPasswordModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [isModalOpen, isPasswordModalOpen]);
   const [passwordSubmitting, setPasswordSubmitting] = useState(false);
 
   // Settings State
