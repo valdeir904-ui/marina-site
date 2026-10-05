@@ -203,8 +203,8 @@ export default function AdminDashboardPage() {
     setIsModalOpen(true);
   };
 
-  const handleSavePost = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSavePost = async (e?: React.FormEvent | React.MouseEvent) => {
+    if (e) e.preventDefault();
     setSubmitting(true);
     setError('');
 
@@ -217,7 +217,7 @@ export default function AdminDashboardPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           title, slug, summary, content, category, 
-          image_url: imageUrl, video_url: videoUrl, video_type: videoType,
+          image_url: imageUrl, video_url: videoUrl.trim(), video_type: videoType,
           featured, published
         }),
       });
@@ -883,7 +883,7 @@ export default function AdminDashboardPage() {
       {/* Create / Edit Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white w-full max-w-3xl rounded-2xl shadow-2xl my-8 overflow-hidden flex flex-col max-h-full">
+          <div className="bg-white w-full max-w-3xl rounded-2xl shadow-2xl my-8 overflow-hidden flex flex-col max-h-[90vh]">
             
             <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50">
               <h3 className="font-serif text-xl font-bold text-slate-900">
@@ -915,93 +915,112 @@ export default function AdminDashboardPage() {
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Link (URL)</label>
-                    <div className="flex items-center w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus-within:ring-2 focus-within:ring-brand-500 transition-all">
-                      <span className="text-slate-400 text-sm hidden sm:inline mr-1">/blog/</span>
-                      <input
-                        type="text" required value={slug} onChange={(e) => setSlug(generateSlug(e.target.value))}
-                        placeholder="como-reconhecer-burnout"
-                        className="w-full bg-transparent text-slate-900 outline-none"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-1">
                     <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Categoria</label>
-                    <input
-                      list="categories-list"
-                      required value={category} onChange={(e) => setCategory(e.target.value)}
-                      placeholder="Digite ou selecione..."
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none transition-all bg-white"
-                    />
+                    <div className="relative">
+                      <select
+                        required value={category} onChange={(e) => setCategory(e.target.value)}
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none transition-all bg-white appearance-none"
+                      >
+                        <option value="" disabled>Selecione uma categoria...</option>
+                        {uniqueCategories.includes('Artigos') ? null : <option value="Artigos">Artigos</option>}
+                        {uniqueCategories.includes('Ansiedade') ? null : <option value="Ansiedade">Ansiedade</option>}
+                        {uniqueCategories.includes('Burnout') ? null : <option value="Burnout">Burnout</option>}
+                        {uniqueCategories.includes('Relacionamentos') ? null : <option value="Relacionamentos">Relacionamentos</option>}
+                        {uniqueCategories.includes('Redes Sociais') ? null : <option value="Redes Sociais">Redes Sociais</option>}
+                        {uniqueCategories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                      </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Imagem de Capa (Upload)</label>
-                    <div className="relative flex items-center gap-3">
-                      <label className="cursor-pointer shrink-0 bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-3 rounded-xl border border-slate-200 font-semibold transition-colors flex items-center gap-2">
-                        <UploadCloud className="w-4 h-4" />
-                        {uploadingImage ? 'Enviando...' : 'Escolher Arquivo'}
-                        <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" disabled={uploadingImage} />
-                      </label>
-                      <input 
-                        type="url" value={imageUrl} onChange={e => setImageUrl(e.target.value)}
-                        placeholder="URL gerada..." 
-                        className="flex-1 px-4 py-3 rounded-xl border border-slate-200 text-slate-500 bg-slate-50 outline-none text-xs" 
-                        readOnly
-                      />
-                    </div>
+                  <div className="space-y-2 col-span-1 md:col-span-2">
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Imagem de Capa (Upload)</label>
+                    
+                    {imageUrl && (
+                      <div className="relative w-full md:w-1/2 h-48 rounded-xl border border-slate-200 overflow-hidden bg-slate-50 mb-2">
+                        <img src={imageUrl} alt="Capa" className="w-full h-full object-cover" />
+                        <button type="button" onClick={() => setImageUrl('')} className="absolute top-2 right-2 bg-white/90 hover:bg-rose-50 text-rose-600 p-1.5 rounded-lg shadow-sm transition-colors">
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    )}
+                    
+                    <label className="cursor-pointer w-full md:w-1/2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-3 rounded-xl border border-slate-200 font-semibold transition-colors flex items-center justify-center gap-2">
+                      <UploadCloud className="w-5 h-5" />
+                      {uploadingImage ? 'Enviando imagem...' : imageUrl ? 'Trocar Imagem' : 'Escolher Arquivo do Computador'}
+                      <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" disabled={uploadingImage} />
+                    </label>
+                    <p className="text-xs text-slate-400">Tamanho recomendado: 1200x630 pixels. (Formato: Retangular)</p>
                   </div>
                 </div>
 
                 <div className="p-5 bg-slate-50 rounded-2xl border border-slate-100 space-y-4">
-                  <h4 className="text-sm font-bold text-slate-700 flex items-center gap-2">
-                    <Video className="w-4 h-4 text-brand-600" /> Mídia em Vídeo (Opcional)
-                  </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Origem do Vídeo</label>
-                      <select 
-                        value={videoType} onChange={(e) => setVideoType(e.target.value as 'youtube'|'instagram')}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none bg-white"
-                      >
-                        <option value="youtube">YouTube (Horizontal)</option>
-                        <option value="instagram">Instagram / TikTok (Vertical)</option>
-                      </select>
-                    </div>
-                    <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">URL do Vídeo</label>
-                      <input
-                        type="url" value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)}
-                        placeholder="https://..."
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none"
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-sm font-bold text-slate-700 flex items-center gap-2">
+                      <Video className="w-4 h-4 text-brand-600" /> Mídia em Vídeo (Opcional)
+                    </h4>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input 
+                        type="checkbox" 
+                        className="sr-only peer" 
+                        checked={!!videoUrl}
+                        onChange={(e) => {
+                          if (!e.target.checked) setVideoUrl('');
+                          else setVideoUrl(' ');
+                        }}
                       />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="flex items-center gap-3 p-4 bg-amber-50 rounded-xl border border-amber-100">
-                    <input
-                      type="checkbox"
-                      id="featured-checkbox"
-                      checked={featured}
-                      onChange={(e) => setFeatured(e.target.checked)}
-                      className="w-5 h-5 text-brand-600 rounded border-slate-300 focus:ring-brand-500"
-                    />
-                    <label htmlFor="featured-checkbox" className="text-sm font-bold text-amber-900 cursor-pointer">
-                      ⭐ Destacar na Página Inicial
+                      <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-600"></div>
                     </label>
                   </div>
-                  <div className="space-y-1">
-                    <select 
-                      value={published} onChange={(e) => setPublished(Number(e.target.value))}
-                      className={`w-full px-4 py-4 rounded-xl border font-bold text-sm focus:ring-2 focus:ring-brand-500 outline-none transition-colors ${published === 1 ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-slate-50 text-slate-600 border-slate-200'}`}
-                    >
-                      <option value={1}>🟢 Publicar Imediatamente</option>
-                      <option value={0}>🟡 Salvar como Rascunho</option>
-                    </select>
-                  </div>
+                  
+                  {!!videoUrl && (
+                    <div className="space-y-5 pt-4 border-t border-slate-200 animate-in fade-in slide-in-from-top-2">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div className="space-y-1">
+                          <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Formato do Vídeo</label>
+                          <select 
+                            value={videoType} onChange={(e) => setVideoType(e.target.value as 'youtube'|'instagram')}
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none bg-white"
+                          >
+                            <option value="youtube">YouTube (Horizontal)</option>
+                            <option value="instagram">Instagram / TikTok (Vertical)</option>
+                          </select>
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Link do Vídeo</label>
+                          <input
+                            type="url" value={videoUrl.trim()} onChange={(e) => setVideoUrl(e.target.value)}
+                            placeholder="Cole o link (YouTube, Instagram ou TikTok)..."
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:ring-2 focus:ring-brand-500 outline-none"
+                          />
+                        </div>
+                      </div>
+                      
+                      {videoUrl.trim() && (
+                        <div className="w-full bg-slate-900 rounded-xl overflow-hidden flex items-center justify-center relative shadow-inner mx-auto" style={{ aspectRatio: videoType === 'instagram' ? '9/16' : '16/9', maxHeight: '300px', maxWidth: videoType === 'instagram' ? '170px' : '100%' }}>
+                          <div className="text-slate-400 text-xs flex flex-col items-center gap-2 p-4 text-center">
+                            <Video className="w-8 h-8 opacity-50" />
+                            <span>Prévia do Vídeo Habilitada<br/><span className="text-[10px] opacity-70">(O vídeo real aparecerá no site)</span></span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-3 p-4 bg-amber-50 rounded-xl border border-amber-100">
+                  <input
+                    type="checkbox"
+                    id="featured-checkbox"
+                    checked={featured}
+                    onChange={(e) => setFeatured(e.target.checked)}
+                    className="w-5 h-5 text-brand-600 rounded border-slate-300 focus:ring-brand-500"
+                  />
+                  <label htmlFor="featured-checkbox" className="text-sm font-bold text-amber-900 cursor-pointer">
+                    ⭐ Destacar na Página Inicial (Aparece nos cards principais)
+                  </label>
                 </div>
 
                 <div className="space-y-1">
@@ -1036,16 +1055,38 @@ export default function AdminDashboardPage() {
               </form>
             </div>
 
-            <div className="px-6 py-4 border-t border-slate-100 bg-slate-50 flex justify-end gap-3 shrink-0">
+            <div className="px-6 py-4 border-t border-slate-100 bg-slate-50 flex flex-wrap items-center justify-between gap-3 shrink-0">
               <button type="button" onClick={() => setIsModalOpen(false)} className="px-5 py-2.5 rounded-xl text-slate-600 font-bold hover:bg-slate-200 transition-colors">
                 Cancelar
               </button>
-              <button 
-                type="submit" form="post-form" disabled={submitting || uploadingImage} 
-                className="px-8 py-2.5 rounded-xl bg-brand-700 text-white font-bold hover:bg-brand-800 transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-              >
-                {submitting ? 'Salvando...' : <><CheckCircle className="w-4 h-4"/> Salvar Artigo</>}
-              </button>
+              
+              <div className="flex flex-wrap items-center gap-3">
+                {editingPost && (
+                  <button 
+                    type="button" 
+                    onClick={() => window.open(`/blog/${editingPost.slug}`, '_blank')}
+                    className="px-5 py-2.5 rounded-xl border border-brand-200 text-brand-700 bg-brand-50 font-bold hover:bg-brand-100 transition-colors flex items-center gap-2"
+                  >
+                    <Eye className="w-4 h-4" /> Ver Prévia
+                  </button>
+                )}
+                <button 
+                  type="button" 
+                  onClick={(e) => { setPublished(0); handleSavePost(e); }} 
+                  disabled={submitting || uploadingImage} 
+                  className="px-5 py-2.5 rounded-xl bg-slate-200 text-slate-700 font-bold hover:bg-slate-300 transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {submitting && published === 0 ? 'Salvando...' : 'Salvar Rascunho'}
+                </button>
+                <button 
+                  type="button" 
+                  onClick={(e) => { setPublished(1); handleSavePost(e); }} 
+                  disabled={submitting || uploadingImage} 
+                  className="px-8 py-2.5 rounded-xl bg-brand-700 text-white font-bold hover:bg-brand-800 transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                >
+                  {submitting && published === 1 ? 'Publicando...' : <><CheckCircle className="w-4 h-4"/> Publicar Artigo</>}
+                </button>
+              </div>
             </div>
           </div>
         </div>
