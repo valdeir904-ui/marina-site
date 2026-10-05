@@ -50,12 +50,12 @@ const especialidades = [
     icon: Brain,
     title: 'Ansiedade & Pânico',
     text: 'Manejo de pensamentos acelerados, crises de pânico, apreensão constante e sintomas físicos causados pelo estresse.',
-    bgHover: 'hover:bg-teal-100',
-    textHover: 'hover:text-teal-900',
-    iconWrapperHover: 'group-hover:bg-white',
-    iconHover: 'group-hover:text-teal-700',
-    titleHover: 'group-hover:text-teal-950',
-    descHover: 'group-hover:text-teal-900'
+    bgHover: 'hover:bg-[#6D5E42]',
+    textHover: 'hover:text-white',
+    iconWrapperHover: 'group-hover:bg-white/20',
+    iconHover: 'group-hover:text-white',
+    titleHover: 'group-hover:text-white',
+    descHover: 'group-hover:text-white/90'
   },
   {
     icon: Activity,
@@ -72,29 +72,29 @@ const especialidades = [
     icon: Heart,
     title: 'Luto',
     text: 'Acolhimento para a dor de perdas afetivas, falecimentos e transições de vida. Um espaço para ressignificar sem pressa.',
-    bgHover: 'hover:bg-black',
+    bgHover: 'hover:bg-[#6D5E42]',
     textHover: 'hover:text-white',
-    iconWrapperHover: 'group-hover:bg-white/10',
+    iconWrapperHover: 'group-hover:bg-white/20',
     iconHover: 'group-hover:text-white',
     titleHover: 'group-hover:text-white',
-    descHover: 'group-hover:text-slate-300'
+    descHover: 'group-hover:text-white/90'
   },
   {
     icon: Users,
     title: 'Relacionamentos, separações e conflitos afetivos',
     text: 'Melhoria da comunicação, resolução construtiva de conflitos e fortalecimento do vínculo e da parceria afetiva.',
-    bgHover: 'hover:bg-[#C8C0B3]',
-    textHover: 'hover:text-[#223C3C]',
-    iconWrapperHover: 'group-hover:bg-white',
-    iconHover: 'group-hover:text-[#223C3C]',
-    titleHover: 'group-hover:text-[#223C3C]',
-    descHover: 'group-hover:text-[#223C3C]/90'
+    bgHover: 'hover:bg-[#6D5E42]',
+    textHover: 'hover:text-white',
+    iconWrapperHover: 'group-hover:bg-white/20',
+    iconHover: 'group-hover:text-white',
+    titleHover: 'group-hover:text-white',
+    descHover: 'group-hover:text-white/90'
   },
   {
     icon: Sun,
     title: 'Depressão & Apatia',
     text: 'Intervenções para resgatar a vitalidade, tratar o desânimo persistente e reorganizar a rotina com novos propósitos.',
-    bgHover: 'hover:bg-[#223C3C]',
+    bgHover: 'hover:bg-[#6D5E42]',
     textHover: 'hover:text-white',
     iconWrapperHover: 'group-hover:bg-white/20',
     iconHover: 'group-hover:text-white',
@@ -105,12 +105,12 @@ const especialidades = [
     icon: ShieldCheck,
     title: 'TOC & Oscilações Emocionais',
     text: 'Manejo de pensamentos obsessivos, rituais compulsivos e sobrecarga emocional com técnicas comportamentais validadas.',
-    bgHover: 'hover:bg-[#96ACAB]',
-    textHover: 'hover:text-[#223C3C]',
-    iconWrapperHover: 'group-hover:bg-white',
-    iconHover: 'group-hover:text-[#223C3C]',
-    titleHover: 'group-hover:text-[#223C3C]',
-    descHover: 'group-hover:text-[#223C3C]/90'
+    bgHover: 'hover:bg-[#6D5E42]',
+    textHover: 'hover:text-white',
+    iconWrapperHover: 'group-hover:bg-white/20',
+    iconHover: 'group-hover:text-white',
+    titleHover: 'group-hover:text-white',
+    descHover: 'group-hover:text-white/90'
   },
 ];
 
