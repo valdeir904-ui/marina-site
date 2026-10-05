@@ -2,11 +2,10 @@ import React from 'react';
 import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import dynamic from 'next/dynamic';
 
 export const revalidate = 60; // Cache page for 60 seconds (ISR) to fix slow TTFB and LCP
 
-const FloatingWhatsapp = dynamic(() => import('@/components/FloatingWhatsapp'), { ssr: false });
+import FloatingWhatsapp from '@/components/FloatingWhatsapp';
 import { getSiteSettings } from '@/lib/settings';
 import FaqAccordion from '@/components/FaqAccordion';
 import StepTimeline from '@/components/StepTimeline';
@@ -14,7 +13,7 @@ import GoogleReviewsWidget from '@/components/GoogleReviewsWidget';
 import Reveal from '@/components/Reveal';
 import TypewriterEffect from '@/components/TypewriterEffect';
 import AboutSection from '@/components/AboutSection';
-const HeroWave = dynamic(() => import('@/components/HeroWave'), { ssr: false });
+import HeroWave from '@/components/HeroWave';
 import DeepDiveSections from '@/components/DeepDiveSections';
 import Link from 'next/link';
 import {

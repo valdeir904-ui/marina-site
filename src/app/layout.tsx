@@ -46,12 +46,8 @@ export const metadata: Metadata = {
   },
 };
 
-import dynamic from 'next/dynamic';
-
-const SmoothScroll = dynamic(() => import('@/components/SmoothScroll'), {
-  ssr: false,
-});
-const AnalyticsTracker = dynamic(() => import('@/components/AnalyticsTracker'), { ssr: false });
+import SmoothScroll from '@/components/SmoothScroll';
+import AnalyticsTracker from '@/components/AnalyticsTracker';
 
 export default function RootLayout({
   children,
