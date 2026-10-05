@@ -894,7 +894,7 @@ export default function AdminDashboardPage() {
               </button>
             </div>
 
-            <div className="p-6 overflow-y-auto">
+            <div className="p-6 overflow-y-auto flex-1 min-h-0">
               {error && (
                 <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm font-semibold flex items-center gap-2">
                   <AlertCircle className="w-5 h-5 shrink-0" />
