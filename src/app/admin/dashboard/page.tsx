@@ -436,7 +436,7 @@ export default function AdminDashboardPage() {
       <main className="flex-1 flex flex-col min-w-0">
         
         {/* Header mobile (visible if needed) / Topbar for actions */}
-        <header className="bg-white border-b border-slate-200 px-4 sm:px-8 py-4 flex items-center justify-between sticky top-0 z-10">
+        <header className={`bg-white border-b border-slate-200 px-4 sm:px-8 py-4 items-center justify-between sticky top-0 z-10 ${activeTab === 'editor' ? 'hidden' : 'flex'}`}>
           <div className="flex items-center gap-3">
             <button onClick={() => setMobileMenuOpen(true)} className="md:hidden p-2 -ml-2 text-slate-600 hover:text-brand-700">
               <Menu className="w-6 h-6" />
@@ -965,7 +965,7 @@ export default function AdminDashboardPage() {
                       </div>
                       
                       {imageUrl && (
-                        <div className="relative w-32 h-20 shrink-0 rounded-xl border border-slate-200 overflow-hidden bg-slate-50">
+                        <div className="relative w-56 h-32 shrink-0 rounded-xl border border-slate-200 overflow-hidden bg-slate-50 shadow-sm">
                           <img src={imageUrl} alt="Capa" className="w-full h-full object-cover" />
                           <button type="button" onClick={() => setImageUrl('')} className="absolute top-1 right-1 bg-white/90 hover:bg-rose-50 text-rose-600 p-1 rounded-md shadow-sm transition-colors">
                             <X className="w-3.5 h-3.5" />
