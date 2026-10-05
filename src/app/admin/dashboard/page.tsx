@@ -761,7 +761,7 @@ export default function AdminDashboardPage() {
                 </div>
               </div>
             </div>
-          ) : (
+          ) : activeTab === 'posts' ? (
             // TAB: POSTS
             <div className="w-full space-y-4">
               
@@ -1057,7 +1057,7 @@ export default function AdminDashboardPage() {
             </div>
 
             <div className="px-6 py-4 border-t border-slate-100 bg-slate-50 flex flex-wrap items-center justify-between gap-3 shrink-0">
-              <button type="button" onClick={() => setIsModalOpen(false)} className="px-5 py-2.5 rounded-xl text-slate-600 font-bold hover:bg-slate-200 transition-colors">
+              <button type="button" onClick={() => setActiveTab('posts')} className="px-5 py-2.5 rounded-xl text-slate-600 font-bold hover:bg-slate-200 transition-colors">
                 Cancelar
               </button>
               
@@ -1090,7 +1090,6 @@ export default function AdminDashboardPage() {
               </div>
             </div>
           </div>
-        </div>
           ) : null}
         </div>
       </main>
