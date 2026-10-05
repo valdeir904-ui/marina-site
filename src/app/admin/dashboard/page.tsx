@@ -36,12 +36,11 @@ interface Stat {
 }
 
 export default function AdminDashboardPage() {
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'posts' | 'settings'>('posts');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'posts' | 'settings' | 'editor'>('posts');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [posts, setPosts] = useState<Post[]>([]);
   const [stats, setStats] = useState<Stat[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingPost, setEditingPost] = useState<Post | null>(null);
 
   // Form fields
@@ -68,15 +67,15 @@ export default function AdminDashboardPage() {
   const [passwordError, setPasswordError] = useState('');
   const [passwordSuccess, setPasswordSuccess] = useState('');
 
-  // Block body scroll when any modal is open
+  // Block body scroll when password modal is open
   useEffect(() => {
-    if (isModalOpen || isPasswordModalOpen) {
+    if (isPasswordModalOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
     return () => { document.body.style.overflow = 'unset'; };
-  }, [isModalOpen, isPasswordModalOpen]);
+  }, [isPasswordModalOpen]);
   const [passwordSubmitting, setPasswordSubmitting] = useState(false);
 
   // Settings State
@@ -194,7 +193,8 @@ export default function AdminDashboardPage() {
     setFeatured(false);
     setPublished(1);
     setError('');
-    setIsModalOpen(true);
+    setError('');
+    setActiveTab('editor');
   };
 
   const openEditPostModal = (post: Post) => {
@@ -210,7 +210,8 @@ export default function AdminDashboardPage() {
     setFeatured(post.featured === 1);
     setPublished(post.published === undefined ? 1 : post.published);
     setError('');
-    setIsModalOpen(true);
+    setError('');
+    setActiveTab('editor');
   };
 
   const handleSavePost = async (e?: React.FormEvent | React.MouseEvent) => {
@@ -235,7 +236,7 @@ export default function AdminDashboardPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Erro ao salvar a postagem.');
 
-      setIsModalOpen(false);
+      setActiveTab('posts');
       fetchData();
     } catch (err: any) {
       setError(err.message || 'Erro ao salvar postagem.');
@@ -881,27 +882,14 @@ export default function AdminDashboardPage() {
                 </div>
               </div>
             </div>
-          )}
-        </div>
-      </main>
-
-      {/* Datalist for Categories */}
-      <datalist id="categories-list">
-        {uniqueCategories.map(cat => <option key={cat} value={cat} />)}
-      </datalist>
-
-      {/* Create / Edit Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-[100] bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-[95vw] xl:max-w-[1200px] h-[95vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+          ) : activeTab === 'editor' ? (
+            <div className="bg-white w-full rounded-2xl shadow-sm border border-slate-200 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-300">
             
             <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50 shrink-0">
               <h3 className="font-serif text-xl font-bold text-slate-900">
                 {editingPost ? 'Editar Artigo' : 'Publicar Novo Artigo'}
               </h3>
-              <button onClick={() => setIsModalOpen(false)} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-200 rounded-full transition-colors">
-                <X className="w-5 h-5" />
-              </button>
+              <button onClick={() => setActiveTab('posts')} className="px-4 py-2 text-slate-500 hover:text-slate-800 hover:bg-slate-200 rounded-xl transition-colors font-bold flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Voltar</button>
             </div>
 
             <div className="flex-1 overflow-y-auto p-6">
@@ -1103,7 +1091,15 @@ export default function AdminDashboardPage() {
             </div>
           </div>
         </div>
-      )}
+          ) : null}
+        </div>
+      </main>
+
+      {/* Datalist for Categories */}
+      <datalist id="categories-list">
+        {uniqueCategories.map(cat => <option key={cat} value={cat} />)}
+      </datalist>
+
       {/* Change Password Modal */}
       {isPasswordModalOpen && (
         <div className="fixed inset-0 z-[60] bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
