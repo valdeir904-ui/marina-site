@@ -37,7 +37,7 @@ export default function AnalyticsTracker() {
       const target = e.target as HTMLElement;
       const link = target.closest('a');
       
-      if (link && link.href.includes('api.whatsapp.com')) {
+      if (link && (link.href.includes('wa.me') || link.href.includes('whatsapp.com'))) {
         trackEvent('conversion');
       }
     };

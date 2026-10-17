@@ -6,7 +6,7 @@ const db = new sqlite3.Database(dbPath);
 
 const settings = [
   ['whatsapp_number', '5516994244626'],
-  ['whatsapp_message', 'Oi Marina! 🖐 Preciso de ajuda com alguns problemas e gostaria de conversar com você.'],
+  ['whatsapp_message', 'Olá, Marina! Gostaria de saber mais sobre as sessões de terapia e agendar uma consulta.'],
   ['instagram_url', 'https://instagram.com/marinafalcaopsi'],
   ['crp', 'CRP 06/162899'],
   ['address', 'Atendimento presencial em Ribeirão Preto - SP e on-line para todo o Brasil'],

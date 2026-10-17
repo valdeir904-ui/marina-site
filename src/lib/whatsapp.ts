@@ -10,6 +10,14 @@ export function formatWhatsappNumber(phone?: string): string {
 
 export function getWhatsappUrl(phone?: string, message?: string): string {
   const cleanNumber = formatWhatsappNumber(phone);
-  const text = message ? encodeURIComponent(message) : '';
-  return `https://wa.me/${cleanNumber}${text ? `?text=${text}` : ''}`;
+  
+  // Limpa caracteres inválidos ou corrompidos (como \uFFFD) que possam quebrar a URL do WhatsApp
+  let cleanMsg = (message || '').replace(/\uFFFD/g, '').trim();
+  
+  if (!cleanMsg) {
+    cleanMsg = 'Olá, Marina! Gostaria de saber mais sobre as sessões de terapia e agendar uma consulta.';
+  }
+
+  const text = encodeURIComponent(cleanMsg);
+  return `https://wa.me/${cleanNumber}?text=${text}`;
 }
