@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { MapPin, Phone, Lock } from 'lucide-react';
+import { getWhatsappUrl } from '@/lib/whatsapp';
 
 const InstagramIcon = () => (
   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -14,9 +15,7 @@ interface FooterProps {
 
 export default function Footer({ settings = {} }: FooterProps) {
   const currentYear = new Date().getFullYear();
-  const whatsappNumber = settings.whatsapp_number || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516994244626';
-  const whatsappMessage = encodeURIComponent(settings.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!');
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+  const whatsappUrl = getWhatsappUrl(settings.whatsapp_number, settings.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!');
 
   return (
     <footer className="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">

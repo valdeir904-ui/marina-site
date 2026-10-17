@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { MessageCircle, Menu, X } from 'lucide-react';
+import { getWhatsappUrl } from '@/lib/whatsapp';
 
 const InstagramIcon = () => (
   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -33,9 +34,7 @@ export default function Header({ settings = {} }: HeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const whatsappNumber = settings.whatsapp_number || '5516994244626';
-  const whatsappMessage = encodeURIComponent(settings.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!');
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+  const whatsappUrl = getWhatsappUrl(settings.whatsapp_number, settings.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!');
 
   return (
     <header className={`fixed w-full left-0 right-0 top-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-brand-700/95 shadow-md border-b-transparent backdrop-blur-md' : 'bg-transparent border-transparent'}`}>

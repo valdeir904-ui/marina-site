@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { query } from '@/lib/db';
 import { getSiteSettings } from '@/lib/settings';
+import { getWhatsappUrl } from '@/lib/whatsapp';
 import { ArrowLeft, Calendar, MessageCircle, Share2, Tag, Video } from 'lucide-react';
 
 async function getPostBySlug(slug: string) {
@@ -47,10 +48,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound();
   }
 
-  const whatsappNumber = settings.whatsapp_number || '5516994244626';
-  const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(
+  const whatsappUrl = getWhatsappUrl(
+    settings.whatsapp_number,
     `Oi Marina! 🖐 Li o artigo "${post.title}" e gostaria de agendar uma consulta de terapia!`
-  )}`;
+  );
 
   // Helper para garantir que links do Instagram e YouTube funcionem no iframe
   let finalVideoUrl = post.video_url;

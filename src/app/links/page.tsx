@@ -16,6 +16,7 @@ import Footer from '@/components/Footer';
 import FloatingWhatsapp from '@/components/FloatingWhatsapp';
 import GoogleReviewsWidget from '@/components/GoogleReviewsWidget';
 import { getSiteSettings } from '@/lib/settings';
+import { getWhatsappUrl } from '@/lib/whatsapp';
 
 export const metadata = {
   title: 'Links da Bio | Marina Falcão Psicóloga',
@@ -37,9 +38,7 @@ export default async function BioLinksPage() {
     getSiteSettings(),
   ]);
 
-  const whatsappNumber = settings.whatsapp_number || '5516994244626';
-  const whatsappMessage = encodeURIComponent(settings.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!');
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+  const whatsappUrl = getWhatsappUrl(settings.whatsapp_number, settings.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!');
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-warm-100 via-warm-50 to-sage-50 text-slate-800 flex flex-col font-sans">

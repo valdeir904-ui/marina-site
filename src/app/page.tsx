@@ -7,6 +7,7 @@ export const revalidate = 60; // Cache page for 60 seconds (ISR) to fix slow TTF
 
 import FloatingWhatsapp from '@/components/FloatingWhatsapp';
 import { getSiteSettings } from '@/lib/settings';
+import { getWhatsappUrl } from '@/lib/whatsapp';
 import FaqAccordion from '@/components/FaqAccordion';
 import StepTimeline from '@/components/StepTimeline';
 import GoogleReviewsWidget from '@/components/GoogleReviewsWidget';
@@ -118,18 +119,18 @@ export default async function HomePage() {
   const settings = await getSiteSettings();
   const latestPosts = await getFeaturedPosts();
 
-  const whatsappNumber = settings.whatsapp_number || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516994244626';
+  const whatsappNumber = settings.whatsapp_number;
   const heroWaMessage = 'Olá, Marina! Gostaria de saber mais sobre as sessões de terapia e agendar uma consulta.';
-  const heroWaUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(heroWaMessage)}`;
+  const heroWaUrl = getWhatsappUrl(whatsappNumber, heroWaMessage);
 
   const sobreWaMessage = 'Olá, Marina! Gostaria de agendar uma sessão e iniciar meu processo terapêutico.';
-  const sobreWaUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(sobreWaMessage)}`;
+  const sobreWaUrl = getWhatsappUrl(whatsappNumber, sobreWaMessage);
 
   const citaWaMessage = 'Olá, Marina! Gostaria de resgatar o sentido de viver com presença. Podemos agendar uma consulta?';
-  const citaWaUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(citaWaMessage)}`;
+  const citaWaUrl = getWhatsappUrl(whatsappNumber, citaWaMessage);
 
   const ctaWaMessage = 'Olá, Marina! Vim pelo site e gostaria de agendar uma sessão on-line.';
-  const ctaWaUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(ctaWaMessage)}`;
+  const ctaWaUrl = getWhatsappUrl(whatsappNumber, ctaWaMessage);
 
   return (
     <div className="min-h-screen bg-warm-50 text-slate-800 flex flex-col font-sans overflow-x-hidden">

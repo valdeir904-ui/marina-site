@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { MessageCircle, X } from 'lucide-react';
+import { getWhatsappUrl } from '@/lib/whatsapp';
 
 interface FloatingWhatsappProps {
   whatsappNumber?: string;
@@ -10,15 +11,14 @@ interface FloatingWhatsappProps {
 }
 
 export default function FloatingWhatsapp({
-  whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5516994244626',
-  whatsappMessage = process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE || 'Olá, Marina! Gostaria de saber mais sobre as sessões de terapia e agendar uma consulta.',
+  whatsappNumber,
+  whatsappMessage = 'Olá, Marina! Gostaria de saber mais sobre as sessões de terapia e agendar uma consulta.',
   avatarUrl = '/images/marina-avatar.jpg',
 }: FloatingWhatsappProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
 
-  const message = encodeURIComponent(whatsappMessage);
-  const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${message}`;
+  const whatsappUrl = getWhatsappUrl(whatsappNumber, whatsappMessage);
 
   useEffect(() => {
     const isMobile = window.innerWidth < 768;

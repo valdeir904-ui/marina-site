@@ -16,7 +16,10 @@ export async function GET() {
     // 4: Redes sociais / Instagram
     await query("UPDATE posts SET image_url = '/images/blog-redes-sociais.png' WHERE slug LIKE '%instagram%' OR slug LIKE '%redes-sociais%'");
 
-    return NextResponse.json({ success: true, message: 'Imagens atualizadas no banco de produção!' });
+    // 5: WhatsApp Number
+    await query("UPDATE settings SET value = '5516994244626' WHERE key = 'whatsapp_number'");
+
+    return NextResponse.json({ success: true, message: 'Imagens e configurações atualizadas no banco de produção!' });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
