@@ -197,15 +197,15 @@ export default async function HomePage() {
                   <div className="absolute -inset-2 bg-gradient-to-tr from-brand-200/50 to-sage-200/50 rounded-[3rem] blur-2xl -z-10"></div>
                   
                   <div className="bg-white/80 backdrop-blur-xl rounded-[2rem] border border-white shadow-2xl overflow-hidden p-5 sm:p-6 space-y-5">
-                    <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-tr from-brand-200 via-warm-100 to-sage-200 shadow-inner group">
+                    <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-tr from-brand-200 via-warm-100 to-sage-200 shadow-inner group">
                       <Image 
-                        src="/images/marina-profile.jpg" 
+                        src="/images/marina-hero.jpg" 
                         alt="Marina Falcão"
                         fill
                         priority
                         fetchPriority="high"
                         sizes="(max-width: 768px) 100vw, 400px"
-                        className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                        className="object-cover object-[center_32%] transition-transform duration-700 ease-out group-hover:scale-105"
                       />
                     </div>
                     

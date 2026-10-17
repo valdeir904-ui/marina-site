@@ -13,16 +13,16 @@ export default function AboutSection({ whatsappUrl }: AboutSectionProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           
           {/* Imagem (Esquerda) */}
-          <Reveal animation="slide-right" className="relative order-2 lg:order-1">
-            <div className="relative w-full aspect-[4/5] max-w-md mx-auto lg:max-w-none rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
+          <Reveal animation="slide-right" className="relative order-2 lg:order-1 flex justify-center">
+            <div className="relative w-full aspect-[4/5] max-w-sm sm:max-w-md lg:max-w-[440px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
               <Image 
-                src="/images/marina-profile.jpg" 
+                src="/images/marina-sobre.jpg" 
                 alt="Psicóloga Marina Falcão" 
                 fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-top hover:scale-105 transition-transform duration-1000"
+                sizes="(max-width: 1024px) 100vw, 440px"
+                className="object-cover object-[center_30%] scale-[1.3] hover:scale-[1.35] transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-brand-900/10 mix-blend-overlay"></div>
+              <div className="absolute inset-0 bg-brand-900/10 mix-blend-overlay pointer-events-none"></div>
             </div>
             
             {/* Decoração sutil */}
