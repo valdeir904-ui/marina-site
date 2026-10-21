@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { trackWhatsappConversion } from '@/lib/tracking';
 
 export default function AnalyticsTracker() {
   const pathname = usePathname();
@@ -39,6 +40,7 @@ export default function AnalyticsTracker() {
       
       if (link && (link.href.includes('wa.me') || link.href.includes('whatsapp.com'))) {
         trackEvent('conversion');
+        trackWhatsappConversion();
       }
     };
 
