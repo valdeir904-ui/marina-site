@@ -20,6 +20,7 @@ export async function getSiteSettings(): Promise<Record<string, string>> {
       instagram_url: settingsObj.instagram_url || 'https://www.instagram.com/psimarinafalcao/',
       doctoralia_url: settingsObj.doctoralia_url || 'https://www.doctoralia.com.br',
       google_reviews_url: settingsObj.google_reviews_url || '',
+      phone: settingsObj.phone || '(16) 99424-4626',
       ...settingsObj
     };
   } catch (error) {
@@ -31,7 +32,8 @@ export async function getSiteSettings(): Promise<Record<string, string>> {
       address: 'Atendimento on-line para todo o Brasil',
       instagram_url: 'https://www.instagram.com/psimarinafalcao/',
       doctoralia_url: 'https://www.doctoralia.com.br',
-      google_reviews_url: ''
+      google_reviews_url: '',
+      phone: '(16) 99424-4626'
     };
   }
 }

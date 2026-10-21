@@ -11,7 +11,8 @@ const settings = [
   ['crp', 'CRP 06/162899'],
   ['address', 'Atendimento presencial em Ribeirão Preto - SP e on-line para todo o Brasil'],
   ['doctoralia_url', 'https://www.doctoralia.com.br/marina-falcao/psicologo/ribeirao-preto'],
-  ['google_reviews_url', '']
+  ['google_reviews_url', ''],
+  ['phone', '(16) 99424-4626']
 ];
 
 db.serialize(() => {

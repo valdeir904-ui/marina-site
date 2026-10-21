@@ -87,7 +87,14 @@ export default function Footer({ settings = {} }: FooterProps) {
             </div>
             <div className="flex items-center gap-3 text-sm text-slate-400">
               <Phone className="w-5 h-5 text-brand-400 shrink-0" />
-              <span>{settings.phone || '(16) 99771-2697'}</span>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-slate-200 transition-colors"
+              >
+                {settings.phone || '(16) 99424-4626'}
+              </a>
             </div>
             <div className="pt-2 flex items-center gap-3 text-xs text-slate-500">
               <Lock className="w-4 h-4" />
