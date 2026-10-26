@@ -70,8 +70,8 @@ export default function AboutSection({ onlineOnly = false }: AboutSectionProps) 
                     <p className="text-2xl sm:text-3xl font-serif text-brand-700 font-bold mb-1">100%</p>
                     <p className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">On-line</p>
                   </div>
-                  <div className="bg-warm-50 p-4 rounded-2xl border border-warm-200 text-center col-span-2 sm:col-span-1">
-                    <p className="text-2xl sm:text-3xl font-serif text-brand-700 font-bold mb-1">CRP 06</p>
+                  <div className="bg-warm-50 p-4 rounded-2xl border border-warm-200 text-center col-span-2 sm:col-span-1 flex flex-col justify-center">
+                    <p className="text-xl sm:text-2xl font-serif text-brand-700 font-bold mb-1">CRP 06/162899</p>
                     <p className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">Atuação Ética</p>
                   </div>
                 </div>
@@ -117,6 +117,9 @@ export default function AboutSection({ onlineOnly = false }: AboutSectionProps) 
                   Prazer, sou a <br className="hidden sm:block" />
                   <span className="text-brand-700">Marina Falcão</span>
                 </h2>
+                <p className="text-xs font-bold text-brand-600 uppercase tracking-wider">
+                  Psicóloga Clínica • CRP 06/162899
+                </p>
               </div>
             </Reveal>
 
@@ -135,14 +138,18 @@ export default function AboutSection({ onlineOnly = false }: AboutSectionProps) 
             </Reveal>
 
             <Reveal animation="slide-left" delay={200}>
-              <div className="pt-6 grid grid-cols-2 gap-4">
-                <div className="bg-warm-50/80 p-5 rounded-2xl border border-warm-200">
-                  <p className="text-4xl font-serif text-brand-700 mb-2">+1000</p>
+              <div className="pt-6 grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div className="bg-warm-50/80 p-5 rounded-2xl border border-warm-200 text-center">
+                  <p className="text-3xl sm:text-4xl font-serif text-brand-700 mb-2">+1000</p>
                   <p className="text-xs font-bold text-slate-700 uppercase tracking-widest">Sessões Realizadas</p>
                 </div>
-                <div className="bg-warm-50/80 p-5 rounded-2xl border border-warm-200">
-                  <p className="text-4xl font-serif text-brand-700 mb-2">100%</p>
+                <div className="bg-warm-50/80 p-5 rounded-2xl border border-warm-200 text-center">
+                  <p className="text-3xl sm:text-4xl font-serif text-brand-700 mb-2">100%</p>
                   <p className="text-xs font-bold text-slate-700 uppercase tracking-widest">Atendimento On-line</p>
+                </div>
+                <div className="bg-warm-50/80 p-5 rounded-2xl border border-warm-200 text-center col-span-2 sm:col-span-1 flex flex-col justify-center">
+                  <p className="text-xl sm:text-2xl font-serif text-brand-700 font-bold mb-2">CRP 06/162899</p>
+                  <p className="text-xs font-bold text-slate-700 uppercase tracking-widest">Atuação Ética</p>
                 </div>
               </div>
             </Reveal>
