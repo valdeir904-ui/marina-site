@@ -2,23 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { Star, ExternalLink } from 'lucide-react';
-
-interface Review {
-  author_name: string;
-  profile_photo_url?: string;
-  rating: number;
-  relative_time_description: string;
-  text: string;
-  source?: string;
-}
-
-interface GoogleReviewsData {
-  rating: number;
-  user_ratings_total: number;
-  google_url: string;
-  reviews: Review[];
-  source?: string;
-}
+import { GoogleReviewsData } from '@/lib/reviews';
 
 function GoogleLogo({ className }: { className?: string }) {
   return (
@@ -64,8 +48,8 @@ function useDraggableScroll(dataLoaded: boolean) {
 
     const onMouseDown = (e: MouseEvent) => {
       isDown = true;
-      slider.style.scrollBehavior = 'auto'; // Disable smooth scroll while dragging
-      slider.style.scrollSnapType = 'none'; // Disable snap while dragging
+      slider.style.scrollBehavior = 'auto';
+      slider.style.scrollSnapType = 'none';
       slider.classList.add('cursor-grabbing');
       startX = e.pageX - slider.offsetLeft;
       scrollLeft = slider.scrollLeft;
@@ -86,7 +70,7 @@ function useDraggableScroll(dataLoaded: boolean) {
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 2; // Scroll-fast
+      const walk = (x - startX) * 2;
       slider.scrollLeft = scrollLeft - walk;
     };
 
@@ -96,7 +80,7 @@ function useDraggableScroll(dataLoaded: boolean) {
     slider.addEventListener('mousemove', onMouseMove);
 
     let animationFrameId: number;
-    const speed = 0.5; // pixels per frame
+    const speed = 0.5;
 
     slider.addEventListener('mouseenter', () => {
       slider.dataset.hovered = 'true';
@@ -110,14 +94,14 @@ function useDraggableScroll(dataLoaded: boolean) {
     slider.addEventListener('touchend', () => {
       setTimeout(() => {
         slider.dataset.hovered = 'false';
-      }, 1500); // pause a bit after touch
+      }, 1500);
     });
 
     let accumulatedScroll = 0;
 
     const loop = () => {
       if (!isDown && slider.dataset.hovered !== 'true') {
-        slider.style.scrollBehavior = 'auto'; // Must be auto for 1px increments
+        slider.style.scrollBehavior = 'auto';
         
         accumulatedScroll += speed;
         if (accumulatedScroll >= 1) {
@@ -125,7 +109,6 @@ function useDraggableScroll(dataLoaded: boolean) {
           accumulatedScroll -= Math.floor(accumulatedScroll);
         }
         
-        // If we scrolled past half the content (since it's duplicated), reset to start seamlessly
         if (slider.scrollLeft >= slider.scrollWidth / 2) {
           slider.scrollLeft = 0;
         }
@@ -147,9 +130,14 @@ function useDraggableScroll(dataLoaded: boolean) {
   return ref;
 }
 
-export default function GoogleReviewsWidget({ compact = false }: { compact?: boolean }) {
-  const [data, setData] = useState<GoogleReviewsData | null>(null);
-  const [loading, setLoading] = useState(true);
+interface GoogleReviewsWidgetProps {
+  compact?: boolean;
+  initialData?: GoogleReviewsData;
+}
+
+export default function GoogleReviewsWidget({ compact = false, initialData }: GoogleReviewsWidgetProps) {
+  const [data, setData] = useState<GoogleReviewsData | null>(initialData || null);
+  const [loading, setLoading] = useState(!initialData);
   const [expandedIndices, setExpandedIndices] = useState<Set<number>>(new Set());
   const scrollRefCompact = useDraggableScroll(!!data);
   const scrollRefFull = useDraggableScroll(!!data);
@@ -164,6 +152,8 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
   };
 
   useEffect(() => {
+    if (initialData) return;
+
     async function fetchReviews() {
       try {
         const res = await fetch('/api/google-reviews');
@@ -173,9 +163,8 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
           return;
         }
         const json = await res.json();
-        // Embaralha as avaliações e duplica para efeito infinito
         if (json.reviews) {
-          let shuffled = json.reviews.sort(() => Math.random() - 0.5);
+          const shuffled = json.reviews.sort(() => Math.random() - 0.5);
           json.reviews = [...shuffled, ...shuffled, ...shuffled];
         }
         setData(json);
@@ -186,9 +175,9 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
       }
     }
     fetchReviews();
-  }, []);
+  }, [initialData]);
 
-  if (loading) {
+  if (loading && !data) {
     return (
       <div className="py-8 text-center text-slate-400 text-sm animate-pulse">
         Carregando avaliações...
@@ -199,6 +188,8 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
   if (!data || !data.reviews || data.reviews.length === 0) {
     return null;
   }
+
+  const reviewsList = data.reviews.length <= 4 ? [...data.reviews, ...data.reviews] : data.reviews;
 
   if (compact) {
     return (
@@ -214,76 +205,78 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
           className="flex overflow-x-auto hide-scrollbar gap-4 pb-2 cursor-grab items-stretch px-[12.5vw] sm:px-[calc(50%-130px)]"
           style={{ scrollBehavior: 'auto' }}
         >
-          {data.reviews.map((rev, idx) => {
+          {reviewsList.map((rev, idx) => {
             const isExpanded = expandedIndices.has(idx);
             const isLong = rev.text.length > 130;
             return (
-          <figure 
-            key={idx} 
-            className={`flex flex-col justify-between space-y-6 select-none h-auto transition-all duration-300
-              w-[75vw] sm:w-[260px] shrink-0 bg-white p-5 rounded-2xl border border-warm-200 shadow-sm hover:shadow-md
-            `}
-          >
-            <div className="space-y-4">
-              <div className="flex items-center gap-1 text-amber-400 pointer-events-none">
-                {[...Array(rev.rating || 5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current" />
-                ))}
-              </div>
-              <div className="flex flex-col items-start relative z-10">
-                <blockquote className={`text-slate-700 text-sm sm:text-base leading-relaxed transition-all duration-300 pointer-events-none ${isExpanded ? '' : 'line-clamp-4'}`}>
-                  &ldquo;{rev.text}&rdquo;
-                </blockquote>
-                {isLong && (
-                  <button 
-                    onClick={() => toggleExpand(idx)}
-                    className="text-brand-600 text-xs font-bold mt-2 hover:text-brand-800 transition-colors pointer-events-auto"
-                  >
-                    {isExpanded ? 'Ler menos' : 'Ler mais...'}
-                  </button>
-                )}
-              </div>
-            </div>
-
-            <figcaption className="flex items-center gap-3 pointer-events-none">
-              {rev.profile_photo_url ? (
-                <img
-                  src={rev.profile_photo_url}
-                  alt={rev.author_name}
-                  className="w-9 h-9 rounded-full object-cover border border-warm-200 shrink-0"
-                />
-              ) : (
-                <div className={`w-9 h-9 shrink-0 rounded-full font-semibold flex items-center justify-center text-xs ${
-                  rev.source === 'doctoralia' ? 'bg-[#00e3a4]/20 text-[#00b380]' : 'bg-brand-100 text-brand-700'
-                }`}>
-                  {rev.author_name.charAt(0)}
+              <figure 
+                key={idx} 
+                className="flex flex-col justify-between space-y-6 select-none h-auto transition-all duration-300 w-[75vw] sm:w-[260px] shrink-0 bg-white p-5 rounded-2xl border border-warm-200 shadow-sm hover:shadow-md"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center gap-1 text-amber-400 pointer-events-none">
+                    {[...Array(rev.rating || 5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-current" />
+                    ))}
+                  </div>
+                  <div className="flex flex-col items-start relative z-10">
+                    <blockquote className={`text-slate-700 text-sm sm:text-base leading-relaxed transition-all duration-300 pointer-events-none ${isExpanded ? '' : 'line-clamp-4'}`}>
+                      &ldquo;{rev.text}&rdquo;
+                    </blockquote>
+                    {isLong && (
+                      <button 
+                        onClick={() => toggleExpand(idx)}
+                        className="text-brand-600 text-xs font-bold mt-2 hover:text-brand-800 transition-colors pointer-events-auto"
+                      >
+                        {isExpanded ? 'Ler menos' : 'Ler mais...'}
+                      </button>
+                    )}
+                  </div>
                 </div>
-              )}
-              <div className="overflow-hidden">
-                <span className="font-semibold text-slate-900 text-sm block truncate">{rev.author_name}</span>
-                <span className="text-xs text-slate-500 block truncate">{rev.relative_time_description}</span>
-              </div>
-              <div className="ml-auto flex-shrink-0 opacity-80 pl-2">
-                {rev.source === 'doctoralia' ? <DoctoraliaLogo className="w-6 h-6" /> : <GoogleLogo className="w-6 h-6" />}
-              </div>
-            </figcaption>
-          </figure>
-          )})}
+
+                <figcaption className="flex items-center gap-3 pointer-events-none">
+                  {rev.profile_photo_url ? (
+                    <img
+                      src={rev.profile_photo_url}
+                      alt={rev.author_name}
+                      className="w-9 h-9 rounded-full object-cover border border-warm-200 shrink-0"
+                    />
+                  ) : (
+                    <div className={`w-9 h-9 shrink-0 rounded-full font-semibold flex items-center justify-center text-xs ${
+                      rev.source === 'doctoralia' ? 'bg-[#00e3a4]/20 text-[#00b380]' : 'bg-brand-100 text-brand-700'
+                    }`}>
+                      {rev.author_name.charAt(0)}
+                    </div>
+                  )}
+                  <div className="overflow-hidden">
+                    <span className="font-semibold text-slate-900 text-sm block truncate">{rev.author_name}</span>
+                    <span className="text-xs text-slate-500 block truncate">{rev.relative_time_description}</span>
+                  </div>
+                  <div className="ml-auto flex-shrink-0 opacity-80 pl-2">
+                    {rev.source === 'doctoralia' ? <DoctoraliaLogo className="w-6 h-6" /> : <GoogleLogo className="w-6 h-6" />}
+                  </div>
+                </figcaption>
+              </figure>
+            );
+          })}
         </div>
       </div>
     );
   }
 
+  const ratingFormatted = data.rating ? data.rating.toFixed(1).replace('.', ',') : '5,0';
+  const totalReviews = data.user_ratings_total || 8;
+
   return (
-    <div className="space-y-10">
-      {/* Resumo das avaliações */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pb-8 border-b border-warm-200">
+    <div className="space-y-8">
+      {/* Resumo das avaliações com Google e Doctoralia */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pb-6 border-b border-warm-200">
         <div className="flex items-center gap-4 text-center sm:text-left">
           <GoogleLogo className="w-8 h-8 shrink-0" />
           <DoctoraliaLogo className="w-8 h-8 shrink-0 -ml-2" />
           <div>
             <div className="flex items-center justify-center sm:justify-start gap-2">
-              <span className="font-serif text-2xl text-slate-900">{data.rating.toFixed(1)}</span>
+              <span className="font-serif text-2xl font-bold text-slate-900">{ratingFormatted}</span>
               <div className="flex items-center gap-0.5 text-amber-400">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-current" />
@@ -291,23 +284,23 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
               </div>
             </div>
             <p className="text-sm text-slate-500 mt-0.5">
-              Baseado em {data.user_ratings_total} avaliações (Google e Doctoralia)
+              Nota {ratingFormatted} baseada em {totalReviews} avaliações no Google e na Doctoralia
             </p>
           </div>
         </div>
 
         <a
-          href={data.google_url}
+          href={data.google_url || "https://www.google.com/search?q=Marina+Falc%C3%A3o+Psic%C3%B3loga"}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-brand-700 transition-colors underline decoration-warm-400 underline-offset-4 hover:decoration-brand-400 shrink-0 relative z-10"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-brand-700 transition-colors underline decoration-warm-400 underline-offset-4 hover:decoration-brand-400 shrink-0 relative z-10"
         >
           <span>Ver perfil no Google</span>
           <ExternalLink className="w-3.5 h-3.5" />
         </a>
       </div>
 
-      {/* Depoimentos */}
+      {/* Carrossel de avaliações */}
       <style dangerouslySetInnerHTML={{ __html: `
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -317,68 +310,63 @@ export default function GoogleReviewsWidget({ compact = false }: { compact?: boo
       
       <div 
         ref={scrollRefFull}
-        className={`
-        ${data.reviews.length > 3 
-          ? 'flex overflow-x-auto hide-scrollbar pb-8 gap-4 md:gap-6 cursor-grab items-stretch px-[12.5vw] sm:px-[calc(50%-140px)]' 
-          : 'grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12'}
-      `}
+        className="flex overflow-x-auto hide-scrollbar pb-6 gap-4 md:gap-6 cursor-grab items-stretch px-[5vw] sm:px-[calc(50%-150px)]"
         style={{ scrollBehavior: 'auto' }}
       >
-        {data.reviews.map((rev, idx) => {
+        {reviewsList.map((rev, idx) => {
           const isExpanded = expandedIndices.has(idx);
           const isLong = rev.text.length > 150;
           return (
-          <figure 
-            key={idx} 
-            className={`flex flex-col justify-between space-y-6 select-none h-auto transition-all duration-300
-              ${data.reviews.length > 3 ? 'w-[75vw] sm:w-[280px] shrink-0 bg-white p-6 rounded-2xl border border-warm-200 shadow-sm hover:shadow-md transition-shadow' : ''}
-            `}
-          >
-            <div className="space-y-4">
-              <div className="flex items-center gap-1 text-amber-400 pointer-events-none">
-                {[...Array(rev.rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current" />
-                ))}
-              </div>
-              <div className="flex flex-col items-start relative z-10">
-                <blockquote className={`text-slate-700 text-sm sm:text-base leading-relaxed transition-all duration-300 pointer-events-none ${isExpanded ? '' : 'line-clamp-4'}`}>
-                  &ldquo;{rev.text}&rdquo;
-                </blockquote>
-                {isLong && (
-                  <button 
-                    onClick={() => toggleExpand(idx)}
-                    className="text-brand-600 text-xs font-bold mt-2 hover:text-brand-800 transition-colors pointer-events-auto"
-                  >
-                    {isExpanded ? 'Ler menos' : 'Ler mais...'}
-                  </button>
-                )}
-              </div>
-            </div>
-
-            <figcaption className="flex items-center gap-3 pointer-events-none">
-              {rev.profile_photo_url ? (
-                <img
-                  src={rev.profile_photo_url}
-                  alt={rev.author_name}
-                  className="w-9 h-9 rounded-full object-cover border border-warm-200 shrink-0"
-                />
-              ) : (
-                <div className={`w-9 h-9 shrink-0 rounded-full font-semibold flex items-center justify-center text-xs ${
-                  rev.source === 'doctoralia' ? 'bg-[#00e3a4]/20 text-[#00b380]' : 'bg-brand-100 text-brand-700'
-                }`}>
-                  {rev.author_name.charAt(0)}
+            <figure 
+              key={idx} 
+              className="flex flex-col justify-between space-y-5 select-none h-auto transition-all duration-300 w-[80vw] sm:w-[300px] shrink-0 bg-white p-6 rounded-2xl border border-warm-200 shadow-sm hover:shadow-md"
+            >
+              <div className="space-y-3">
+                <div className="flex items-center gap-1 text-amber-400 pointer-events-none">
+                  {[...Array(rev.rating || 5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-current" />
+                  ))}
                 </div>
-              )}
-              <div className="overflow-hidden">
-                <span className="font-semibold text-slate-900 text-sm block truncate">{rev.author_name}</span>
-                <span className="text-xs text-slate-500 block truncate">{rev.relative_time_description}</span>
+                <div className="flex flex-col items-start relative z-10">
+                  <blockquote className={`text-slate-700 text-sm sm:text-base leading-relaxed transition-all duration-300 pointer-events-none ${isExpanded ? '' : 'line-clamp-4'}`}>
+                    &ldquo;{rev.text}&rdquo;
+                  </blockquote>
+                  {isLong && (
+                    <button 
+                      onClick={() => toggleExpand(idx)}
+                      className="text-brand-600 text-xs font-bold mt-2 hover:text-brand-800 transition-colors pointer-events-auto"
+                    >
+                      {isExpanded ? 'Ler menos' : 'Ler mais...'}
+                    </button>
+                  )}
+                </div>
               </div>
-              <div className="ml-auto flex-shrink-0 opacity-80 pl-2">
-                {rev.source === 'doctoralia' ? <DoctoraliaLogo className="w-6 h-6" /> : <GoogleLogo className="w-6 h-6" />}
-              </div>
-            </figcaption>
-          </figure>
-        )})}
+
+              <figcaption className="flex items-center gap-3 pointer-events-none pt-2 border-t border-warm-100">
+                {rev.profile_photo_url ? (
+                  <img
+                    src={rev.profile_photo_url}
+                    alt={rev.author_name}
+                    className="w-9 h-9 rounded-full object-cover border border-warm-200 shrink-0"
+                  />
+                ) : (
+                  <div className={`w-9 h-9 shrink-0 rounded-full font-semibold flex items-center justify-center text-xs ${
+                    rev.source === 'doctoralia' ? 'bg-[#00e3a4]/20 text-[#00b380]' : 'bg-brand-100 text-brand-700'
+                  }`}>
+                    {rev.author_name.charAt(0)}
+                  </div>
+                )}
+                <div className="overflow-hidden">
+                  <span className="font-semibold text-slate-900 text-sm block truncate">{rev.author_name}</span>
+                  <span className="text-xs text-slate-500 block truncate">{rev.relative_time_description}</span>
+                </div>
+                <div className="ml-auto flex-shrink-0 opacity-80 pl-2">
+                  {rev.source === 'doctoralia' ? <DoctoraliaLogo className="w-6 h-6" /> : <GoogleLogo className="w-6 h-6" />}
+                </div>
+              </figcaption>
+            </figure>
+          );
+        })}
       </div>
     </div>
   );

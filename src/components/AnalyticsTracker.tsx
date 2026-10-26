@@ -3,13 +3,35 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { trackWhatsappConversion } from '@/lib/tracking';
+import { checkAndStoreTrafficSource, isGoogleAdsVisitor, GOOGLE_ADS_MESSAGE } from '@/lib/whatsapp';
 
 export default function AnalyticsTracker() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Ignorar painel admin
+    // Identificar e salvar origem de tráfego do Google Ads imediatamente
+    const isFromAds = checkAndStoreTrafficSource();
+
+    // Ignorar painel admin para analytics
     if (pathname.startsWith('/admin')) return;
+
+    // Se veio do Google Ads, atualiza os links de WhatsApp já presentes no DOM para refletir a mensagem de anúncio
+    if (isFromAds || isGoogleAdsVisitor()) {
+      try {
+        const waLinks = document.querySelectorAll<HTMLAnchorElement>('a[href*="wa.me"], a[href*="whatsapp.com"]');
+        waLinks.forEach((link) => {
+          try {
+            const url = new URL(link.href);
+            url.searchParams.set('text', GOOGLE_ADS_MESSAGE);
+            link.href = url.toString();
+          } catch {
+            // Caso URL seja relativa ou malformada
+          }
+        });
+      } catch {
+        // Silencioso
+      }
+    }
 
     const trackEvent = async (type: 'view' | 'time' | 'conversion') => {
       try {
@@ -18,7 +40,7 @@ export default function AnalyticsTracker() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ type, path: pathname }),
         });
-      } catch (e) {
+      } catch {
         // Silent fail for analytics
       }
     };
@@ -39,6 +61,17 @@ export default function AnalyticsTracker() {
       const link = target.closest('a');
       
       if (link && (link.href.includes('wa.me') || link.href.includes('whatsapp.com'))) {
+        // Garante a mensagem do Google Ads no momento do clique, caso o visitante seja proveniente de anúncio
+        if (isGoogleAdsVisitor()) {
+          try {
+            const url = new URL(link.href);
+            url.searchParams.set('text', GOOGLE_ADS_MESSAGE);
+            link.href = url.toString();
+          } catch {
+            // Silencioso
+          }
+        }
+
         trackEvent('conversion');
         trackWhatsappConversion();
       }

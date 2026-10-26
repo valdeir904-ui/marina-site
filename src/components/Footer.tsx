@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { MapPin, Phone, Lock } from 'lucide-react';
+import { Video, Phone, Lock } from 'lucide-react';
 import { getWhatsappUrl } from '@/lib/whatsapp';
 
 const InstagramIcon = () => (
@@ -21,7 +21,7 @@ export default function Footer({ settings = {} }: FooterProps) {
     <footer className="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-          {/* Col 1: Institutional */}
+          {/* Col 1: Institucional */}
           <div className="md:col-span-1 space-y-4">
             <div>
               <span className="font-serif text-xl text-white block">Marina Falcão</span>
@@ -30,11 +30,11 @@ export default function Footer({ settings = {} }: FooterProps) {
               </span>
             </div>
             <p className="text-sm text-slate-300 leading-relaxed">
-              Escuta clínica guiada pela ciência, sensibilidade e acolhimento. Especialista em Saúde Mental do Trabalhador, Ansiedade, Burnout e Luto.
+              Escuta clínica com ética, sensibilidade e rigor científico. Atendimento on-line para adultos em todo o Brasil e no exterior.
             </p>
           </div>
 
-          {/* Col 2: Navigation */}
+          {/* Col 2: Navegação */}
           <div>
             <h3 className="font-serif text-lg font-semibold text-white mb-4">Navegação</h3>
             <ul className="space-y-2.5 text-sm text-slate-300">
@@ -49,13 +49,23 @@ export default function Footer({ settings = {} }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <Link href="/#abordagens" className="hover:text-brand-300 transition-colors">
-                  Abordagens Teóricas
+                <Link href="/#como-funciona" className="hover:text-brand-300 transition-colors">
+                  Como Funciona
+                </Link>
+              </li>
+              <li>
+                <Link href="/#atendimento" className="hover:text-brand-300 transition-colors">
+                  Atendimento On-line
+                </Link>
+              </li>
+              <li>
+                <Link href="/#faq" className="hover:text-brand-300 transition-colors">
+                  Perguntas Frequentes
                 </Link>
               </li>
               <li>
                 <Link href="/blog" className="hover:text-brand-300 transition-colors">
-                  Blog & Artigos
+                  Blog
                 </Link>
               </li>
               <li>
@@ -66,26 +76,27 @@ export default function Footer({ settings = {} }: FooterProps) {
             </ul>
           </div>
 
-          {/* Col 3: Specialties */}
+          {/* Col 3: Áreas de Atuação */}
           <div>
             <h3 className="font-serif text-lg font-semibold text-white mb-4">Áreas de Atuação</h3>
             <ul className="space-y-2.5 text-sm text-slate-400">
               <li>Ansiedade & Síndrome do Pânico</li>
-              <li>Burnout & Estresse Ocupacional</li>
+              <li>Burnout & Esgotamento Profissional</li>
               <li>Elaboração do Luto & Perdas</li>
-              <li>Questões de Relacionamento e Vínculos Afetivos</li>
-              <li>Psicossomática & Psicogerontologia</li>
+              <li>Relacionamentos & Vínculos Afetivos</li>
+              <li>Depressão & Desânimo</li>
+              <li>Regulação Emocional</li>
             </ul>
           </div>
 
-          {/* Col 4: Contact & Locations */}
+          {/* Col 4: Atendimento 100% on-line */}
           <div className="space-y-3">
-            <h3 className="font-serif text-lg font-semibold text-white mb-4">Atendimentos</h3>
-            <div className="flex items-start gap-3 text-sm text-slate-400">
-              <MapPin className="w-5 h-5 text-brand-600 mt-0.5 shrink-0" />
-              <span>{settings.address || 'Presencial em Ribeirão Preto - SP e On-line para todo o Brasil'} e Exterior.</span>
+            <h3 className="font-serif text-lg font-semibold text-white mb-4">Modalidade</h3>
+            <div className="flex items-start gap-3 text-sm text-slate-300">
+              <Video className="w-5 h-5 text-brand-400 mt-0.5 shrink-0" />
+              <span className="font-medium">Atendimento 100% on-line · Todo o Brasil e exterior</span>
             </div>
-            <div className="flex items-center gap-3 text-sm text-slate-400">
+            <div className="flex items-center gap-3 text-sm text-slate-400 pt-2">
               <Phone className="w-5 h-5 text-brand-400 shrink-0" />
               <a
                 href={whatsappUrl}
@@ -109,7 +120,7 @@ export default function Footer({ settings = {} }: FooterProps) {
           <p>© {currentYear} Psicóloga Marina Falcão • Todos os direitos reservados.</p>
           <div className="flex items-center gap-4 flex-wrap">
             <a
-              href={settings.google_url || "https://www.google.com/search?q=Marina+Falc%C3%A3o+Psic%C3%B3loga+Ribeir%C3%A3o+Preto"}
+              href="https://www.google.com/search?q=Marina+Falc%C3%A3o+Psic%C3%B3loga"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-slate-300"

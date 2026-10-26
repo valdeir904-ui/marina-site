@@ -14,7 +14,8 @@ const InstagramIcon = () => (
 const navLinks = [
   { href: '/#sobre', label: 'Sobre Mim' },
   { href: '/#especialidades', label: 'Especialidades' },
-  { href: '/#abordagens', label: 'Abordagens' },
+  { href: '/#como-funciona', label: 'Como Funciona' },
+  { href: '/#atendimento', label: 'Atendimento On-line' },
   { href: '/blog', label: 'Blog' },
 ];
 
@@ -133,7 +134,7 @@ export default function Header({ settings = {} }: HeaderProps) {
             onClick={() => setMobileMenuOpen(false)}
           >
             <MessageCircle className="w-5 h-5" />
-            <span>Agendar pelo WhatsApp</span>
+            <span>Agendar sessão</span>
           </a>
         </div>
       )}
