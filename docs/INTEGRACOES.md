@@ -1,14 +1,22 @@
-# Documentação de Integrações
+# Documentação de Integrações e Teste A/B
 
-Este documento centraliza as informações sobre integrações externas, rastreamento de anúncios, fluxo de deploy e DNS da landing page da Psicóloga Marina Falcão.
+Este documento centraliza as informações sobre integrações externas, rastreamento de anúncios, fluxo de deploy, teste A/B e páginas da Psicóloga Marina Falcão.
 
 ---
 
-## 1. Atendimento 100% On-line
+## 1. Estrutura de Páginas e Teste A/B
 
-- A psicóloga Marina Falcão realiza atendimento **exclusivamente on-line por videochamada** para adultos em todo o Brasil e no exterior.
-- Não há modalidade presencial nem endereço físico divulgado no site público.
-- Os dados estruturados (Schema.org / JSON-LD) e metadados Open Graph refletem `areaServed: "BR"` e serviço de psicoterapia on-line.
+O site agora possui duas páginas principais para estratégia de tráfego e conversão:
+
+1. **Página Principal (`/`)**:
+   - Landing page institucional completa com apresentação clássica, módulos de aprofundamento (`DeepDiveSections`), fundamentação teórica, carrossel de artigos recentes do blog, avaliações e detalhes do atendimento.
+2. **Página de Conversão para Anúncios (`/psicologaonline`)**:
+   - URL dedicada para campanhas de Google Ads ("psicóloga online", "terapia online").
+   - Foco 100% em tráfego de celular (primeira tela sem rolagem, H1 direto e CTA principal em destaque).
+   - Atendimento 100% on-line (sem menção a cidades físicas ou presencial).
+   - Avaliações de pacientes (Google + Doctoralia) posicionadas no topo logo após o hero, com renderização estática/servidor (SSR).
+   - Seção curta "Atendimento on-line" e FAQ com respostas completas no HTML.
+   - Botões de agendamento padronizados em 4 pontos estratégicos da página.
 
 ---
 
@@ -27,7 +35,7 @@ Quando um visitante acessa o site vindo de uma campanha do Google Ads:
 2. **Persistência**: Essa origem é salva no `sessionStorage` (`marina_traffic_source_google_ads = '1'`), garantindo que continue válida durante toda a navegação interna do visitante pelas páginas do site.
 3. **Mensagem Pré-preenchida**:
    - Para visitantes do Google Ads: `"Olá, Marina! Vi seu anúncio no Google e gostaria de agendar uma sessão."`
-   - Para acessos orgânicos/diretos: `"Olá, Marina! Gostaria de saber mais sobre as sessões de terapia e agendar uma consulta."`
+   - Para acessos orgânicos/diretos: mensagem padrão configurada no site.
 4. **Ponto Central**: A lógica é controlada centralmente em `src/lib/whatsapp.ts` (`isGoogleAdsVisitor()`, `getWhatsappUrl()`) e sincronizada em tempo real com os links da página pelo `src/components/AnalyticsTracker.tsx`.
 
 ### 2.3 Onde está o código
@@ -51,16 +59,6 @@ Quando um visitante acessa o site vindo de uma campanha do Google Ads:
    - Escuta cliques globais em links de WhatsApp (`wa.me` ou `whatsapp.com`), disparando `trackWhatsappConversion()` e `trackEvent('conversion')`.
 5. **`src/app/layout.tsx`**:
    - Carrega o `<GoogleAdsScript />` e `<AnalyticsTracker />` no `RootLayout`.
-
-### 2.4 Como testar a conversão e a mensagem
-1. **Teste da Mensagem do Google Ads**:
-   - Acesse o site com parâmetro de teste: `https://www.marinafalcao.com.br/?gclid=teste123` ou `?utm_source=google&utm_medium=cpc`.
-   - Clique em qualquer botão de agendamento de WhatsApp.
-   - Verifique se a conversa no WhatsApp abre com a mensagem: `"Olá, Marina! Vi seu anúncio no Google e gostaria de agendar uma sessão."`
-2. **Google Tag Assistant**:
-   - Instale a extensão [Tag Assistant Companion](https://tagassistant.google.com/) no Chrome.
-   - Inicie uma sessão de depuração apontando para a URL da landing page.
-   - Clique em qualquer botão de WhatsApp e confirme o evento `conversion` com o `send_to` `AW-18011596440/ftQgCPa48KQdEJjNzIxD`.
 
 ---
 
@@ -88,4 +86,5 @@ O ciclo de vida de atualizações do site segue o seguinte fluxo contínuo:
 ## 4. Gestão de Parâmetros UTM
 
 - As tags e parâmetros UTM (como `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`) são configurados no Google Ads (campo "Sufixo do URL final").
-- A presença de `gclid` ou `utm_source=google&utm_medium=cpc` ativa a mensagem personalizada de anúncio no WhatsApp durante toda a sessão do usuário.
+- Para direcionar tráfego para a página de teste A/B, configure o URL final do anúncio como:
+  `https://www.marinafalcao.com.br/psicologaonline`

@@ -11,19 +11,12 @@ const InstagramIcon = () => (
   </svg>
 );
 
-const navLinks = [
-  { href: '/#sobre', label: 'Sobre Mim' },
-  { href: '/#especialidades', label: 'Especialidades' },
-  { href: '/#como-funciona', label: 'Como Funciona' },
-  { href: '/#atendimento', label: 'Atendimento On-line' },
-  { href: '/blog', label: 'Blog' },
-];
-
 interface HeaderProps {
   settings?: Record<string, string>;
+  isOnlineLanding?: boolean;
 }
 
-export default function Header({ settings = {} }: HeaderProps) {
+export default function Header({ settings = {}, isOnlineLanding = false }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -35,13 +28,28 @@ export default function Header({ settings = {} }: HeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navLinks = isOnlineLanding
+    ? [
+        { href: '/psicologaonline#sobre', label: 'Sobre Mim' },
+        { href: '/psicologaonline#especialidades', label: 'Especialidades' },
+        { href: '/psicologaonline#como-funciona', label: 'Como Funciona' },
+        { href: '/psicologaonline#atendimento', label: 'Atendimento On-line' },
+        { href: '/blog', label: 'Blog' },
+      ]
+    : [
+        { href: '/#sobre', label: 'Sobre Mim' },
+        { href: '/#especialidades', label: 'Especialidades' },
+        { href: '/#abordagens', label: 'Abordagens' },
+        { href: '/blog', label: 'Blog' },
+      ];
+
   const whatsappUrl = getWhatsappUrl(settings.whatsapp_number, settings.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!');
 
   return (
     <header className={`fixed w-full left-0 right-0 top-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-brand-700/95 shadow-md border-b-transparent backdrop-blur-md' : 'bg-transparent border-transparent'}`}>
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand / Logo */}
-        <Link href="/" className="block group">
+        <Link href={isOnlineLanding ? "/psicologaonline" : "/"} className="block group">
           <span className={`font-serif text-xl sm:text-2xl tracking-tight block transition-colors duration-500 ${isScrolled ? 'text-white' : 'text-brand-700'}`}>
             Marina Falcão
           </span>

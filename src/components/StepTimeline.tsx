@@ -1,8 +1,8 @@
 import React from 'react';
 import Reveal from './Reveal';
-import { MessageCircle, CalendarClock, Video, Sprout } from 'lucide-react';
+import { MessageCircle, CalendarClock, HeartHandshake, Sprout, Video } from 'lucide-react';
 
-export default function StepTimeline() {
+export default function StepTimeline({ onlineOnly = false }: { onlineOnly?: boolean }) {
   const steps = [
     {
       number: '01',
@@ -12,26 +12,28 @@ export default function StepTimeline() {
     },
     {
       number: '02',
-      title: 'Agendamento on-line',
-      description: 'Defina o melhor dia e horário para a sua sessão de 50 minutos por videochamada com praticidade.',
-      icon: CalendarClock,
+      title: onlineOnly ? 'Agendamento on-line' : 'Agendamento',
+      description: onlineOnly
+        ? 'Defina o melhor dia e horário para a sua sessão de 50 minutos por videochamada com praticidade.'
+        : 'Escolha a modalidade, o melhor dia e horário para a sua sessão de forma prática e rápida.',
+      icon: onlineOnly ? Video : CalendarClock,
     },
     {
       number: '03',
       title: 'Primeira sessão',
-      description: 'Um espaço seguro de acolhimento e escuta atenta para compreender suas necessidades e traçar metas.',
-      icon: Video,
+      description: 'Um espaço seguro de acolhimento para mapear suas necessidades latentes e traçar metas terapêuticas.',
+      icon: HeartHandshake,
     },
     {
       number: '04',
       title: 'Acompanhamento',
-      description: 'Sessões semanais focadas no autoconhecimento, regulação emocional e melhoria da sua qualidade de vida.',
+      description: 'Sessões semanais focadas no autoconhecimento, na regulação emocional e na melhoria da sua qualidade de vida.',
       icon: Sprout,
     },
   ];
 
   return (
-    <div className="relative max-w-7xl mx-auto py-6">
+    <div className="relative max-w-7xl mx-auto py-8">
       {/* Linha horizontal conectora (apenas em telas grandes) */}
       <div className="hidden lg:block absolute top-[4.5rem] left-[12%] right-[12%] h-px bg-warm-200"></div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Video, Phone, Lock } from 'lucide-react';
+import { MapPin, Video, Phone, Lock } from 'lucide-react';
 import { getWhatsappUrl } from '@/lib/whatsapp';
 
 const InstagramIcon = () => (
@@ -11,9 +11,10 @@ const InstagramIcon = () => (
 
 interface FooterProps {
   settings?: Record<string, string>;
+  onlineOnly?: boolean;
 }
 
-export default function Footer({ settings = {} }: FooterProps) {
+export default function Footer({ settings = {}, onlineOnly = false }: FooterProps) {
   const currentYear = new Date().getFullYear();
   const whatsappUrl = getWhatsappUrl(settings.whatsapp_number, settings.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!');
 
@@ -30,7 +31,9 @@ export default function Footer({ settings = {} }: FooterProps) {
               </span>
             </div>
             <p className="text-sm text-slate-300 leading-relaxed">
-              Escuta clínica com ética, sensibilidade e rigor científico. Atendimento on-line para adultos em todo o Brasil e no exterior.
+              {onlineOnly
+                ? 'Escuta clínica com ética, sensibilidade e rigor científico. Atendimento on-line para adultos em todo o Brasil e no exterior.'
+                : 'Escuta clínica guiada pela ciência, sensibilidade e acolhimento. Especialista em Saúde Mental do Trabalhador, Ansiedade, Burnout e Luto.'}
             </p>
           </div>
 
@@ -39,33 +42,43 @@ export default function Footer({ settings = {} }: FooterProps) {
             <h3 className="font-serif text-lg font-semibold text-white mb-4">Navegação</h3>
             <ul className="space-y-2.5 text-sm text-slate-300">
               <li>
-                <Link href="/#sobre" className="hover:text-brand-300 transition-colors">
+                <Link href={onlineOnly ? "/psicologaonline#sobre" : "/#sobre"} className="hover:text-brand-300 transition-colors">
                   Sobre Mim
                 </Link>
               </li>
               <li>
-                <Link href="/#especialidades" className="hover:text-brand-300 transition-colors">
+                <Link href={onlineOnly ? "/psicologaonline#especialidades" : "/#especialidades"} className="hover:text-brand-300 transition-colors">
                   Especialidades
                 </Link>
               </li>
-              <li>
-                <Link href="/#como-funciona" className="hover:text-brand-300 transition-colors">
-                  Como Funciona
-                </Link>
-              </li>
-              <li>
-                <Link href="/#atendimento" className="hover:text-brand-300 transition-colors">
-                  Atendimento On-line
-                </Link>
-              </li>
-              <li>
-                <Link href="/#faq" className="hover:text-brand-300 transition-colors">
-                  Perguntas Frequentes
-                </Link>
-              </li>
+              {onlineOnly ? (
+                <>
+                  <li>
+                    <Link href="/psicologaonline#como-funciona" className="hover:text-brand-300 transition-colors">
+                      Como Funciona
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/psicologaonline#atendimento" className="hover:text-brand-300 transition-colors">
+                      Atendimento On-line
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/psicologaonline#faq" className="hover:text-brand-300 transition-colors">
+                      Perguntas Frequentes
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <li>
+                  <Link href="/#abordagens" className="hover:text-brand-300 transition-colors">
+                    Abordagens Teóricas
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link href="/blog" className="hover:text-brand-300 transition-colors">
-                  Blog
+                  Blog & Artigos
                 </Link>
               </li>
               <li>
@@ -81,22 +94,30 @@ export default function Footer({ settings = {} }: FooterProps) {
             <h3 className="font-serif text-lg font-semibold text-white mb-4">Áreas de Atuação</h3>
             <ul className="space-y-2.5 text-sm text-slate-400">
               <li>Ansiedade & Síndrome do Pânico</li>
-              <li>Burnout & Esgotamento Profissional</li>
+              <li>Burnout & Estresse Ocupacional</li>
               <li>Elaboração do Luto & Perdas</li>
-              <li>Relacionamentos & Vínculos Afetivos</li>
-              <li>Depressão & Desânimo</li>
-              <li>Regulação Emocional</li>
+              <li>Questões de Relacionamento e Vínculos Afetivos</li>
+              <li>Psicossomática & Psicogerontologia</li>
             </ul>
           </div>
 
-          {/* Col 4: Atendimento 100% on-line */}
+          {/* Col 4: Atendimentos */}
           <div className="space-y-3">
-            <h3 className="font-serif text-lg font-semibold text-white mb-4">Modalidade</h3>
-            <div className="flex items-start gap-3 text-sm text-slate-300">
-              <Video className="w-5 h-5 text-brand-400 mt-0.5 shrink-0" />
-              <span className="font-medium">Atendimento 100% on-line · Todo o Brasil e exterior</span>
-            </div>
-            <div className="flex items-center gap-3 text-sm text-slate-400 pt-2">
+            <h3 className="font-serif text-lg font-semibold text-white mb-4">
+              {onlineOnly ? 'Modalidade' : 'Atendimentos'}
+            </h3>
+            {onlineOnly ? (
+              <div className="flex items-start gap-3 text-sm text-slate-300">
+                <Video className="w-5 h-5 text-brand-400 mt-0.5 shrink-0" />
+                <span className="font-medium">Atendimento 100% on-line · Todo o Brasil e exterior</span>
+              </div>
+            ) : (
+              <div className="flex items-start gap-3 text-sm text-slate-400">
+                <MapPin className="w-5 h-5 text-brand-600 mt-0.5 shrink-0" />
+                <span>{settings.address || 'Presencial em Ribeirão Preto - SP e On-line para todo o Brasil'} e Exterior.</span>
+              </div>
+            )}
+            <div className="flex items-center gap-3 text-sm text-slate-400 pt-1">
               <Phone className="w-5 h-5 text-brand-400 shrink-0" />
               <a
                 href={whatsappUrl}
@@ -120,7 +141,7 @@ export default function Footer({ settings = {} }: FooterProps) {
           <p>© {currentYear} Psicóloga Marina Falcão • Todos os direitos reservados.</p>
           <div className="flex items-center gap-4 flex-wrap">
             <a
-              href="https://www.google.com/search?q=Marina+Falc%C3%A3o+Psic%C3%B3loga"
+              href={onlineOnly ? "https://www.google.com/search?q=Marina+Falc%C3%A3o+Psic%C3%B3loga" : (settings.google_url || "https://www.google.com/search?q=Marina+Falc%C3%A3o+Psic%C3%B3loga+Ribeir%C3%A3o+Preto")}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-slate-300"
