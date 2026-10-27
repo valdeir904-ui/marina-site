@@ -41,7 +41,7 @@ export default function AboutSection({ onlineOnly = false }: AboutSectionProps) 
                     <span className="text-brand-700">Marina Falcão</span>
                   </h2>
                   <p className="text-xs font-bold text-brand-600 uppercase tracking-wider">
-                    Psicóloga Clínica • CRP 06/162899 • Desde 2022
+                    Psicóloga Clínica • CRP 06/162899 • Desde 2020
                   </p>
                 </div>
               </Reveal>
@@ -118,7 +118,7 @@ export default function AboutSection({ onlineOnly = false }: AboutSectionProps) 
                   <span className="text-brand-700">Marina Falcão</span>
                 </h2>
                 <p className="text-xs font-bold text-brand-600 uppercase tracking-wider">
-                  Psicóloga Clínica • CRP 06/162899
+                  Psicóloga Clínica • CRP 06/162899 • Desde 2020
                 </p>
               </div>
             </Reveal>

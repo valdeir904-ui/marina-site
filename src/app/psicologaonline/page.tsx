@@ -185,7 +185,7 @@ export default async function PsicologaOnlinePage() {
                   </span>
                   <span className="text-slate-300 hidden sm:inline">·</span>
                   <span className="bg-white/80 border border-warm-200 px-2.5 py-1 rounded-full">
-                    Desde 2022
+                    Desde 2020
                   </span>
                   <span className="text-slate-300 hidden sm:inline">·</span>
                   <span className="bg-white/80 border border-warm-200 px-2.5 py-1 rounded-full">
