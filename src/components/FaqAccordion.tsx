@@ -38,6 +38,21 @@ const faqsClassic: FaqItem[] = [
 
 const faqsOnline: FaqItem[] = [
   {
+    question: 'O atendimento é presencial ou on-line?',
+    answer:
+      'Os dois. Presencial no Centro de Ribeirão Preto e on-line por videochamada para todo o Brasil e o exterior. Você escolhe o formato ao agendar.',
+  },
+  {
+    question: 'Onde fica o consultório?',
+    answer:
+      'Rua Bernardino de Campos, 1001, sala 310, Edifício Fortes Guimarães, Centro de Ribeirão Preto.',
+  },
+  {
+    question: 'Tem estacionamento?',
+    answer:
+      'Há estacionamentos pagos nas proximidades do edifício.',
+  },
+  {
     question: 'Como funciona a primeira sessão?',
     answer:
       'A primeira sessão é um momento de acolhimento e escuta atenta. Nela, conversamos sobre suas principais queixas, sua história e o que você busca com a terapia. É o espaço para você se sentir à vontade, tirar todas as suas dúvidas e traçarmos juntos os objetivos do seu processo.',

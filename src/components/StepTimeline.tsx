@@ -12,11 +12,11 @@ export default function StepTimeline({ onlineOnly = false }: { onlineOnly?: bool
     },
     {
       number: '02',
-      title: onlineOnly ? 'Agendamento on-line' : 'Agendamento',
+      title: 'Agendamento',
       description: onlineOnly
-        ? 'Defina o melhor dia e horário para a sua sessão de 50 minutos por videochamada com praticidade.'
+        ? 'Escolha a modalidade (presencial ou on-line), o melhor dia e horário para a sua sessão de 50 minutos.'
         : 'Escolha a modalidade, o melhor dia e horário para a sua sessão de forma prática e rápida.',
-      icon: onlineOnly ? Video : CalendarClock,
+      icon: CalendarClock,
     },
     {
       number: '03',

@@ -32,7 +32,7 @@ export default function Footer({ settings = {}, onlineOnly = false }: FooterProp
             </div>
             <p className="text-sm text-slate-300 leading-relaxed">
               {onlineOnly
-                ? 'Escuta clínica com ética, sensibilidade e rigor científico. Atendimento on-line para adultos em todo o Brasil e no exterior.'
+                ? 'Escuta clínica com ética, sensibilidade e rigor científico. Atendimento presencial no Centro de Ribeirão Preto e on-line para adultos em todo o Brasil e no exterior.'
                 : 'Escuta clínica guiada pela ciência, sensibilidade e acolhimento. Especialista em Saúde Mental do Trabalhador, Ansiedade, Burnout e Luto.'}
             </p>
           </div>
@@ -56,6 +56,11 @@ export default function Footer({ settings = {}, onlineOnly = false }: FooterProp
                   <li>
                     <Link href="/psicologaonline#como-funciona" className="hover:text-brand-300 transition-colors">
                       Como Funciona
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/psicologaonline#presencial" className="hover:text-brand-300 transition-colors">
+                      Atendimento Presencial
                     </Link>
                   </li>
                   <li>
@@ -104,12 +109,21 @@ export default function Footer({ settings = {}, onlineOnly = false }: FooterProp
           {/* Col 4: Atendimentos */}
           <div className="space-y-3">
             <h3 className="font-serif text-lg font-semibold text-white mb-4">
-              {onlineOnly ? 'Modalidade' : 'Atendimentos'}
+              Atendimentos
             </h3>
             {onlineOnly ? (
-              <div className="flex items-start gap-3 text-sm text-slate-300">
-                <Video className="w-5 h-5 text-brand-400 mt-0.5 shrink-0" />
-                <span className="font-medium">Atendimento 100% on-line · Todo o Brasil e exterior</span>
+              <div className="space-y-2 text-sm text-slate-300">
+                <div className="flex items-start gap-2.5">
+                  <MapPin className="w-5 h-5 text-brand-400 mt-0.5 shrink-0" />
+                  <div>
+                    <span className="font-medium text-white block">
+                      Presencial em Ribeirão Preto (Centro) · On-line para todo o Brasil e exterior
+                    </span>
+                    <span className="text-xs text-slate-400 block mt-1">
+                      Rua Bernardino de Campos, 1001, sala 310 – Edifício Fortes Guimarães – Centro – Ribeirão Preto/SP – CEP 14015-130
+                    </span>
+                  </div>
+                </div>
               </div>
             ) : (
               <div className="flex items-start gap-3 text-sm text-slate-400">

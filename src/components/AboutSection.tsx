@@ -19,7 +19,7 @@ export default function AboutSection({ onlineOnly = false }: AboutSectionProps) 
               <div className="relative w-full aspect-[4/5] max-w-sm sm:max-w-md lg:max-w-[420px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
                 <Image 
                   src="/images/marina-sobre.jpg" 
-                  alt="Psicóloga Marina Falcão - Atendimento On-line" 
+                  alt="Psicóloga Marina Falcão - Atendimento Presencial e On-line" 
                   fill
                   sizes="(max-width: 1024px) 100vw, 420px"
                   className="object-cover object-[center_30%] scale-[1.25] hover:scale-[1.3] transition-transform duration-700 ease-out"
@@ -41,7 +41,7 @@ export default function AboutSection({ onlineOnly = false }: AboutSectionProps) 
                     <span className="text-brand-700">Marina Falcão</span>
                   </h2>
                   <p className="text-xs font-bold text-brand-600 uppercase tracking-wider">
-                    Psicóloga Clínica • CRP 06/162899 • Desde 2020
+                    Psicóloga Clínica • CRP 06/162899 • Desde 2022
                   </p>
                 </div>
               </Reveal>
@@ -67,8 +67,8 @@ export default function AboutSection({ onlineOnly = false }: AboutSectionProps) 
                     <p className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">Sessões Realizadas</p>
                   </div>
                   <div className="bg-warm-50 p-4 rounded-2xl border border-warm-200 text-center">
-                    <p className="text-2xl sm:text-3xl font-serif text-brand-700 font-bold mb-1">100%</p>
-                    <p className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">On-line</p>
+                    <p className="text-xl sm:text-2xl font-serif text-brand-700 font-bold mb-1">Presencial & On-line</p>
+                    <p className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">Modalidades</p>
                   </div>
                   <div className="bg-warm-50 p-4 rounded-2xl border border-warm-200 text-center col-span-2 sm:col-span-1 flex flex-col justify-center">
                     <p className="text-xl sm:text-2xl font-serif text-brand-700 font-bold mb-1">CRP 06/162899</p>

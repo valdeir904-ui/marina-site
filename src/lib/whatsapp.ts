@@ -2,6 +2,9 @@ export const GOOGLE_ADS_STORAGE_KEY = 'marina_traffic_source_google_ads';
 export const GOOGLE_ADS_MESSAGE = 'Olá, Marina! Vi seu anúncio no Google e gostaria de agendar uma sessão.';
 export const DEFAULT_WHATSAPP_MESSAGE = 'Olá, Marina! Gostaria de saber mais sobre as sessões de terapia e agendar uma consulta.';
 
+export const GOOGLE_ADS_PRESENCIAL_MESSAGE = 'Olá, Marina! Vi seu anúncio no Google e gostaria de agendar uma sessão presencial em Ribeirão Preto.';
+export const DEFAULT_PRESENCIAL_MESSAGE = 'Olá, Marina! Gostaria de agendar uma sessão presencial em Ribeirão Preto.';
+
 export function checkAndStoreTrafficSource(): boolean {
   if (typeof window === 'undefined') return false;
   try {
@@ -42,16 +45,21 @@ export function formatWhatsappNumber(phone?: string): string {
   return digits;
 }
 
-export function getWhatsappUrl(phone?: string, message?: string): string {
+export interface WhatsappUrlOptions {
+  presencial?: boolean;
+}
+
+export function getWhatsappUrl(phone?: string, message?: string, options?: WhatsappUrlOptions): string {
   const cleanNumber = formatWhatsappNumber(phone);
+  const isPresencial = options?.presencial ?? false;
   
   // Limpa caracteres inválidos ou corrompidos que possam quebrar a URL do WhatsApp
   let cleanMsg = (message || '').replace(/\uFFFD/g, '').trim();
   
   if (isGoogleAdsVisitor()) {
-    cleanMsg = GOOGLE_ADS_MESSAGE;
+    cleanMsg = isPresencial ? GOOGLE_ADS_PRESENCIAL_MESSAGE : GOOGLE_ADS_MESSAGE;
   } else if (!cleanMsg) {
-    cleanMsg = DEFAULT_WHATSAPP_MESSAGE;
+    cleanMsg = isPresencial ? DEFAULT_PRESENCIAL_MESSAGE : DEFAULT_WHATSAPP_MESSAGE;
   }
 
   const text = encodeURIComponent(cleanMsg);

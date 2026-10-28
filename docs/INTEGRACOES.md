@@ -11,12 +11,13 @@ O site agora possui duas páginas principais para estratégia de tráfego e conv
 1. **Página Principal (`/`)**:
    - Landing page institucional completa com apresentação clássica, módulos de aprofundamento (`DeepDiveSections`), fundamentação teórica, carrossel de artigos recentes do blog, avaliações e detalhes do atendimento.
 2. **Página de Conversão para Anúncios (`/psicologaonline`)**:
-   - URL dedicada para campanhas de Google Ads ("psicóloga online", "terapia online").
-   - Foco 100% em tráfego de celular (primeira tela sem rolagem, H1 direto e CTA principal em destaque).
-   - Atendimento 100% on-line (sem menção a cidades físicas ou presencial).
+   - URL dedicada para campanhas de Google Ads ("psicóloga em ribeirão preto", "sala no centro de ribeirão", "presencial e on-line", "psicóloga online", "terapia online").
+   - Foco em conversão rápida e tráfego mobile (primeira tela sem rolagem, H1 direto e CTA principal visível).
+   - Atendimento presencial no Centro de Ribeirão Preto (sala 310, Edifício Fortes Guimarães) e on-line para todo o Brasil e exterior.
    - Avaliações de pacientes (Google + Doctoralia) posicionadas no topo logo após o hero, com renderização estática/servidor (SSR).
-   - Seção curta "Atendimento on-line" e FAQ com respostas completas no HTML.
-   - Botões de agendamento padronizados em 4 pontos estratégicos da página.
+   - Seção dedicada "Atendimento presencial" com endereço completo, link e mapa interativo do Google Maps.
+   - Seção "Atendimento on-line" ("Prefere on-line? Atendo de qualquer cidade.") e FAQ com respostas completas no HTML.
+   - Botões de agendamento padronizados em pontos estratégicos da página com mensagens específicas.
 
 ---
 
@@ -33,9 +34,14 @@ O site agora possui duas páginas principais para estratégia de tráfego e conv
 Quando um visitante acessa o site vindo de uma campanha do Google Ads:
 1. **Detecção**: Ao carregar a página, o sistema verifica se a URL possui o parâmetro `gclid` ou `utm_source=google` com `utm_medium=cpc`.
 2. **Persistência**: Essa origem é salva no `sessionStorage` (`marina_traffic_source_google_ads = '1'`), garantindo que continue válida durante toda a navegação interna do visitante pelas páginas do site.
-3. **Mensagem Pré-preenchida**:
-   - Para visitantes do Google Ads: `"Olá, Marina! Vi seu anúncio no Google e gostaria de agendar uma sessão."`
-   - Para acessos orgânicos/diretos: mensagem padrão configurada no site.
+3. **Mensagens Pré-preenchidas**:
+   - **Geral / Hero / Flutuante**:
+     - Visitantes do Google Ads: `"Olá, Marina! Vi seu anúncio no Google e gostaria de agendar uma sessão."`
+     - Acessos orgânicos/diretos: `"Olá, Marina! Gostaria de agendar uma consulta de terapia."`
+   - **Botão da Seção Presencial**:
+     - Visitantes do Google Ads: `"Olá, Marina! Vi seu anúncio no Google e gostaria de agendar uma sessão presencial em Ribeirão Preto."`
+     - Acessos orgânicos/diretos: `"Olá, Marina! Gostaria de agendar uma sessão presencial em Ribeirão Preto."`
+   - **Codificação**: Os textos são obrigatoriamente codificados via `encodeURIComponent` (com espaços codificados como `%20`, nunca `+`), garantindo compatibilidade uniforme em celulares (Android/iOS) e navegadores desktop.
 4. **Ponto Central**: A lógica é controlada centralmente em `src/lib/whatsapp.ts` (`isGoogleAdsVisitor()`, `getWhatsappUrl()`) e sincronizada em tempo real com os links da página pelo `src/components/AnalyticsTracker.tsx`.
 
 ### 2.3 Onde está o código

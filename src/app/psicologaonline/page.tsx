@@ -26,15 +26,20 @@ import {
   Clock,
   Globe,
   Lock,
+  MapPin,
+  ExternalLink,
 } from 'lucide-react';
 
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: 'Psicóloga Online Marina Falcão | CRP 06/162899 | Atendimento em todo o Brasil',
+  title: 'Psicóloga em Ribeirão Preto e On-line | Marina Falcão | CRP 06/162899',
   description:
-    'Psicoterapia on-line com a psicóloga Marina Falcão (CRP 06/162899). Sessões de 50 minutos por videochamada, para adultos em todo o Brasil e no exterior. Agende pelo WhatsApp.',
+    'Psicoterapia presencial no Centro de Ribeirão Preto e on-line para todo o Brasil, com a psicóloga Marina Falcão (CRP 06/162899). Sessões de 50 minutos. Agende pelo WhatsApp.',
   keywords: [
+    'Psicóloga em Ribeirão Preto',
+    'Psicóloga Ribeirão Preto',
+    'Psicólogo em Ribeirão Preto',
     'Psicóloga Online',
     'Psicólogo Online',
     'Terapia Online',
@@ -48,9 +53,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Marina Falcão', url: 'https://www.marinafalcao.com.br' }],
   openGraph: {
-    title: 'Psicóloga Online Marina Falcão | CRP 06/162899 | Atendimento em todo o Brasil',
+    title: 'Psicóloga em Ribeirão Preto e On-line | Marina Falcão | CRP 06/162899',
     description:
-      'Psicoterapia on-line com a psicóloga Marina Falcão (CRP 06/162899). Sessões de 50 minutos por videochamada, para adultos em todo o Brasil e no exterior. Agende pelo WhatsApp.',
+      'Psicoterapia presencial no Centro de Ribeirão Preto e on-line para todo o Brasil, com a psicóloga Marina Falcão (CRP 06/162899). Sessões de 50 minutos. Agende pelo WhatsApp.',
     url: 'https://www.marinafalcao.com.br/psicologaonline',
     siteName: 'Psicóloga Marina Falcão',
     locale: 'pt_BR',
@@ -60,20 +65,65 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: 'Psicóloga Online Marina Falcão',
+  '@type': 'Psychologist',
+  '@id': 'https://www.marinafalcao.com.br/psicologaonline#psychologist',
+  name: 'Marina Falcão - Psicóloga em Ribeirão Preto e On-line',
   image: 'https://www.marinafalcao.com.br/images/marina-hero-v2.jpg',
   url: 'https://www.marinafalcao.com.br/psicologaonline',
   telephone: '+5516994244626',
-  areaServed: {
-    '@type': 'Country',
-    name: 'BR',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Rua Bernardino de Campos, 1001, sala 310, Edifício Fortes Guimarães',
+    addressLocality: 'Ribeirão Preto',
+    addressRegion: 'SP',
+    postalCode: '14015-130',
+    addressCountry: 'BR',
   },
-  availableService: {
-    '@type': 'MedicalTherapy',
-    name: 'Psicoterapia On-line',
-    description: 'Atendimento psicológico 100% on-line por videochamada para adultos em todo o Brasil e no exterior.',
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -21.1767,
+    longitude: -47.8103,
   },
+  openingHours: [
+    'Mo-Fr 08:00-20:00',
+    'Sa 08:00-12:00',
+  ],
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '20:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Saturday'],
+      opens: '08:00',
+      closes: '12:00',
+    },
+  ],
+  areaServed: [
+    {
+      '@type': 'City',
+      name: 'Ribeirão Preto',
+    },
+    {
+      '@type': 'Country',
+      name: 'BR',
+    },
+  ],
+  availableService: [
+    {
+      '@type': 'MedicalTherapy',
+      name: 'Psicoterapia Presencial',
+      description: 'Atendimento presencial em sala reservada no Edifício Fortes Guimarães, Centro de Ribeirão Preto/SP.',
+    },
+    {
+      '@type': 'MedicalTherapy',
+      name: 'Psicoterapia On-line',
+      description: 'Atendimento psicológico por videochamada para adultos em todo o Brasil e no exterior.',
+    },
+  ],
   provider: {
     '@type': 'Person',
     name: 'Marina Falcão',
@@ -124,6 +174,8 @@ export default async function PsicologaOnlinePage() {
   const whatsappNumber = settings.whatsapp_number;
   const defaultWaMessage = 'Olá, Marina! Gostaria de agendar uma consulta de terapia.';
   const waUrl = getWhatsappUrl(whatsappNumber, defaultWaMessage);
+  const waPresencialUrl = getWhatsappUrl(whatsappNumber, undefined, { presencial: true });
+  const consultorioPhotoUrl = settings.consultorio_image_url || null;
 
   const ratingFormatted = reviewsData.rating ? reviewsData.rating.toFixed(1).replace('.', ',') : '5,0';
 
@@ -146,15 +198,15 @@ export default async function PsicologaOnlinePage() {
               {/* Coluna de Texto e Ação */}
               <div className="lg:col-span-7 space-y-4 sm:space-y-5 text-center lg:text-left">
                 <div className="inline-flex items-center gap-2 bg-brand-100/70 text-brand-800 text-[11px] sm:text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mx-auto lg:mx-0">
-                  <span>PSICOTERAPIA ON-LINE · TODO O BRASIL</span>
+                  <span>PRESENCIAL EM RIBEIRÃO PRETO E ON-LINE</span>
                 </div>
 
                 <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-[1.18] tracking-tight">
-                  Psicóloga on-line para adultos, por videochamada.
+                  Psicóloga em Ribeirão Preto, presencial e on-line.
                 </h1>
 
                 <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                  Sou Marina Falcão, psicóloga (CRP 06/162899). Atendo adultos em todo o Brasil e no exterior, com escuta acolhedora, ética e sigilo, a partir da Análise do Comportamento.
+                  Sou Marina Falcão, psicóloga (CRP 06/162899). Atendo adultos presencialmente no Centro de Ribeirão Preto e on-line em todo o Brasil e no exterior, com escuta acolhedora, ética e sigilo, a partir da Análise do Comportamento.
                 </p>
 
                 {/* Bloco de Botão Principal + Link Secundário */}
@@ -185,7 +237,7 @@ export default async function PsicologaOnlinePage() {
                   </span>
                   <span className="text-slate-300 hidden sm:inline">·</span>
                   <span className="bg-white/80 border border-warm-200 px-2.5 py-1 rounded-full">
-                    Desde 2020
+                    Centro de Ribeirão Preto
                   </span>
                   <span className="text-slate-300 hidden sm:inline">·</span>
                   <span className="bg-white/80 border border-warm-200 px-2.5 py-1 rounded-full">
@@ -207,7 +259,7 @@ export default async function PsicologaOnlinePage() {
                     <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-tr from-brand-200 via-warm-100 to-sage-200">
                       <Image 
                         src="/images/marina-hero-v2.jpg" 
-                        alt="Marina Falcão - Psicóloga On-line" 
+                        alt="Marina Falcão - Psicóloga em Ribeirão Preto e On-line" 
                         fill
                         priority
                         fetchPriority="high"
@@ -329,8 +381,112 @@ export default async function PsicologaOnlinePage() {
           </div>
         </section>
 
-        {/* 6. NOVA SEÇÃO: ATENDIMENTO ON-LINE */}
-        <section id="atendimento" className="py-16 lg:py-20 bg-warm-100/60 border-b border-warm-200">
+        {/* 6. NOVA SEÇÃO: ATENDIMENTO PRESENCIAL */}
+        <section id="presencial" className="py-16 lg:py-24 bg-warm-100/60 border-b border-warm-200">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+            <Reveal animation="fade-up">
+              <div className="max-w-2xl mx-auto text-center space-y-3">
+                <div className="inline-flex items-center gap-2 text-brand-700 text-xs font-bold tracking-widest uppercase bg-brand-50 border border-brand-200 px-3 py-1 rounded-full">
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>Atendimento Presencial</span>
+                </div>
+                <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
+                  Atendimento presencial no Centro de Ribeirão Preto
+                </h2>
+                <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
+                  As sessões presenciais acontecem em sala reservada, com conforto e sigilo, no Edifício Fortes Guimarães.
+                </p>
+              </div>
+            </Reveal>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+              {/* Card de Informações e Agendamento */}
+              <div className="lg:col-span-6 flex flex-col justify-between bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-warm-200/80 space-y-6">
+                <div className="space-y-6">
+                  {/* Endereço */}
+                  <div className="flex items-start gap-4">
+                    <div className="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center text-brand-700 shrink-0 mt-0.5">
+                      <MapPin className="w-5 h-5" />
+                    </div>
+                    <div className="space-y-1.5 flex-1">
+                      <h3 className="font-serif text-lg font-bold text-slate-900">Endereço</h3>
+                      <p className="text-slate-600 text-sm leading-relaxed">
+                        Rua Bernardino de Campos, 1001, sala 310 – Edifício Fortes Guimarães – Centro – Ribeirão Preto/SP – CEP 14015-130.
+                      </p>
+                      <div className="pt-1">
+                        <a
+                          href="https://www.google.com/maps/search/?api=1&query=Rua+Bernardino+de+Campos+1001+Ribeirao+Preto"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-brand-700 hover:text-brand-800 text-sm font-semibold underline decoration-brand-300 underline-offset-4 hover:decoration-brand-500 transition-colors"
+                        >
+                          <span>Abrir no Google Maps</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Horário */}
+                  <div className="flex items-start gap-4 pt-4 border-t border-warm-100">
+                    <div className="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center text-brand-700 shrink-0 mt-0.5">
+                      <Clock className="w-5 h-5" />
+                    </div>
+                    <div className="space-y-1 flex-1">
+                      <h3 className="font-serif text-lg font-bold text-slate-900">Horário de atendimento</h3>
+                      <p className="text-slate-600 text-sm leading-relaxed">
+                        Segunda a sexta, 8h às 20h · Sábado, 8h às 12h
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Espaço preparado para foto (só exibe se houver imagem configurada) */}
+                  {consultorioPhotoUrl && (
+                    <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-warm-200 mt-4">
+                      <Image
+                        src={consultorioPhotoUrl}
+                        alt="Consultório de psicologia em Ribeirão Preto - Edifício Fortes Guimarães"
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 600px"
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* Botão de Agendamento Presencial */}
+                <div className="pt-4 border-t border-warm-100">
+                  <a
+                    href={waPresencialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-wa-type="presencial"
+                    data-track="cta-presencial"
+                    className="w-full inline-flex items-center justify-center gap-2.5 bg-brand-700 hover:bg-brand-800 text-white font-semibold px-6 py-3.5 rounded-full text-base transition-colors shadow-warm-md hover:shadow-warm-lg"
+                  >
+                    <MessageCircle className="w-5 h-5 shrink-0" />
+                    <span>Agendar sessão presencial</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Mapa do Google Incorporado */}
+              <div className="lg:col-span-6 bg-white rounded-2xl p-2 sm:p-3 shadow-sm border border-warm-200/80 flex flex-col min-h-[280px] sm:min-h-[350px]">
+                <iframe
+                  title="Localização do consultório - Edifício Fortes Guimarães, Ribeirão Preto"
+                  src="https://maps.google.com/maps?q=Rua%20Bernardino%20de%20Campos,%201001,%20Centro,%20Ribeir%C3%A3o%20Preto%20-%20SP&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                  loading="lazy"
+                  className="w-full h-64 sm:h-80 lg:h-full lg:min-h-[360px] rounded-xl border-0"
+                  allowFullScreen={false}
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 7. SEÇÃO: ATENDIMENTO ON-LINE */}
+        <section id="atendimento" className="py-16 lg:py-20 bg-white border-b border-warm-200">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
             <Reveal animation="fade-up">
               <div className="space-y-4">
@@ -339,7 +495,7 @@ export default async function PsicologaOnlinePage() {
                   <span>Atendimento On-line</span>
                 </div>
                 <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
-                  De qualquer cidade, no conforto do seu espaço.
+                  Prefere on-line? Atendo de qualquer cidade.
                 </h2>
                 <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
                   As sessões acontecem por videochamada, com a mesma qualidade e o mesmo sigilo do atendimento presencial. Atendo pessoas em todo o Brasil e brasileiros no exterior, em português.
@@ -349,15 +505,15 @@ export default async function PsicologaOnlinePage() {
 
             {/* Três itens curtos */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-              <div className="bg-white p-5 rounded-2xl border border-warm-200 shadow-sm flex items-center justify-center gap-3">
+              <div className="bg-warm-50/80 p-5 rounded-2xl border border-warm-200 shadow-sm flex items-center justify-center gap-3">
                 <Clock className="w-5 h-5 text-brand-600 shrink-0" />
                 <span className="font-medium text-slate-800 text-sm">Sessões de 50 minutos</span>
               </div>
-              <div className="bg-white p-5 rounded-2xl border border-warm-200 shadow-sm flex items-center justify-center gap-3">
+              <div className="bg-warm-50/80 p-5 rounded-2xl border border-warm-200 shadow-sm flex items-center justify-center gap-3">
                 <Lock className="w-5 h-5 text-brand-600 shrink-0" />
                 <span className="font-medium text-slate-800 text-sm">Videochamada segura</span>
               </div>
-              <div className="bg-white p-5 rounded-2xl border border-warm-200 shadow-sm flex items-center justify-center gap-3">
+              <div className="bg-warm-50/80 p-5 rounded-2xl border border-warm-200 shadow-sm flex items-center justify-center gap-3">
                 <Globe className="w-5 h-5 text-brand-600 shrink-0" />
                 <span className="font-medium text-slate-800 text-sm">Brasil e exterior</span>
               </div>
@@ -365,7 +521,7 @@ export default async function PsicologaOnlinePage() {
           </div>
         </section>
 
-        {/* 7. PERGUNTAS FREQUENTES */}
+        {/* 8. PERGUNTAS FREQUENTES */}
         <section id="faq" className="py-16 lg:py-24 bg-warm-50 border-b border-warm-200">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
             <div className="space-y-3 text-center sm:text-left">
@@ -382,14 +538,14 @@ export default async function PsicologaOnlinePage() {
           </div>
         </section>
 
-        {/* 8. CHAMADA FINAL */}
+        {/* 9. CHAMADA FINAL */}
         <section className="py-16 lg:py-24 bg-brand-700 text-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center space-y-6">
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl leading-tight font-bold">
               Entre o caos e o cuidado, existe um lugar seguro.
             </h2>
             <p className="text-brand-100 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-              Dê o primeiro passo para resgatar seu equilíbrio emocional. Atendimento 100% on-line para todo o Brasil e exterior.
+              Dê o primeiro passo para resgatar seu equilíbrio emocional. Atendimento presencial no Centro de Ribeirão Preto e on-line para todo o Brasil e exterior.
             </p>
             <div className="pt-2">
               <a

@@ -33,7 +33,8 @@ export default function Header({ settings = {}, isOnlineLanding = false }: Heade
         { href: '/psicologaonline#sobre', label: 'Sobre Mim' },
         { href: '/psicologaonline#especialidades', label: 'Especialidades' },
         { href: '/psicologaonline#como-funciona', label: 'Como Funciona' },
-        { href: '/psicologaonline#atendimento', label: 'Atendimento On-line' },
+        { href: '/psicologaonline#presencial', label: 'Presencial' },
+        { href: '/psicologaonline#atendimento', label: 'On-line' },
         { href: '/blog', label: 'Blog' },
       ]
     : [
