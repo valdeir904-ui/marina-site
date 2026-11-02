@@ -197,8 +197,8 @@ export default async function PsicologaOnlinePage() {
       <Header settings={settings} isOnlineLanding={true} />
 
       <main className="flex-grow">
-        {/* 1. HERO - Otimizado para celular (cabe na 1ª tela sem rolar) */}
-        <section className="relative overflow-hidden pt-20 lg:pt-24 pb-12 lg:pb-20">
+        {/* 1. HERO - Limpo, acolhedor e 100% visível na 1ª tela sem rolagem no mobile */}
+        <section className="relative overflow-hidden pt-24 lg:pt-28 pb-10 lg:pb-16 bg-warm-50">
           <div className="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
             <svg 
               className="absolute top-0 right-0 w-[200%] sm:w-[150%] lg:w-[120%] h-full text-brand-200/20 transform origin-top-right" 
@@ -217,7 +217,8 @@ export default async function PsicologaOnlinePage() {
               <path d="M1440 0V900C1200 850 800 550 400 650C200 700 50 600 0 450V0H1440Z" />
             </svg>
           </div>
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-4 sm:pt-6">
+
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
               
               {/* Coluna de Texto e Ação */}
@@ -226,16 +227,16 @@ export default async function PsicologaOnlinePage() {
                   <span>PRESENCIAL EM RIBEIRÃO PRETO E ON-LINE</span>
                 </div>
 
-                <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-[1.18] tracking-tight">
+                <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-[1.2] tracking-tight">
                   Psicóloga em Ribeirão Preto, presencial e on-line.
                 </h1>
 
                 <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                  Sou Marina Falcão, psicóloga (CRP 06/162899). Atendo adultos presencialmente no Centro de Ribeirão Preto e on-line em todo o Brasil e no exterior, com escuta acolhedora, ética e sigilo, a partir da Análise do Comportamento.
+                  Um espaço seguro, ético e acolhedor para cuidar da sua saúde mental, lidar com a ansiedade e atravessar momentos difíceis a partir da Análise do Comportamento.
                 </p>
 
-                {/* Bloco de Botão Principal + Link Secundário */}
-                <div className="pt-1 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4">
+                {/* Bloco de Botão Principal + Microcopy */}
+                <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4">
                   <div className="w-full sm:w-auto flex flex-col items-center lg:items-start">
                     <a
                       href={waUrl}
@@ -253,37 +254,18 @@ export default async function PsicologaOnlinePage() {
                   </div>
 
                   <Link
-                    href="#especialidades"
+                    href="#sobre-marina"
                     className="inline-flex items-center gap-1 text-slate-600 hover:text-brand-700 font-medium text-xs sm:text-sm transition-colors underline decoration-warm-400 underline-offset-4 hover:decoration-brand-400 py-1"
                   >
-                    Conhecer especialidades
+                    Conhecer a Marina ↓
                   </Link>
-                </div>
-
-                {/* Selos Curtos Abaixo do Botão */}
-                <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-1.5 text-xs text-slate-600 font-medium">
-                  <span className="bg-white/80 border border-warm-200 px-2.5 py-1 rounded-full">
-                    CRP 06/162899
-                  </span>
-                  <span className="text-slate-300 hidden sm:inline">·</span>
-                  <span className="bg-white/80 border border-warm-200 px-2.5 py-1 rounded-full">
-                    Centro de Ribeirão Preto
-                  </span>
-                  <span className="text-slate-300 hidden sm:inline">·</span>
-                  <span className="bg-white/80 border border-warm-200 px-2.5 py-1 rounded-full">
-                    Sessões de 50 min
-                  </span>
-                  <span className="text-slate-300 hidden sm:inline">·</span>
-                  <span className="bg-white/80 border border-warm-200 px-2.5 py-1 rounded-full text-amber-700 font-semibold inline-flex items-center gap-1">
-                    ★ {ratingFormatted} no Google
-                  </span>
                 </div>
               </div>
 
-              {/* Coluna de Imagem da Marina */}
-              <div className="lg:col-span-5 relative mt-4 lg:mt-0">
-                <div className="mx-auto w-full max-w-[280px] sm:max-w-[340px]">
-                  <div className="bg-white/95 rounded-[2rem] border border-warm-200/80 shadow-lg overflow-hidden p-4 sm:p-5 space-y-3 sm:space-y-4">
+              {/* Coluna de Imagem da Marina (Visível em telas grandes Desktop) */}
+              <div className="hidden lg:block lg:col-span-5 relative">
+                <div className="mx-auto w-full max-w-[340px]">
+                  <div className="bg-white/95 rounded-[2rem] border border-warm-200/80 shadow-lg overflow-hidden p-5 space-y-4">
                     <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-warm-100">
                       <Image 
                         src="/images/marina-hero-v2.webp" 
@@ -292,21 +274,83 @@ export default async function PsicologaOnlinePage() {
                         priority
                         fetchPriority="high"
                         unoptimized
-                        sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 340px"
+                        sizes="340px"
                         className="object-cover object-[center_20%]"
                       />
                     </div>
                     
                     <div className="text-center pt-1">
-                      <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">Marina Falcão</h2>
+                      <h2 className="font-serif text-2xl font-bold text-slate-900">Marina Falcão</h2>
                       <p className="text-[11px] font-bold text-brand-600 uppercase tracking-wider mt-1">
                         Psicóloga Clínica • CRP 06/162899
                       </p>
+                    </div>
+
+                    {/* Selos no Desktop */}
+                    <div className="pt-2 grid grid-cols-2 gap-2 text-center text-xs">
+                      <div className="bg-warm-50 border border-warm-200 px-2 py-1.5 rounded-xl font-medium text-slate-700">
+                        Centro de Ribeirão
+                      </div>
+                      <div className="bg-warm-50 border border-warm-200 px-2 py-1.5 rounded-xl font-semibold text-amber-700">
+                        ★ {ratingFormatted} no Google
+                      </div>
+                      <div className="bg-warm-50 border border-warm-200 px-2 py-1.5 rounded-xl font-medium text-slate-700">
+                        Sessões de 50 min
+                      </div>
+                      <div className="bg-warm-50 border border-warm-200 px-2 py-1.5 rounded-xl font-medium text-slate-700">
+                        Presencial & On-line
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
+            </div>
+          </div>
+        </section>
+
+        {/* 2. SEÇÃO DE APRESENTAÇÃO NO MOBILE (Aparece logo abaixo do Hero no celular) */}
+        <section id="sobre-marina" className="lg:hidden py-10 bg-white border-y border-warm-200">
+          <div className="max-w-md mx-auto px-4 space-y-6">
+            <div className="bg-warm-50/80 rounded-[2rem] border border-warm-200/80 shadow-sm p-5 space-y-4">
+              <div className="relative w-full aspect-[4/5] max-w-[280px] mx-auto rounded-2xl overflow-hidden bg-warm-100 shadow-inner">
+                <Image 
+                  src="/images/marina-hero-v2.webp" 
+                  alt="Marina Falcão - Psicóloga em Ribeirão Preto e On-line" 
+                  fill
+                  priority
+                  fetchPriority="high"
+                  unoptimized
+                  sizes="280px"
+                  className="object-cover object-[center_20%]"
+                />
+              </div>
+              
+              <div className="text-center space-y-1">
+                <h2 className="font-serif text-2xl font-bold text-slate-900">Marina Falcão</h2>
+                <p className="text-xs font-bold text-brand-700 uppercase tracking-wider">
+                  Psicóloga Clínica • CRP 06/162899
+                </p>
+                <p className="text-xs text-slate-600 pt-1 leading-relaxed">
+                  Atendimentos presenciais no Centro de Ribeirão Preto e on-line para todo o Brasil.
+                </p>
+              </div>
+
+              {/* Selos de Credibilidade no Celular (Logo abaixo da foto da Marina) */}
+              <div className="grid grid-cols-2 gap-2 pt-2 text-center text-xs">
+                <div className="bg-white border border-warm-200 px-2.5 py-2 rounded-xl font-medium text-slate-700 shadow-xs">
+                  CRP 06/162899
+                </div>
+                <div className="bg-white border border-warm-200 px-2.5 py-2 rounded-xl font-semibold text-amber-700 shadow-xs">
+                  ★ {ratingFormatted} no Google
+                </div>
+                <div className="bg-white border border-warm-200 px-2.5 py-2 rounded-xl font-medium text-slate-700 shadow-xs">
+                  Centro de Ribeirão
+                </div>
+                <div className="bg-white border border-warm-200 px-2.5 py-2 rounded-xl font-medium text-slate-700 shadow-xs">
+                  Sessões de 50 min
+                </div>
+              </div>
             </div>
           </div>
         </section>
