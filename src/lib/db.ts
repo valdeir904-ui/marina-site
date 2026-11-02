@@ -174,6 +174,17 @@ export async function initDb() {
           hashedPassword,
         ]);
       }
+
+      // Provisionar usuário Valdeir se não existir (Postgres)
+      const valdeirCheckPg = await pool.query('SELECT id FROM users WHERE email = $1', ['valdeir@marinafalcao.com.br']);
+      if (valdeirCheckPg.rows.length === 0) {
+        const valdeirHash = await bcrypt.hash('ValdeirAdmin2026!', 10);
+        await pool.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3)', [
+          'Valdeir',
+          'valdeir@marinafalcao.com.br',
+          valdeirHash,
+        ]);
+      }
     } else if (driver === 'sqlite') {
       const db = await getSqliteDb();
       await db.exec(`
@@ -226,6 +237,13 @@ export async function initDb() {
         const rawPassword = process.env.ADMIN_PASSWORD || 'admin123456';
         const hashedPassword = await bcrypt.hash(rawPassword, 10);
         await db.run('INSERT INTO users (name, email, password) VALUES (?, ?, ?)', ['Marina Falcão', adminEmail, hashedPassword]);
+      }
+
+      // Provisionar usuário Valdeir se não existir (SQLite)
+      const valdeirUserSqlite = await db.get('SELECT id FROM users WHERE email = ?', ['valdeir@marinafalcao.com.br']);
+      if (!valdeirUserSqlite) {
+        const valdeirHash = await bcrypt.hash('ValdeirAdmin2026!', 10);
+        await db.run('INSERT INTO users (name, email, password) VALUES (?, ?, ?)', ['Valdeir', 'valdeir@marinafalcao.com.br', valdeirHash]);
       }
     } else {
       // MySQL logic
