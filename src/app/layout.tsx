@@ -4,6 +4,7 @@ import './globals.css';
 import SmoothScroll from '@/components/SmoothScroll';
 import AnalyticsTracker from '@/components/AnalyticsTracker';
 import GoogleAdsScript from '@/components/GoogleAdsScript';
+import MicrosoftClarity from '@/components/MicrosoftClarity';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -58,6 +59,7 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${playfair.variable} ${montserrat.variable} ${madefor.variable} overflow-x-hidden`}>
       <body className="min-h-screen bg-warm-50 text-slate-800 font-sans antialiased selection:bg-brand-200 selection:text-brand-900 overflow-x-hidden">
         <GoogleAdsScript />
+        <MicrosoftClarity />
         <AnalyticsTracker />
         {children}
         <SmoothScroll>{null}</SmoothScroll>

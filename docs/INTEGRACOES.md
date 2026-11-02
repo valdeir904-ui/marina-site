@@ -17,7 +17,13 @@ O site agora possui duas páginas principais para estratégia de tráfego e conv
    - Avaliações de pacientes (Google + Doctoralia) posicionadas no topo logo após o hero, com renderização estática/servidor (SSR).
    - Seção dedicada "Atendimento presencial" com endereço completo, link e mapa interativo do Google Maps.
    - Seção "Atendimento on-line" ("Prefere on-line? Atendo de qualquer cidade.") e FAQ com respostas completas no HTML.
-   - Botões de agendamento padronizados em pontos estratégicos da página com mensagens específicas.
+   - Botões de agendamento com menor atrito/compromisso para maximizar a taxa de cliques de visitantes mobile (campanhas de anúncio):
+     - **Hero (topo)**: "Tirar dúvidas no WhatsApp", acompanhado de "Resposta pela própria Marina · Sem compromisso". Visível na 1ª tela sem rolagem no celular.
+     - **Meio da página (Especialidades, Como funciona e Chamada final)**: "Ver horários disponíveis".
+     - **Seção Presencial**: mantido "Agendar sessão presencial".
+     - **Menu (Header)**: mantido "Agendar sessão".
+     - **Botão flutuante**: mantido "Fale comigo no WhatsApp".
+   - Todo e qualquer botão para WhatsApp continua utilizando `wa.me`, o número `5516994244626` e disparando automaticamente a conversão do Google Ads.
 
 ---
 
@@ -94,3 +100,34 @@ O ciclo de vida de atualizações do site segue o seguinte fluxo contínuo:
 - As tags e parâmetros UTM (como `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`) são configurados no Google Ads (campo "Sufixo do URL final").
 - Para direcionar tráfego para a página de teste A/B, configure o URL final do anúncio como:
   `https://www.marinafalcao.com.br/psicologaonline`
+
+---
+
+## 5. Integração com Microsoft Clarity (Mapas de Calor e Gravações de Sessão)
+
+- **Componente**: `src/components/MicrosoftClarity.tsx`
+- **Variável de Ambiente**: `NEXT_PUBLIC_CLARITY_ID`
+  - A variável é inserida nas variáveis de ambiente do projeto na Vercel (sem necessidade de arquivos `.env` locais no repositório).
+  - Caso a variável não esteja configurada ou vazia, o componente não renderiza nada, evitando requisições desnecessárias.
+- **Estratégia de Carregamento**: Utiliza `strategy="lazyOnload"` do Next.js Script, garantindo que o rastreamento comportamental seja inicializado somente após o carregamento interativo crítico da página, sem penalizar o LCP ou TBT móvel.
+- **Localização**: Carregado globalmente em `src/app/layout.tsx`, cobrindo todas as páginas e rotas do domínio.
+
+---
+
+## 6. Otimizações de Velocidade e LCP (Mobile Performance)
+
+Para assegurar LCP abaixo de 2,5 s no celular (PageSpeed / Lighthouse):
+1. **Elemento de LCP Otimizado (Foto do Hero da Marina)**:
+   - Servida em formato moderno WebP (`/images/marina-hero-v2.webp`) e AVIF com compressão de alta qualidade.
+   - Redimensionada de 1470 px para 780 px (largura 2x para telas retina mobile de ~390 px), reduzindo o peso original de 161 KiB para ~38 KiB (~76% de redução).
+   - Renderizada com `priority`, `fetchPriority="high"`, sem `loading="lazy"`, e `sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 340px"`.
+   - `next.config.mjs` configurado com `formats: ['image/avif', 'image/webp']`.
+2. **Fachada Interativa de Mapa (Google Maps Facade)**:
+   - Substituição do `iframe` fixo e pesado do Google Maps por um componente interativo sob demanda (`src/components/GoogleMapsFacade.tsx`).
+   - Evita centenas de KiB de scripts e requisições concorrentes na árvore de rede durante o carregamento inicial. O iframe só é instanciado quando o usuário clica para interagir com o mapa.
+3. **Eliminação de JavaScript Legado**:
+   - Inclusão de `.browserslistrc` com metas modernas (`> 0.3%, not dead, not op_mini all, not IE 11`), eliminando polyfills redundantes gerados pelo build.
+4. **Fontes Otimizadas**:
+   - Restrição dos pesos das fontes do Google no `RootLayout` (`Playfair_Display`, `Montserrat`, `Wix_Madefor_Text`) mantendo `display: 'swap'`.
+5. **Imagens Abaixo da Dobra**:
+   - `loading="lazy"` e dimensões explícitas aplicadas para prevenir Cumulative Layout Shift (CLS).

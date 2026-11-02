@@ -14,6 +14,7 @@ import GoogleReviewsWidget from '@/components/GoogleReviewsWidget';
 import Reveal from '@/components/Reveal';
 import AboutSection from '@/components/AboutSection';
 import HeroWave from '@/components/HeroWave';
+import GoogleMapsFacade from '@/components/GoogleMapsFacade';
 import {
   MessageCircle,
   Brain,
@@ -211,16 +212,21 @@ export default async function PsicologaOnlinePage() {
 
                 {/* Bloco de Botão Principal + Link Secundário */}
                 <div className="pt-1 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4">
-                  <a
-                    href={waUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-track="cta-hero"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-brand-700 hover:bg-brand-800 text-white font-semibold px-6 py-3.5 rounded-full text-base transition-colors shadow-warm-md hover:shadow-warm-lg"
-                  >
-                    <MessageCircle className="w-5 h-5 shrink-0" />
-                    <span>Quero agendar minha primeira sessão</span>
-                  </a>
+                  <div className="w-full sm:w-auto flex flex-col items-center lg:items-start">
+                    <a
+                      href={waUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-track="cta-hero"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-brand-700 hover:bg-brand-800 text-white font-semibold px-6 py-3.5 rounded-full text-base transition-colors shadow-warm-md hover:shadow-warm-lg"
+                    >
+                      <MessageCircle className="w-5 h-5 shrink-0" />
+                      <span>Tirar dúvidas no WhatsApp</span>
+                    </a>
+                    <p className="text-[12px] text-slate-500 font-medium pt-1.5 text-center lg:text-left">
+                      Resposta pela própria Marina · Sem compromisso
+                    </p>
+                  </div>
 
                   <Link
                     href="#especialidades"
@@ -258,12 +264,12 @@ export default async function PsicologaOnlinePage() {
                   <div className="bg-white/85 backdrop-blur-md rounded-[2rem] border border-white shadow-xl overflow-hidden p-4 sm:p-5 space-y-3 sm:space-y-4">
                     <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-tr from-brand-200 via-warm-100 to-sage-200">
                       <Image 
-                        src="/images/marina-hero-v2.jpg" 
+                        src="/images/marina-hero-v2.webp" 
                         alt="Marina Falcão - Psicóloga em Ribeirão Preto e On-line" 
                         fill
                         priority
                         fetchPriority="high"
-                        sizes="(max-width: 768px) 280px, 340px"
+                        sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 340px"
                         className="object-cover object-[center_20%]"
                       />
                     </div>
@@ -342,7 +348,7 @@ export default async function PsicologaOnlinePage() {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-brand-700 hover:bg-brand-800 text-white font-semibold px-8 py-3.5 rounded-full text-base transition-colors shadow-warm-md hover:shadow-warm-lg"
               >
                 <MessageCircle className="w-5 h-5 shrink-0" />
-                <span>Quero agendar minha primeira sessão</span>
+                <span>Ver horários disponíveis</span>
               </a>
             </div>
           </div>
@@ -375,7 +381,7 @@ export default async function PsicologaOnlinePage() {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-brand-700 hover:bg-brand-800 text-white font-semibold px-8 py-3.5 rounded-full text-base transition-colors shadow-warm-md hover:shadow-warm-lg"
               >
                 <MessageCircle className="w-5 h-5 shrink-0" />
-                <span>Quero agendar minha primeira sessão</span>
+                <span>Ver horários disponíveis</span>
               </a>
             </div>
           </div>
@@ -447,6 +453,7 @@ export default async function PsicologaOnlinePage() {
                         src={consultorioPhotoUrl}
                         alt="Consultório de psicologia em Ribeirão Preto - Edifício Fortes Guimarães"
                         fill
+                        loading="lazy"
                         sizes="(max-width: 1024px) 100vw, 600px"
                         className="object-cover"
                       />
@@ -470,16 +477,9 @@ export default async function PsicologaOnlinePage() {
                 </div>
               </div>
 
-              {/* Mapa do Google Incorporado */}
+              {/* Mapa do Google Incorporado / Fachada otimizada */}
               <div className="lg:col-span-6 bg-white rounded-2xl p-2 sm:p-3 shadow-sm border border-warm-200/80 flex flex-col min-h-[280px] sm:min-h-[350px]">
-                <iframe
-                  title="Localização do consultório - Edifício Fortes Guimarães, Ribeirão Preto"
-                  src="https://maps.google.com/maps?q=Rua%20Bernardino%20de%20Campos,%201001,%20Centro,%20Ribeir%C3%A3o%20Preto%20-%20SP&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                  loading="lazy"
-                  className="w-full h-64 sm:h-80 lg:h-full lg:min-h-[360px] rounded-xl border-0"
-                  allowFullScreen={false}
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
+                <GoogleMapsFacade />
               </div>
             </div>
           </div>
@@ -556,7 +556,7 @@ export default async function PsicologaOnlinePage() {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white hover:bg-warm-100 text-brand-700 font-bold px-8 py-4 rounded-full text-base shadow-warm-lg transition-colors"
               >
                 <MessageCircle className="w-5 h-5 shrink-0" />
-                <span>Quero agendar minha primeira sessão</span>
+                <span>Ver horários disponíveis</span>
               </a>
             </div>
           </div>

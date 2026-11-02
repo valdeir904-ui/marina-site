@@ -18,9 +18,10 @@ export default function AboutSection({ onlineOnly = false }: AboutSectionProps) 
             <Reveal animation="slide-right" className="relative order-2 lg:order-1 flex justify-center">
               <div className="relative w-full aspect-[4/5] max-w-sm sm:max-w-md lg:max-w-[420px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
                 <Image 
-                  src="/images/marina-sobre.jpg" 
+                  src="/images/marina-sobre.webp" 
                   alt="Psicóloga Marina Falcão - Atendimento Presencial e On-line" 
                   fill
+                  loading="lazy"
                   sizes="(max-width: 1024px) 100vw, 420px"
                   className="object-cover object-[center_30%] scale-[1.25] hover:scale-[1.3] transition-transform duration-700 ease-out"
                 />
