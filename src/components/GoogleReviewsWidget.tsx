@@ -239,6 +239,10 @@ export default function GoogleReviewsWidget({ compact = false, initialData }: Go
                     <img
                       src={rev.profile_photo_url}
                       alt={rev.author_name}
+                      loading="lazy"
+                      decoding="async"
+                      width={36}
+                      height={36}
                       className="w-9 h-9 rounded-full object-cover border border-warm-200 shrink-0"
                     />
                   ) : (
@@ -347,6 +351,10 @@ export default function GoogleReviewsWidget({ compact = false, initialData }: Go
                   <img
                     src={rev.profile_photo_url}
                     alt={rev.author_name}
+                    loading="lazy"
+                    decoding="async"
+                    width={36}
+                    height={36}
                     className="w-9 h-9 rounded-full object-cover border border-warm-200 shrink-0"
                   />
                 ) : (

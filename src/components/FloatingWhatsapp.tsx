@@ -155,7 +155,7 @@ export default function FloatingWhatsapp({
         rel="noopener noreferrer"
         aria-label="Agendar via WhatsApp"
         onClick={() => setIsOpen(false)}
-        className="flex items-center justify-center w-[60px] h-[60px] bg-[#25D366] text-white rounded-full shadow-[0_4px_14px_rgba(37,211,102,0.4)] hover:bg-[#20bd5a] hover:scale-110 transition-all duration-300 relative group"
+        className="flex items-center justify-center w-[60px] h-[60px] bg-[#25D366] text-white rounded-full shadow-[0_4px_14px_rgba(37,211,102,0.4)] hover:bg-[#20bd5a] hover:scale-110 transition-all duration-300 relative group pulse-ring-cta"
       >
         {/* WhatsApp Logo SVG */}
         <svg viewBox="0 0 24 24" className="w-8 h-8 fill-current" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">

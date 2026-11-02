@@ -114,20 +114,23 @@ O ciclo de vida de atualizações do site segue o seguinte fluxo contínuo:
 
 ---
 
-## 6. Otimizações de Velocidade e LCP (Mobile Performance)
+## 6. Otimizações de Velocidade e Redução do Render Delay de LCP (Mobile Performance)
 
 Para assegurar LCP abaixo de 2,5 s no celular (PageSpeed / Lighthouse):
 1. **Elemento de LCP Otimizado (Foto do Hero da Marina)**:
-   - Servida em formato moderno WebP (`/images/marina-hero-v2.webp`) e AVIF com compressão de alta qualidade.
-   - Redimensionada de 1470 px para 780 px (largura 2x para telas retina mobile de ~390 px), reduzindo o peso original de 161 KiB para ~38 KiB (~76% de redução).
+   - Servida diretamente como asset estático WebP (`/images/marina-hero-v2.webp`) de apenas ~38 KiB com `unoptimized`, garantindo entrega direta em ~35 ms sem latência de processamento serverless.
    - Renderizada com `priority`, `fetchPriority="high"`, sem `loading="lazy"`, e `sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 340px"`.
-   - `next.config.mjs` configurado com `formats: ['image/avif', 'image/webp']`.
-2. **Fachada Interativa de Mapa (Google Maps Facade)**:
-   - Substituição do `iframe` fixo e pesado do Google Maps por um componente interativo sob demanda (`src/components/GoogleMapsFacade.tsx`).
-   - Evita centenas de KiB de scripts e requisições concorrentes na árvore de rede durante o carregamento inicial. O iframe só é instanciado quando o usuário clica para interagir com o mapa.
-3. **Eliminação de JavaScript Legado**:
-   - Inclusão de `.browserslistrc` com metas modernas (`> 0.3%, not dead, not op_mini all, not IE 11`), eliminando polyfills redundantes gerados pelo build.
-4. **Fontes Otimizadas**:
-   - Restrição dos pesos das fontes do Google no `RootLayout` (`Playfair_Display`, `Montserrat`, `Wix_Madefor_Text`) mantendo `display: 'swap'`.
-5. **Imagens Abaixo da Dobra**:
-   - `loading="lazy"` e dimensões explícitas aplicadas para prevenir Cumulative Layout Shift (CLS).
+   - Remoção de filtros pesados de GPU no cartão da foto: substituído `backdrop-blur-md` e `blur-xl` por fundo sólido suave `bg-white/95 border-warm-200/80` e sombra limpa.
+2. **Redução Drástica do Atraso de Renderização (Render Delay)**:
+   - **Fontes**: Remoção completa da família `Wix Madefor Text`. Mantidas estritamente 2 famílias: `Playfair Display` (títulos) e `Montserrat` (textos).
+   - **Preload Focado**: Preload ativado exclusivamente para `Playfair Display` (fonte usada no H1 do Hero). `Montserrat` com `preload: false` para não competir na fila prioritária de rede.
+   - **Remoção de Framer Motion no Hero**: O componente `HeroWave` foi convertido em SVG estático puro, eliminando hooks e o bundle do Framer Motion da renderização inicial da primeira tela.
+   - **Scroll Otimizado**: O pacote `@studio-freight/react-lenis` foi condicionado apenas a viewports desktop (`>= 1024px`), liberando o thread principal e a GPU dos dispositivos móveis para usar a rolagem nativa ultra veloz.
+   - **Remoção de Preloads de Avaliações**: `GoogleReviewsWidget` carregado assincronamente com `next/dynamic`, e tags `<img>` das fotos de avaliadores com `loading="lazy"` e `decoding="async"`, eliminando preloads indesejados no `<head>` e reduzindo o payload de HTML de ~181 KB para ~131 KB.
+3. **Fachada Interativa de Mapa (Google Maps Facade)**:
+   - Substituição do `iframe` fixo e pesado do Google Maps por um componente interativo sob demanda (`src/components/GoogleMapsFacade.tsx`), carregado com `next/dynamic`.
+4. **Identidade Visual dos Botões de WhatsApp (CRO & Paleta)**:
+   - **Verde Fechado e Terroso**: Fundo `#1F7A4C` e hover `#185C3B` com texto e ícone branco (contraste 5,3:1, aprovado em acessibilidade).
+   - **Formato**: Formato pill (`rounded-full`), tipografia preservada e ícone do WhatsApp alinhado à esquerda.
+   - **Efeito de Pulso Suave (Keyframes CSS)**: Aplicado exclusivamente no botão do Hero ("Tirar dúvidas no WhatsApp") e no botão flutuante. Anel expansivo suave de até 10 px na cor `rgba(37, 211, 102, 0.45)` com ciclo de 4 s (1,6 s ativo + pausa), sem alterar o scale do botão e respeitando `@media (prefers-reduced-motion: reduce)`.
+   - **Botão de Contorno**: Fundo branco com borda e texto `#1F7A4C` na Chamada Final.

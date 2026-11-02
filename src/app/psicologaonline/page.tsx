@@ -2,19 +2,26 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingWhatsapp from '@/components/FloatingWhatsapp';
 import { getSiteSettings } from '@/lib/settings';
 import { getWhatsappUrl } from '@/lib/whatsapp';
 import { getReviewsData } from '@/lib/reviews';
-import FaqAccordion from '@/components/FaqAccordion';
 import StepTimeline from '@/components/StepTimeline';
-import GoogleReviewsWidget from '@/components/GoogleReviewsWidget';
 import Reveal from '@/components/Reveal';
 import AboutSection from '@/components/AboutSection';
-import HeroWave from '@/components/HeroWave';
-import GoogleMapsFacade from '@/components/GoogleMapsFacade';
+
+const GoogleReviewsWidget = dynamic(() => import('@/components/GoogleReviewsWidget'), {
+  loading: () => (
+    <div className="py-8 text-center text-slate-400 text-sm">Carregando avaliações...</div>
+  ),
+});
+
+const FaqAccordion = dynamic(() => import('@/components/FaqAccordion'));
+
+const GoogleMapsFacade = dynamic(() => import('@/components/GoogleMapsFacade'));
 import {
   MessageCircle,
   Brain,
@@ -192,7 +199,24 @@ export default async function PsicologaOnlinePage() {
       <main className="flex-grow">
         {/* 1. HERO - Otimizado para celular (cabe na 1ª tela sem rolar) */}
         <section className="relative overflow-hidden pt-20 lg:pt-24 pb-12 lg:pb-20">
-          <HeroWave />
+          <div className="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
+            <svg 
+              className="absolute top-0 right-0 w-[200%] sm:w-[150%] lg:w-[120%] h-full text-brand-200/20 transform origin-top-right" 
+              preserveAspectRatio="none" 
+              viewBox="0 0 1440 900" 
+              fill="currentColor" 
+            >
+              <path d="M1440 0V900C1100 800 900 600 500 700C300 750 100 650 0 500V0H1440Z" />
+            </svg>
+            <svg 
+              className="absolute top-0 right-0 w-[200%] sm:w-[150%] lg:w-[120%] h-full text-brand-200/10 transform origin-top-right -translate-y-10" 
+              preserveAspectRatio="none" 
+              viewBox="0 0 1440 900" 
+              fill="currentColor" 
+            >
+              <path d="M1440 0V900C1200 850 800 550 400 650C200 700 50 600 0 450V0H1440Z" />
+            </svg>
+          </div>
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-4 sm:pt-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
               
@@ -218,7 +242,7 @@ export default async function PsicologaOnlinePage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       data-track="cta-hero"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-brand-700 hover:bg-brand-800 text-white font-semibold px-6 py-3.5 rounded-full text-base transition-colors shadow-warm-md hover:shadow-warm-lg"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#1F7A4C] hover:bg-[#185C3B] text-white font-semibold px-6 py-3.5 rounded-full text-base transition-colors shadow-warm-md hover:shadow-warm-lg pulse-ring-cta"
                     >
                       <MessageCircle className="w-5 h-5 shrink-0" />
                       <span>Tirar dúvidas no WhatsApp</span>
@@ -259,16 +283,15 @@ export default async function PsicologaOnlinePage() {
               {/* Coluna de Imagem da Marina */}
               <div className="lg:col-span-5 relative mt-4 lg:mt-0">
                 <div className="mx-auto w-full max-w-[280px] sm:max-w-[340px]">
-                  <div className="absolute -inset-2 bg-gradient-to-tr from-brand-200/50 to-sage-200/50 rounded-[2.5rem] blur-xl -z-10"></div>
-                  
-                  <div className="bg-white/85 backdrop-blur-md rounded-[2rem] border border-white shadow-xl overflow-hidden p-4 sm:p-5 space-y-3 sm:space-y-4">
-                    <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-tr from-brand-200 via-warm-100 to-sage-200">
+                  <div className="bg-white/95 rounded-[2rem] border border-warm-200/80 shadow-lg overflow-hidden p-4 sm:p-5 space-y-3 sm:space-y-4">
+                    <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-warm-100">
                       <Image 
                         src="/images/marina-hero-v2.webp" 
                         alt="Marina Falcão - Psicóloga em Ribeirão Preto e On-line" 
                         fill
                         priority
                         fetchPriority="high"
+                        unoptimized
                         sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 340px"
                         className="object-cover object-[center_20%]"
                       />
@@ -298,7 +321,7 @@ export default async function PsicologaOnlinePage() {
               </h2>
             </div>
 
-            <GoogleReviewsWidget initialData={reviewsData} />
+            <GoogleReviewsWidget />
           </div>
         </section>
 
@@ -345,7 +368,7 @@ export default async function PsicologaOnlinePage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-track="cta-especialidades"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-brand-700 hover:bg-brand-800 text-white font-semibold px-8 py-3.5 rounded-full text-base transition-colors shadow-warm-md hover:shadow-warm-lg"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#1F7A4C] hover:bg-[#185C3B] text-white font-semibold px-8 py-3.5 rounded-full text-base transition-colors shadow-warm-md hover:shadow-warm-lg"
               >
                 <MessageCircle className="w-5 h-5 shrink-0" />
                 <span>Ver horários disponíveis</span>
@@ -378,7 +401,7 @@ export default async function PsicologaOnlinePage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-track="cta-como-funciona"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-brand-700 hover:bg-brand-800 text-white font-semibold px-8 py-3.5 rounded-full text-base transition-colors shadow-warm-md hover:shadow-warm-lg"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#1F7A4C] hover:bg-[#185C3B] text-white font-semibold px-8 py-3.5 rounded-full text-base transition-colors shadow-warm-md hover:shadow-warm-lg"
               >
                 <MessageCircle className="w-5 h-5 shrink-0" />
                 <span>Ver horários disponíveis</span>
@@ -469,7 +492,7 @@ export default async function PsicologaOnlinePage() {
                     rel="noopener noreferrer"
                     data-wa-type="presencial"
                     data-track="cta-presencial"
-                    className="w-full inline-flex items-center justify-center gap-2.5 bg-brand-700 hover:bg-brand-800 text-white font-semibold px-6 py-3.5 rounded-full text-base transition-colors shadow-warm-md hover:shadow-warm-lg"
+                    className="w-full inline-flex items-center justify-center gap-2.5 bg-[#1F7A4C] hover:bg-[#185C3B] text-white font-semibold px-6 py-3.5 rounded-full text-base transition-colors shadow-warm-md hover:shadow-warm-lg"
                   >
                     <MessageCircle className="w-5 h-5 shrink-0" />
                     <span>Agendar sessão presencial</span>
@@ -553,7 +576,7 @@ export default async function PsicologaOnlinePage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-track="cta-final"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white hover:bg-warm-100 text-brand-700 font-bold px-8 py-4 rounded-full text-base shadow-warm-lg transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white hover:bg-warm-100 text-[#1F7A4C] border-2 border-[#1F7A4C] font-bold px-8 py-4 rounded-full text-base shadow-warm-lg transition-colors"
               >
                 <MessageCircle className="w-5 h-5 shrink-0" />
                 <span>Ver horários disponíveis</span>

@@ -3,7 +3,7 @@
 @theme {
   /* Tipografia — mapeia as fontes do next/font para as utilities */
   --font-serif: var(--font-playfair), Georgia, serif;
-  --font-sans: var(--font-madefor), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   --font-sub: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
 
   /* Paleta — Dourado/Bronze (brand), Marrom (secondary), Oliva (sage) e Neutros (warm) */
@@ -109,4 +109,27 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #62462b; /* brand-800 */
+}
+
+/* Efeito de destaque pulsante para botões de WhatsApp (Hero e Flutuante) */
+@keyframes cta-pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55);
+  }
+  40% {
+    box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+.pulse-ring-cta {
+  animation: cta-pulse-ring 4s cubic-bezier(0.24, 0, 0.38, 1) 2s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-ring-cta {
+    animation: none !important;
+  }
 }

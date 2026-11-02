@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Playfair_Display, Montserrat, Wix_Madefor_Text } from 'next/font/google';
+import { Playfair_Display, Montserrat } from 'next/font/google';
 import './globals.css';
 import SmoothScroll from '@/components/SmoothScroll';
 import AnalyticsTracker from '@/components/AnalyticsTracker';
@@ -10,18 +10,14 @@ const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
   display: 'swap',
+  preload: true,
 });
 
 const montserrat = Montserrat({
   subsets: ['latin'],
   variable: '--font-montserrat',
   display: 'swap',
-});
-
-const madefor = Wix_Madefor_Text({
-  subsets: ['latin'],
-  variable: '--font-madefor',
-  display: 'swap',
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -56,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${playfair.variable} ${montserrat.variable} ${madefor.variable} overflow-x-hidden`}>
+    <html lang="pt-BR" className={`${playfair.variable} ${montserrat.variable} overflow-x-hidden`}>
       <body className="min-h-screen bg-warm-50 text-slate-800 font-sans antialiased selection:bg-brand-200 selection:text-brand-900 overflow-x-hidden">
         <GoogleAdsScript />
         <MicrosoftClarity />
