@@ -16,16 +16,15 @@ export default function AboutSection({ onlineOnly = false }: AboutSectionProps) 
             
             {/* Imagem (Esquerda) */}
             <Reveal animation="slide-right" className="relative order-2 lg:order-1 flex justify-center">
-              <div className="relative w-full aspect-[4/5] max-w-sm sm:max-w-md lg:max-w-[420px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
+              <div className="relative w-full aspect-[4/5] max-w-sm sm:max-w-md lg:max-w-[420px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-warm-100">
                 <Image 
                   src="/images/marina-sobre.webp" 
                   alt="Psicóloga Marina Falcão - Atendimento Presencial e On-line" 
                   fill
                   loading="lazy"
                   sizes="(max-width: 1024px) 100vw, 420px"
-                  className="object-cover object-[center_30%] scale-[1.25] hover:scale-[1.3] transition-transform duration-700 ease-out"
+                  className="object-cover object-center transition-transform duration-500 ease-out hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-brand-900/10 mix-blend-overlay pointer-events-none"></div>
               </div>
               
               <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-sage-200/60 rounded-full blur-3xl -z-10"></div>
@@ -94,15 +93,15 @@ export default function AboutSection({ onlineOnly = false }: AboutSectionProps) 
           
           {/* Imagem (Esquerda) */}
           <Reveal animation="slide-right" className="relative order-2 lg:order-1 flex justify-center">
-            <div className="relative w-full aspect-[4/5] max-w-sm sm:max-w-md lg:max-w-[440px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
+            <div className="relative w-full aspect-[4/5] max-w-sm sm:max-w-md lg:max-w-[440px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-warm-100">
               <Image 
-                src="/images/marina-sobre.jpg" 
+                src="/images/marina-sobre.webp" 
                 alt="Psicóloga Marina Falcão" 
                 fill
+                loading="lazy"
                 sizes="(max-width: 1024px) 100vw, 440px"
-                className="object-cover object-[center_30%] scale-[1.3] hover:scale-[1.35] transition-transform duration-700 ease-out"
+                className="object-cover object-center transition-transform duration-500 ease-out hover:scale-105"
               />
-              <div className="absolute inset-0 bg-brand-900/10 mix-blend-overlay pointer-events-none"></div>
             </div>
             
             <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-sage-200/60 rounded-full blur-3xl -z-10"></div>

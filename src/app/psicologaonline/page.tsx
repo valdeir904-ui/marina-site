@@ -197,79 +197,83 @@ export default async function PsicologaOnlinePage() {
       <Header settings={settings} isOnlineLanding={true} />
 
       <main className="flex-grow">
-        {/* 1. HERO - Modelo Foto em faixa no topo */}
+        {/* 1. HERO - Responsivo: Faixa no celular, 2 colunas amplas no desktop */}
         <section className="relative overflow-hidden pt-24 lg:pt-28 pb-12 lg:pb-16 bg-warm-50">
-          <div className="max-w-xl lg:max-w-2xl mx-auto px-4 sm:px-6 relative z-10 w-full space-y-4 sm:space-y-5">
-            
-            {/* Foto em faixa no topo com enquadramento perfeito do rosto */}
-            <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] max-h-[320px] rounded-[2rem] overflow-hidden shadow-sm bg-warm-200 border-2 border-white">
-              <Image 
-                src="/images/marina-hero-v2.webp" 
-                alt="Marina Falcão - Psicóloga em Ribeirão Preto e On-line" 
-                fill
-                priority
-                fetchPriority="high"
-                unoptimized
-                sizes="(max-width: 640px) 100vw, 680px"
-                className="object-cover object-[center_18%]"
-              />
-            </div>
+          <div className="max-w-xl lg:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div className="flex flex-col lg:grid lg:grid-cols-12 lg:gap-12 xl:gap-16 lg:items-center">
+              
+              {/* Imagem da Marina: Faixa no topo no mobile, Cartão vertical elegante no desktop */}
+              <div className="order-1 lg:order-2 lg:col-span-5 w-full flex flex-col items-center justify-center">
+                <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/5] max-h-[290px] sm:max-h-[320px] lg:max-h-[520px] max-w-sm sm:max-w-md lg:max-w-[420px] rounded-[2rem] overflow-hidden shadow-sm lg:shadow-xl bg-warm-200 border-2 lg:border-4 border-white">
+                  <Image 
+                    src="/images/marina-hero-v2.webp" 
+                    alt="Marina Falcão - Psicóloga em Ribeirão Preto e On-line" 
+                    fill
+                    priority
+                    fetchPriority="high"
+                    unoptimized
+                    sizes="(max-width: 1024px) 100vw, 420px"
+                    className="object-cover object-[center_18%] lg:object-[center_20%]"
+                  />
+                </div>
 
-            {/* Pílula flutuante centralizada: Olá, eu sou a Marina */}
-            <div className="flex justify-center -mt-7 sm:-mt-8 relative z-20">
-              <div className="inline-flex items-center gap-2 bg-white border border-warm-200/90 shadow-sm px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold text-slate-800">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
-                <span>Olá, eu sou a Marina</span>
+                {/* Pílula flutuante centralizada: Olá, eu sou a Marina */}
+                <div className="flex justify-center -mt-6 sm:-mt-7 lg:-mt-6 relative z-20">
+                  <div className="inline-flex items-center gap-2 bg-white border border-warm-200/90 shadow-sm px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold text-slate-800">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+                    <span>Olá, eu sou a Marina</span>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            {/* Conteúdo de Texto Centralizado */}
-            <div className="space-y-3 text-center pt-1">
-              <h1 className="text-[12px] font-bold tracking-widest uppercase text-[#74532F]">
-                Psicóloga em Ribeirão Preto · presencial e on-line
-              </h1>
+              {/* Conteúdo de Texto Centralizado no mobile, alinhado à esquerda no desktop */}
+              <div className="order-2 lg:order-1 lg:col-span-7 space-y-4 text-center lg:text-left pt-3 lg:pt-0">
+                <h1 className="text-[12px] font-bold tracking-widest uppercase text-[#74532F]">
+                  Psicóloga em Ribeirão Preto · presencial e on-line
+                </h1>
 
-              <p className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 leading-tight tracking-tight">
-                Um espaço seguro para você ser ouvido(a), sem julgamentos.
-              </p>
-
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-lg mx-auto">
-                Atendo adultos no Centro de Ribeirão Preto e on-line, com escuta acolhedora, ética e sigilo.
-              </p>
-
-              {/* Bloco de Botão Principal */}
-              <div className="pt-2 flex flex-col items-center justify-center">
-                <a
-                  href={waUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-track="cta-hero"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#1F7A4C] hover:bg-[#185C3B] text-white font-semibold px-8 py-3.5 rounded-full text-base transition-colors shadow-warm-md hover:shadow-warm-lg pulse-ring-cta"
-                >
-                  <MessageCircle className="w-5 h-5 shrink-0" />
-                  <span>Tirar dúvidas no WhatsApp</span>
-                </a>
-                <p className="text-[12px] text-slate-500 font-medium pt-1.5">
-                  Resposta pela própria Marina · Sem compromisso
+                <p className="font-serif text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-slate-900 leading-tight lg:leading-[1.15] tracking-tight">
+                  Um espaço seguro para você ser ouvido(a), sem julgamentos.
                 </p>
+
+                <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                  Atendo adultos no Centro de Ribeirão Preto e on-line, com escuta acolhedora, ética e sigilo.
+                </p>
+
+                {/* Bloco de Botão Principal */}
+                <div className="pt-2 flex flex-col items-center lg:items-start justify-center">
+                  <a
+                    href={waUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-track="cta-hero"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#1F7A4C] hover:bg-[#185C3B] text-white font-semibold px-8 py-3.5 rounded-full text-base transition-colors shadow-warm-md hover:shadow-warm-lg pulse-ring-cta"
+                  >
+                    <MessageCircle className="w-5 h-5 shrink-0" />
+                    <span>Tirar dúvidas no WhatsApp</span>
+                  </a>
+                  <p className="text-[12px] text-slate-500 font-medium pt-1.5">
+                    Resposta pela própria Marina · Sem compromisso
+                  </p>
+                </div>
+
+                {/* Selos de Credibilidade */}
+                <div className="pt-3 flex flex-col items-center lg:items-start gap-2 text-xs text-slate-700">
+                  <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
+                    <span className="bg-white border border-warm-200 px-3.5 py-1.5 rounded-full inline-flex items-center gap-1.5 font-medium shadow-xs">
+                      <span className="text-[#1F7A4C] font-bold">✓</span> Centro de RP
+                    </span>
+                    <span className="bg-white border border-warm-200 px-3.5 py-1.5 rounded-full inline-flex items-center gap-1.5 font-medium shadow-xs">
+                      <span className="text-[#1F7A4C] font-bold">✓</span> Sessões de 50 min
+                    </span>
+                    <span className="inline-flex items-center gap-1 bg-white border border-warm-200 px-3.5 py-1.5 rounded-full text-amber-700 font-semibold shadow-xs">
+                      ★ {ratingFormatted} no Google
+                    </span>
+                  </div>
+                </div>
               </div>
 
-              {/* Selos do Modelo */}
-              <div className="pt-3 flex flex-col items-center gap-2 text-xs text-slate-700">
-                <div className="flex flex-wrap items-center justify-center gap-2">
-                  <span className="bg-white border border-warm-200 px-3.5 py-1 rounded-full inline-flex items-center gap-1.5 font-medium shadow-xs">
-                    <span className="text-[#1F7A4C] font-bold">✓</span> Centro de RP
-                  </span>
-                  <span className="bg-white border border-warm-200 px-3.5 py-1 rounded-full inline-flex items-center gap-1.5 font-medium shadow-xs">
-                    <span className="text-[#1F7A4C] font-bold">✓</span> Sessões de 50 min
-                  </span>
-                </div>
-                <div className="inline-flex items-center gap-1 bg-white border border-warm-200 px-3.5 py-1 rounded-full text-amber-700 font-semibold shadow-xs">
-                  ★ {ratingFormatted} no Google
-                </div>
-              </div>
             </div>
-
           </div>
         </section>
 
