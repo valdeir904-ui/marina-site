@@ -213,7 +213,7 @@ export default async function PsicologaOnlinePage() {
                     fetchPriority="high"
                     unoptimized
                     sizes="(max-width: 1024px) 100vw, 420px"
-                    className="object-cover object-[center_18%] lg:object-[center_20%]"
+                    className="object-cover object-[center_28%] lg:object-[center_25%]"
                   />
                 </div>
 
