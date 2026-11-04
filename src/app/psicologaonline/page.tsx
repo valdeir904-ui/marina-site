@@ -225,13 +225,13 @@ export default async function PsicologaOnlinePage() {
 
             {/* Conteúdo de Texto Centralizado */}
             <div className="space-y-3 text-center pt-1">
-              <p className="text-[11px] sm:text-xs font-bold tracking-widest uppercase text-brand-800">
-                PSICÓLOGA EM RIBEIRÃO PRETO · PRESENCIAL E ON-LINE
-              </p>
-
-              <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 leading-tight tracking-tight">
-                Um espaço seguro para você ser ouvido(a), sem julgamentos.
+              <h1 className="text-[12px] font-bold tracking-widest uppercase text-[#74532F]">
+                Psicóloga em Ribeirão Preto · presencial e on-line
               </h1>
+
+              <p className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 leading-tight tracking-tight">
+                Um espaço seguro para você ser ouvido(a), sem julgamentos.
+              </p>
 
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-lg mx-auto">
                 Atendo adultos no Centro de Ribeirão Preto e on-line, com escuta acolhedora, ética e sigilo.
