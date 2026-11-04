@@ -228,8 +228,10 @@ export default async function PsicologaOnlinePage() {
 
               {/* Conteúdo de Texto Centralizado no mobile, alinhado à esquerda no desktop */}
               <div className="order-2 lg:order-1 lg:col-span-7 space-y-4 text-center lg:text-left pt-3 lg:pt-0">
-                <h1 className="text-[12px] font-bold tracking-widest uppercase text-[#74532F]">
-                  Psicóloga em Ribeirão Preto · presencial e on-line
+                <h1 className="text-[12px] font-bold tracking-widest uppercase text-[#74532F] leading-snug">
+                  <span className="block sm:inline">Psicóloga em Ribeirão Preto</span>
+                  <span className="hidden sm:inline"> · </span>
+                  <span className="block sm:inline">Presencial e on-line</span>
                 </h1>
 
                 <p className="font-serif text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-slate-900 leading-tight lg:leading-[1.15] tracking-tight">
