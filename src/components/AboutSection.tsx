@@ -49,7 +49,7 @@ export default function AboutSection({ onlineOnly = false }: AboutSectionProps) 
               <Reveal animation="slide-left" delay={100}>
                 <div className="space-y-4 text-slate-600 text-base sm:text-lg leading-relaxed">
                   <p>
-                    Sou psicóloga clínica com fundamentação na Análise do Comportamento. Minha missão é ajudar você a atravessar momentos de dor e esgotamento com acolhimento, técnica validada e empatia genuína.
+                    Sou psicóloga clínica com fundamentação na Análise do Comportamento. Minha missão é ajudar você a atravessar momentos de dor e esgotamento com acolhimento, técnica validada e empatia genuína. Se você procura um psicólogo em Ribeirão Preto para acompanhamento de adultos, atendo presencialmente no Centro e também on-line.
                   </p>
                   <p>
                     Tenho dedicação ao acompanhamento de adultos em <strong>Luto, Ansiedade, Burnout, Questões de Relacionamento e Saúde Mental</strong>. O processo terapêutico é um caminho seguro para compreender sua história, fortalecer sua autonomia e resgatar o sentido de viver com presença.

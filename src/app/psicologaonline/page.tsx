@@ -43,7 +43,7 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: 'Psicóloga em Ribeirão Preto e On-line | Marina Falcão | CRP 06/162899',
   description:
-    'Psicoterapia presencial no Centro de Ribeirão Preto e on-line para todo o Brasil, com a psicóloga Marina Falcão (CRP 06/162899). Sessões de 50 minutos. Agende pelo WhatsApp.',
+    'Procura psicólogo ou psicóloga em Ribeirão Preto? Psicoterapia para adultos com Marina Falcão (CRP 06/162899), presencial no Centro e on-line. Agende pelo WhatsApp.',
   keywords: [
     'Psicóloga em Ribeirão Preto',
     'Psicóloga Ribeirão Preto',
@@ -63,11 +63,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Psicóloga em Ribeirão Preto e On-line | Marina Falcão | CRP 06/162899',
     description:
-      'Psicoterapia presencial no Centro de Ribeirão Preto e on-line para todo o Brasil, com a psicóloga Marina Falcão (CRP 06/162899). Sessões de 50 minutos. Agende pelo WhatsApp.',
+      'Procura psicólogo ou psicóloga em Ribeirão Preto? Psicoterapia para adultos com Marina Falcão (CRP 06/162899), presencial no Centro e on-line. Agende pelo WhatsApp.',
     url: 'https://www.marinafalcao.com.br/psicologaonline',
     siteName: 'Psicóloga Marina Falcão',
     locale: 'pt_BR',
     type: 'website',
+  },
+  twitter: {
+    title: 'Psicóloga em Ribeirão Preto e On-line | Marina Falcão | CRP 06/162899',
+    description:
+      'Procura psicólogo ou psicóloga em Ribeirão Preto? Psicoterapia para adultos com Marina Falcão (CRP 06/162899), presencial no Centro e on-line. Agende pelo WhatsApp.',
   },
 };
 

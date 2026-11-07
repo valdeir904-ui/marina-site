@@ -38,6 +38,11 @@ const faqsClassic: FaqItem[] = [
 
 const faqsOnline: FaqItem[] = [
   {
+    question: 'Procura psicólogo ou psicóloga em Ribeirão Preto? Como funciona o primeiro contato?',
+    answer:
+      'Sou psicóloga e atendo adultos que procuram psicólogo ou psicóloga em Ribeirão Preto, presencialmente no Centro (Rua Bernardino de Campos, 1001) e on-line. No primeiro contato pelo WhatsApp, você tira dúvidas sobre formato, horários e valores, sem compromisso.',
+  },
+  {
     question: 'O atendimento é presencial ou on-line?',
     answer:
       'Os dois. Presencial no Centro de Ribeirão Preto e on-line por videochamada para todo o Brasil e o exterior. Você escolhe o formato ao agendar.',
