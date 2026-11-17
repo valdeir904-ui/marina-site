@@ -2,18 +2,28 @@ import React from 'react';
 import Reveal from './Reveal';
 import { MessageCircle, CalendarClock, HeartHandshake, Sprout, Video } from 'lucide-react';
 
-export default function StepTimeline({ onlineOnly = false }: { onlineOnly?: boolean }) {
+export default function StepTimeline({
+  onlineOnly = false,
+  presencialOnly = false,
+}: {
+  onlineOnly?: boolean;
+  presencialOnly?: boolean;
+}) {
   const steps = [
     {
       number: '01',
       title: 'Contato inicial',
-      description: 'Envie uma mensagem pelo WhatsApp para tirar dúvidas e verificar os horários disponíveis de forma simples.',
+      description: presencialOnly
+        ? 'Envie uma mensagem pelo WhatsApp para tirar dúvidas sobre o atendimento presencial e verificar os horários disponíveis.'
+        : 'Envie uma mensagem pelo WhatsApp para tirar dúvidas e verificar os horários disponíveis de forma simples.',
       icon: MessageCircle,
     },
     {
       number: '02',
       title: 'Agendamento',
-      description: onlineOnly
+      description: presencialOnly
+        ? 'Defina o melhor dia e horário para a sua sessão presencial de 50 minutos no consultório no Centro.'
+        : onlineOnly
         ? 'Escolha a modalidade (presencial ou on-line), o melhor dia e horário para a sua sessão de 50 minutos.'
         : 'Escolha a modalidade, o melhor dia e horário para a sua sessão de forma prática e rápida.',
       icon: CalendarClock,
@@ -21,13 +31,16 @@ export default function StepTimeline({ onlineOnly = false }: { onlineOnly?: bool
     {
       number: '03',
       title: 'Primeira sessão',
-      description: 'Um espaço seguro de acolhimento para mapear suas necessidades latentes e traçar metas terapêuticas.',
+      description: presencialOnly
+        ? 'Um ambiente acolhedor e sigiloso no Edifício Fortes Guimarães para acolher sua história e traçar seus objetivos terapêuticos.'
+        : 'Um espaço seguro de acolhimento para mapear suas necessidades latentes e traçar metas terapêuticas.',
       icon: HeartHandshake,
     },
     {
       number: '04',
       title: 'Acompanhamento',
-      description: 'Sessões semanais focadas no autoconhecimento, na regulação emocional e na melhoria da sua qualidade de vida.',
+      description:
+        'Sessões semanais focadas no autoconhecimento, na regulação emocional e na melhoria contínua da sua qualidade de vida.',
       icon: Sprout,
     },
   ];

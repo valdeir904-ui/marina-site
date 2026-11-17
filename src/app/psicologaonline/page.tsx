@@ -294,7 +294,7 @@ export default async function PsicologaOnlinePage() {
               </h2>
             </div>
 
-            <GoogleReviewsWidget />
+            <GoogleReviewsWidget initialData={reviewsData} />
           </div>
         </section>
 

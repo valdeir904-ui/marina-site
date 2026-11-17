@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { Star, ExternalLink } from 'lucide-react';
-import { GoogleReviewsData } from '@/lib/reviews';
+import { GoogleReviewsData, FALLBACK_REVIEWS } from '@/lib/reviews-data';
 
 function GoogleLogo({ className }: { className?: string }) {
   return (
@@ -158,18 +158,20 @@ export default function GoogleReviewsWidget({ compact = false, initialData }: Go
       try {
         const res = await fetch('/api/google-reviews');
         if (!res.ok) {
-          const errJson = await res.json().catch(() => null);
-          setData(errJson || { error: 'Status ' + res.status });
+          setData(FALLBACK_REVIEWS);
           return;
         }
         const json = await res.json();
-        if (json.reviews) {
+        if (json && json.reviews && json.reviews.length > 0) {
           const shuffled = json.reviews.sort(() => Math.random() - 0.5);
           json.reviews = [...shuffled, ...shuffled, ...shuffled];
+          setData(json);
+        } else {
+          setData(FALLBACK_REVIEWS);
         }
-        setData(json);
       } catch (err) {
         console.error('Erro ao buscar avaliações:', err);
+        setData(FALLBACK_REVIEWS);
       } finally {
         setLoading(false);
       }

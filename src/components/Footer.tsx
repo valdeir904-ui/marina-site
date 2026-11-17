@@ -12,11 +12,14 @@ const InstagramIcon = () => (
 interface FooterProps {
   settings?: Record<string, string>;
   onlineOnly?: boolean;
+  presencialOnly?: boolean;
 }
 
-export default function Footer({ settings = {}, onlineOnly = false }: FooterProps) {
+export default function Footer({ settings = {}, onlineOnly = false, presencialOnly = false }: FooterProps) {
   const currentYear = new Date().getFullYear();
-  const whatsappUrl = getWhatsappUrl(settings.whatsapp_number, settings.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!');
+  const whatsappUrl = presencialOnly
+    ? getWhatsappUrl(settings.whatsapp_number, undefined, { presencial: true })
+    : getWhatsappUrl(settings.whatsapp_number, settings.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!');
 
   return (
     <footer className="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
@@ -31,7 +34,9 @@ export default function Footer({ settings = {}, onlineOnly = false }: FooterProp
               </span>
             </div>
             <p className="text-sm text-slate-300 leading-relaxed">
-              {onlineOnly
+              {presencialOnly
+                ? 'Psicoterapia presencial no Centro de Ribeirão Preto com ética, sensibilidade e rigor científico. Atendimento particular com emissão de nota fiscal para reembolso.'
+                : onlineOnly
                 ? 'Escuta clínica com ética, sensibilidade e rigor científico. Atendimento presencial no Centro de Ribeirão Preto e on-line para adultos em todo o Brasil e no exterior.'
                 : 'Escuta clínica guiada pela ciência, sensibilidade e acolhimento. Especialista em Saúde Mental do Trabalhador, Ansiedade, Burnout e Luto.'}
             </p>
@@ -41,18 +46,56 @@ export default function Footer({ settings = {}, onlineOnly = false }: FooterProp
           <div>
             <h3 className="font-serif text-lg font-semibold text-white mb-4">Navegação</h3>
             <ul className="space-y-2.5 text-sm text-slate-300">
-              <li>
-                <Link href={onlineOnly ? "/psicologaonline#sobre" : "/#sobre"} className="hover:text-brand-300 transition-colors">
-                  Sobre Mim
-                </Link>
-              </li>
-              <li>
-                <Link href={onlineOnly ? "/psicologaonline#especialidades" : "/#especialidades"} className="hover:text-brand-300 transition-colors">
-                  Especialidades
-                </Link>
-              </li>
-              {onlineOnly ? (
+              {presencialOnly ? (
                 <>
+                  <li>
+                    <Link href="/psicologa-ribeirao-preto#consultorio" className="hover:text-brand-300 transition-colors">
+                      Consultório no Centro
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/psicologa-ribeirao-preto#avaliacoes" className="hover:text-brand-300 transition-colors">
+                      Avaliações de Pacientes
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/psicologa-ribeirao-preto#areas-de-atuacao" className="hover:text-brand-300 transition-colors">
+                      Áreas de Atuação
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/psicologa-ribeirao-preto#como-funciona" className="hover:text-brand-300 transition-colors">
+                      Como Funciona
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/psicologa-ribeirao-preto#reembolso" className="hover:text-brand-300 transition-colors">
+                      Particular e Reembolso
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/psicologa-ribeirao-preto#faq" className="hover:text-brand-300 transition-colors">
+                      Perguntas Frequentes
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/psicologaonline" className="hover:text-brand-300 transition-colors">
+                      Atendimento On-line
+                    </Link>
+                  </li>
+                </>
+              ) : onlineOnly ? (
+                <>
+                  <li>
+                    <Link href="/psicologaonline#sobre" className="hover:text-brand-300 transition-colors">
+                      Sobre Mim
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/psicologaonline#especialidades" className="hover:text-brand-300 transition-colors">
+                      Especialidades
+                    </Link>
+                  </li>
                   <li>
                     <Link href="/psicologaonline#como-funciona" className="hover:text-brand-300 transition-colors">
                       Como Funciona
@@ -75,11 +118,23 @@ export default function Footer({ settings = {}, onlineOnly = false }: FooterProp
                   </li>
                 </>
               ) : (
-                <li>
-                  <Link href="/#abordagens" className="hover:text-brand-300 transition-colors">
-                    Abordagens Teóricas
-                  </Link>
-                </li>
+                <>
+                  <li>
+                    <Link href="/#sobre" className="hover:text-brand-300 transition-colors">
+                      Sobre Mim
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/#especialidades" className="hover:text-brand-300 transition-colors">
+                      Especialidades
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/#abordagens" className="hover:text-brand-300 transition-colors">
+                      Abordagens Teóricas
+                    </Link>
+                  </li>
+                </>
               )}
               <li>
                 <Link href="/blog" className="hover:text-brand-300 transition-colors">
@@ -111,7 +166,21 @@ export default function Footer({ settings = {}, onlineOnly = false }: FooterProp
             <h3 className="font-serif text-lg font-semibold text-white mb-4">
               Atendimentos
             </h3>
-            {onlineOnly ? (
+            {presencialOnly ? (
+              <div className="space-y-2 text-sm text-slate-300">
+                <div className="flex items-start gap-2.5">
+                  <MapPin className="w-5 h-5 text-brand-400 mt-0.5 shrink-0" />
+                  <div>
+                    <span className="font-medium text-white block">
+                      Consultório no Centro de Ribeirão Preto
+                    </span>
+                    <span className="text-xs text-slate-400 block mt-1">
+                      Rua Bernardino de Campos, 1001, sala 310 – Edifício Fortes Guimarães – Centro – Ribeirão Preto/SP – CEP 14015-130
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ) : onlineOnly ? (
               <div className="space-y-2 text-sm text-slate-300">
                 <div className="flex items-start gap-2.5">
                   <MapPin className="w-5 h-5 text-brand-400 mt-0.5 shrink-0" />

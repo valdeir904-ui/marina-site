@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { query } from '@/lib/db';
+import { FALLBACK_REVIEWS } from '@/lib/reviews';
 
 export const revalidate = 0; // Temp: Desativando o cache para debugar
 
@@ -21,15 +22,18 @@ export async function GET() {
     }
     
     // Se não tiver cache, tenta fazer a sincronização inicial
-    const syncRes = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/google-reviews/sync`);
-    if (syncRes.ok) {
-      const syncData = await syncRes.json();
-      return NextResponse.json(syncData);
-    }
+    try {
+      const syncRes = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/google-reviews/sync`);
+      if (syncRes.ok) {
+        const syncData = await syncRes.json();
+        return NextResponse.json(syncData);
+      }
+    } catch {}
 
-    return NextResponse.json({ error: 'Nenhuma avaliação encontrada e falha ao sincronizar.' }, { status: 404 });
+    // Fallback seguro caso não haja cache sincronizado
+    return NextResponse.json(FALLBACK_REVIEWS);
   } catch (error: any) {
     console.error('Erro ao buscar avaliações no cache:', error);
-    return NextResponse.json({ error: 'Erro ao carregar avaliações do cache.' }, { status: 500 });
+    return NextResponse.json(FALLBACK_REVIEWS);
   }
 }

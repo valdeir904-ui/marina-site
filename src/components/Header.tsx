@@ -14,9 +14,10 @@ const InstagramIcon = () => (
 interface HeaderProps {
   settings?: Record<string, string>;
   isOnlineLanding?: boolean;
+  isPresencialLanding?: boolean;
 }
 
-export default function Header({ settings = {}, isOnlineLanding = false }: HeaderProps) {
+export default function Header({ settings = {}, isOnlineLanding = false, isPresencialLanding = false }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -28,7 +29,16 @@ export default function Header({ settings = {}, isOnlineLanding = false }: Heade
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = isOnlineLanding
+  const navLinks = isPresencialLanding
+    ? [
+        { href: '/psicologa-ribeirao-preto#consultorio', label: 'Consultório' },
+        { href: '/psicologa-ribeirao-preto#avaliacoes', label: 'Avaliações' },
+        { href: '/psicologa-ribeirao-preto#areas-de-atuacao', label: 'Áreas de Atuação' },
+        { href: '/psicologa-ribeirao-preto#como-funciona', label: 'Como Funciona' },
+        { href: '/psicologa-ribeirao-preto#reembolso', label: 'Reembolso' },
+        { href: '/psicologa-ribeirao-preto#faq', label: 'Dúvidas' },
+      ]
+    : isOnlineLanding
     ? [
         { href: '/psicologaonline#sobre', label: 'Sobre Mim' },
         { href: '/psicologaonline#especialidades', label: 'Especialidades' },
@@ -44,13 +54,15 @@ export default function Header({ settings = {}, isOnlineLanding = false }: Heade
         { href: '/blog', label: 'Blog' },
       ];
 
-  const whatsappUrl = getWhatsappUrl(settings.whatsapp_number, settings.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!');
+  const whatsappUrl = isPresencialLanding
+    ? getWhatsappUrl(settings.whatsapp_number, undefined, { presencial: true })
+    : getWhatsappUrl(settings.whatsapp_number, settings.whatsapp_message || 'Oi Marina! 🖐 Gostaria de agendar uma consulta de terapia!');
 
   return (
     <header className={`fixed w-full left-0 right-0 top-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-brand-700/95 shadow-md border-b-transparent backdrop-blur-md' : 'bg-transparent border-transparent'}`}>
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand / Logo */}
-        <Link href={isOnlineLanding ? "/psicologaonline" : "/"} className="block group">
+        <Link href={isPresencialLanding ? "/psicologa-ribeirao-preto" : isOnlineLanding ? "/psicologaonline" : "/"} className="block group">
           <span className={`font-serif text-xl sm:text-2xl tracking-tight block transition-colors duration-500 ${isScrolled ? 'text-white' : 'text-brand-700'}`}>
             Marina Falcão
           </span>
@@ -85,7 +97,8 @@ export default function Header({ settings = {}, isOnlineLanding = false }: Heade
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            data-track="cta-header-desktop"
+            data-wa-type={isPresencialLanding ? "presencial" : undefined}
+            data-track={isPresencialLanding ? "cta-header-desktop-presencial" : "cta-header-desktop"}
             className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm transition-all duration-500 transform hover:-translate-y-0.5 ${
               isScrolled 
                 ? 'bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-md hover:shadow-lg' 
@@ -138,7 +151,8 @@ export default function Header({ settings = {}, isOnlineLanding = false }: Heade
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            data-track="cta-header-mobile"
+            data-wa-type={isPresencialLanding ? "presencial" : undefined}
+            data-track={isPresencialLanding ? "cta-header-mobile-presencial" : "cta-header-mobile"}
             className="w-full flex items-center justify-center gap-2 bg-brand-700 hover:bg-brand-800 text-white px-5 py-3 rounded-full font-medium text-sm transition-colors mt-2"
             onClick={() => setMobileMenuOpen(false)}
           >

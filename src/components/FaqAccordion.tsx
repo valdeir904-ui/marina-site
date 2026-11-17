@@ -89,9 +89,62 @@ const faqsOnline: FaqItem[] = [
   },
 ];
 
-export default function FaqAccordion({ onlineOnly = false }: { onlineOnly?: boolean }) {
+const faqsPresencial: FaqItem[] = [
+  {
+    question: 'Onde fica o consultório?',
+    answer:
+      'O consultório fica na Rua Bernardino de Campos, 1001, sala 310, Edifício Fortes Guimarães, no Centro de Ribeirão Preto/SP (CEP 14015-130). O local possui fácil acesso, portaria e estacionamentos nas proximidades.',
+  },
+  {
+    question: 'Atende por plano de saúde?',
+    answer:
+      'O atendimento é particular, com nota fiscal e relatório para você solicitar reembolso ao seu plano.',
+  },
+  {
+    question: 'Como funciona o primeiro contato e o agendamento presencial?',
+    answer:
+      'Se você procura um psicólogo em Ribeirão Preto para atendimento presencial, o primeiro contato é feito diretamente pelo WhatsApp. Conversamos de forma simples e acolhedora para tirar dúvidas, verificar a disponibilidade de horários e agendar sua sessão.',
+  },
+  {
+    question: 'Como é a primeira sessão de psicoterapia presencial?',
+    answer:
+      'A primeira sessão é um momento dedicado à escuta acolhedora no consultório. Conversamos sobre o que motivou sua busca pela psicoterapia, sua história e seus objetivos. É um espaço de acolhimento seguro, ético e livre de julgamentos.',
+  },
+  {
+    question: 'Qual a duração e a frequência das sessões?',
+    answer:
+      'Cada sessão presencial tem duração de 50 minutos. A frequência recomendada é semanal para garantir a continuidade e a evolução do acompanhamento clínico.',
+  },
+  {
+    question: 'Tem estacionamento no local ou nas proximidades?',
+    answer:
+      'O Edifício Fortes Guimarães fica em ponto central com diversas opções de estacionamento rotativo e particular na mesma quadra e ruas adjacentes.',
+  },
+  {
+    question: 'O que é a Análise do Comportamento?',
+    answer:
+      'A Análise do Comportamento é uma abordagem psicológica fundamentada na ciência. Ela busca compreender as relações entre sentimentos, pensamentos e o ambiente ao seu redor, construindo estratégias práticas para lidar com ansiedade, estresse e conflitos de relacionamento.',
+  },
+  {
+    question: 'Se eu precisar viajar, posso fazer a sessão on-line?',
+    answer:
+      'Sim. Caso você tenha imprevistos, viagens ou prefira o atendimento remoto em alguma semana, podemos realizar a sessão on-line por videochamada com o mesmo sigilo e qualidade.',
+  },
+];
+
+interface FaqAccordionProps {
+  onlineOnly?: boolean;
+  presencialOnly?: boolean;
+  customFaqs?: FaqItem[];
+}
+
+export default function FaqAccordion({
+  onlineOnly = false,
+  presencialOnly = false,
+  customFaqs,
+}: FaqAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const faqs = onlineOnly ? faqsOnline : faqsClassic;
+  const faqs = customFaqs || (presencialOnly ? faqsPresencial : onlineOnly ? faqsOnline : faqsClassic);
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
